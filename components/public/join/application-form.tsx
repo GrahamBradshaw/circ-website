@@ -56,6 +56,9 @@ export function ApplicationForm({ communities }: ApplicationFormProps) {
       })
 
       if (response.ok) {
+        window.gtag?.("event", "generate_lead", {
+          method: "membership_application",
+        })
         setIsSuccess(true)
       } else {
         const result = await response.json()
