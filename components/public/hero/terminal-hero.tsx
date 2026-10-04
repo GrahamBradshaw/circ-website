@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import Link from "next/link"
+import Image from "next/image"
 import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -34,13 +35,6 @@ const STATS = [
 ]
 
 const N = HARDCODED_SLIDES.length // exactly 5 cards
-
-function getContainerSize(vw: number): { w: string; h: string } {
-  if (vw <= 479) return { w: "16.5rem", h: "22rem"   }
-  if (vw <= 767) return { w: "19rem",   h: "25.5rem" }
-  if (vw <= 991) return { w: "23rem",   h: "29.5rem" }
-  return                 { w: "28rem",   h: "35.5rem" }
-}
 
 // ─── Circular 3D Position Calculator ──────────────────────────────────────────
 // Calculates smooth continuous positions as a function of circular offset `d`.
@@ -119,17 +113,10 @@ function getCardState(diff: number, vw: number) {
 function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const rotObj = useRef({ val: 0 })
+  const activeDotRef = useRef(0)
   const tweenRef = useRef<gsap.core.Tween | null>(null)
   const [activeDot, setActiveDot] = useState(0)
   const [vw, setVw] = useState(1280)
-
-  // Preload all 5 images on mount
-  useEffect(() => {
-    slides.forEach((src) => {
-      const img = new Image()
-      img.src = src
-    })
-  }, [slides])
 
   // Track window resize
   useEffect(() => {
@@ -167,9 +154,12 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
       }
     })
 
-    // Active dot tracks the nearest center slide
-    const centerIndex = ((Math.round(currentRot) % N) + N) % N
-    setActiveDot(centerIndex)
+    // Update React only when the centered slide changes, not on every GSAP frame.
+    const centerIndex = ((Math.round(currentRot) % slides.length) + slides.length) % slides.length
+    if (activeDotRef.current !== centerIndex) {
+      activeDotRef.current = centerIndex
+      setActiveDot(centerIndex)
+    }
   }
 
   // Smooth animation to a target rotation
@@ -222,19 +212,16 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
     rotateTo(rotObj.current.val + diff)
   }
 
-  const { w, h } = getContainerSize(vw)
-
   return (
     <div className="relative flex flex-col items-center gap-6">
       {/* 3D Perspective Stage */}
       <div
         aria-live="polite"
         aria-label="Image carousel"
+        className="relative h-[22rem] w-[16.5rem] min-[480px]:h-[25.5rem] min-[480px]:w-[19rem] min-[768px]:h-[29.5rem] min-[768px]:w-[23rem] min-[992px]:h-[35.5rem] min-[992px]:w-[28rem]"
         style={{
           perspective: "3000px",
           transformStyle: "preserve-3d",
-          width: w,
-          height: h,
           position: "relative",
           transform: "rotateX(0.5deg) rotateY(0deg) rotateZ(0deg)",
         }}
@@ -251,18 +238,19 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
               overflow: "hidden",
               borderRadius: "1.875rem",
               cursor: "pointer",
-              willChange: "transform, opacity",
               transition: "box-shadow 0.3s ease",
             }}
           >
-            <img
+            <Image
               src={src}
               alt={`CIRC showcase photo ${i + 1}`}
+              fill
+              sizes="(max-width: 479px) 264px, (max-width: 767px) 304px, (max-width: 991px) 368px, 448px"
+              priority={i === 0}
+              loading={i === 0 ? undefined : "lazy"}
               draggable={false}
               style={{
                 objectFit: "cover",
-                width: "100%",
-                height: "100%",
                 borderRadius: "1.875rem",
                 display: "block",
                 userSelect: "none",
@@ -330,35 +318,6 @@ export function TerminalHero({
   stats?: HeroStats
   slides?: string[]
 } = {}) {
-  const [displayValues, setDisplayValues] = useState<number[]>(STATS.map(() => 0))
-
-  // Quick increment animation on first load
-  useEffect(() => {
-    let frameId: number
-    const duration = 1200 // quick 1.2s increment animation
-    let start: number | null = null
-
-    const tick = (now: number) => {
-      if (start === null) start = now
-      const elapsed = now - start
-      const progress = Math.min(elapsed / duration, 1)
-
-      // Fast ease-out curve (exponential decay) for a visible, lively counter effect
-      const ease = progress === 1 ? 1 : 1 - Math.pow(2, -10 * progress)
-
-      setDisplayValues(STATS.map((s) => Math.round(s.value * ease)))
-
-      if (progress < 1) {
-        frameId = requestAnimationFrame(tick)
-      } else {
-        setDisplayValues(STATS.map((s) => s.value))
-      }
-    }
-
-    frameId = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frameId)
-  }, [])
-
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-surface-2 dark:bg-[#080809] text-main dark:text-gray-100 transition-colors">
       {/* Background soft glow and fade matching surface-2 */}
@@ -404,12 +363,12 @@ export function TerminalHero({
               </Link>
             </div>
 
-            {/* Stats grid with quick increment animation */}
+            {/* Keep statistics stable during first paint to prevent layout shifts. */}
             <div className="mt-8 grid max-w-[33rem] grid-cols-2 gap-3 rounded-[1.5rem] border border-primary/10 dark:border-white/10 bg-white/80 dark:bg-[#141416]/90 p-3 shadow-[0_18px_45px_rgba(15,36,96,0.06)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur-sm">
-              {STATS.map((metric, index) => (
+              {STATS.map((metric) => (
                 <div key={metric.label} className="rounded-2xl border border-primary/5 dark:border-white/5 bg-[#f9fafb] dark:bg-[#18181B] px-4 py-4 text-left">
                   <div className="flex items-end gap-1 font-display text-3xl font-bold tracking-tight text-primary dark:text-white sm:text-4xl">
-                    <span className="tabular-nums">{displayValues[index]}</span>
+                    <span className="tabular-nums">{metric.value}</span>
                     {metric.suffix && (
                       <span className="pb-1 text-2xl text-primary/80 dark:text-gray-300 sm:text-3xl">{metric.suffix}</span>
                     )}

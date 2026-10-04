@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
-import { Github, Twitter, Instagram, Linkedin, MapPin, ExternalLink } from "lucide-react"
+import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export async function Footer() {
@@ -51,44 +51,6 @@ export async function Footer() {
           <p className="font-body text-white/40 text-xs mt-2 leading-relaxed">
             {settings?.aboutText || "Computing Innovation and Research Club — Mama Ngina University College."}
           </p>
-          <div className="mt-4 pt-3 border-t border-white/10">
-            <a
-              href="https://share.google/5NucqVDcuhPzsBwSS"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-start gap-2 font-body text-xs text-white/60 hover:text-accent-sky transition-colors group leading-relaxed"
-              title="View Computing Innovation & Research Club on Google Maps"
-            >
-              <MapPin size={15} className="text-accent-orange flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
-              <span>
-                Computing Innovation &amp; Research Club · Off Mutomo, Thangari Rd, Gatundu
-                <span className="block text-[11px] text-accent-sky group-hover:underline mt-0.5 font-medium flex items-center gap-1">
-                  Open full Google Maps <ExternalLink size={11} />
-                </span>
-              </span>
-            </a>
-
-            {/* Embedded Mini-Map for immediate visual confirmation */}
-            <div className="mt-3 relative w-full h-28 rounded-xl overflow-hidden border border-white/10 shadow-inner group">
-              <iframe
-                title="Computing Innovation & Research Club Map Location"
-                src="https://maps.google.com/maps?q=-1.037054,36.923318&t=&z=16&ie=UTF8&iwloc=&output=embed"
-                className="w-full h-full border-0 pointer-events-none filter contrast-[1.1] invert-[0.9] hue-rotate-[180deg] opacity-75 group-hover:opacity-100 transition-opacity"
-                loading="lazy"
-              />
-              <a
-                href="https://share.google/5NucqVDcuhPzsBwSS"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="absolute inset-0 bg-transparent flex items-end p-2"
-                aria-label="Open location in Google Maps"
-              >
-                <span className="text-[10px] font-mono font-medium text-white/90 bg-black/75 px-2 py-0.5 rounded backdrop-blur-sm">
-                  Click to explore map
-                </span>
-              </a>
-            </div>
-          </div>
         </div>
 
         {/* Column 2 — Navigation */}
