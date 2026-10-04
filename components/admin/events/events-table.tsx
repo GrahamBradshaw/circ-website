@@ -93,7 +93,7 @@ export function EventsTable({ initialEvents }: EventsTableProps) {
                     ) : (
                       <>
                         <Link 
-                          href={`/admin/events/${event.id}/edit`}
+                          href={`/admin/events/${event.id}`}
                           className="p-1.5 rounded-md text-muted hover:text-primary hover:bg-surface-2 transition-colors"
                           title="Edit"
                         >

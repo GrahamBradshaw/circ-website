@@ -29,23 +29,25 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 flex-shrink-0 group">
-          <div className="relative w-9 h-7 flex-shrink-0">
-            {/* Black logo for light mode */}
+        <div className="relative flex-shrink-0" style={{ width: "56px", height: "36px" }}>
+            {/* Light mode: dark logo GIF */}
             <Image
-              src="/circ-logo-dark.png"
+              src="/logos/circ-logo-light.gif"
               alt="CIRC Logo"
               fill
+              unoptimized
               className="object-contain dark:hidden"
-              sizes="36px"
+              sizes="56px"
               priority
             />
-            {/* White logo for carbon black mode */}
+            {/* Dark mode: white fading logo GIF */}
             <Image
-              src="/circ-logo-white.png"
+              src="/logos/circ-logo-dark.gif"
               alt="CIRC Logo"
               fill
+              unoptimized
               className="object-contain hidden dark:block"
-              sizes="36px"
+              sizes="56px"
               priority
             />
           </div>

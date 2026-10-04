@@ -39,6 +39,14 @@ function needsClerk(request: NextRequest) {
 }
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
+  // Enforce HTTPS in production environments behind proxies
+  const proto = request.headers.get("x-forwarded-proto")
+  if (process.env.NODE_ENV === "production" && proto === "http") {
+    const httpsUrl = request.nextUrl.clone()
+    httpsUrl.protocol = "https:"
+    return NextResponse.redirect(httpsUrl, 301)
+  }
+
   // Public content is server-rendered and does not need Clerk session setup.
   if (!needsClerk(request)) {
     return NextResponse.next()

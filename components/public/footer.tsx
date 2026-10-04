@@ -2,7 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
-import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Github, Twitter, Instagram, Linkedin, MapPin, ExternalLink } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export async function Footer() {
@@ -33,13 +33,14 @@ export async function Footer() {
         {/* Column 1 — Brand */}
         <div>
           <div className="flex items-center gap-3 mb-3">
-            <div className="relative w-9 h-7 flex-shrink-0">
+            <div className="relative flex-shrink-0" style={{ width: "56px", height: "36px" }}>
               <Image
-                src="/circ-logo-white.png"
-                alt="CIRC Logo"
+                src="/logos/circ-logo-dark.gif"
+                alt="CIRC Logo — Computing Innovation & Research Club"
                 fill
+                unoptimized
                 className="object-contain"
-                sizes="36px"
+                sizes="56px"
               />
             </div>
             <span className="font-display text-white text-xl font-bold">CIRC</span>
@@ -47,12 +48,26 @@ export async function Footer() {
           <p className="font-body italic text-[#38BDF8] text-sm mt-3 leading-relaxed">
             &ldquo;Inspiring Innovation, Driving Progress and Creating a Brighter Future.&rdquo;
           </p>
-          <p className="font-body text-white/30 text-xs mt-2 leading-relaxed">
+          <p className="font-body text-white/40 text-xs mt-2 leading-relaxed">
             {settings?.aboutText || "Computing Innovation and Research Club — Mama Ngina University College."}
           </p>
-          <p className="font-body text-white/40 text-xs mt-3 leading-relaxed">
-            CIRC MNUC · Along Kenyatta Road, Mutomo, Gatundu South, Kiambu County, Kenya
-          </p>
+          <div className="mt-4 pt-3 border-t border-white/10">
+            <a
+              href="https://share.google/5NucqVDcuhPzsBwSS"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-start gap-2 font-body text-xs text-white/60 hover:text-accent-sky transition-colors group leading-relaxed"
+              title="View CIRC MNUC location on Google Maps"
+            >
+              <MapPin size={15} className="text-accent-orange flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+              <span>
+                CIRC MNUC · Along Kenyatta Road, Mutomo, Gatundu South, Kiambu County, Kenya
+                <span className="block text-[11px] text-accent-sky group-hover:underline mt-0.5 font-medium flex items-center gap-1">
+                  View on Google Maps <ExternalLink size={11} />
+                </span>
+              </span>
+            </a>
+          </div>
         </div>
 
         {/* Column 2 — Navigation */}

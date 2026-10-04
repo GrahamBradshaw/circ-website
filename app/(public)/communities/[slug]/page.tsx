@@ -122,9 +122,9 @@ export default async function CommunityDetailPage({
             <div className="space-y-8">
               {/* Lead Card */}
               <div className="sticky top-24">
-                <h3 className="font-mono text-accent-orange text-[10px] font-bold uppercase tracking-[.2em] mb-4">
+                <h2 className="font-mono text-accent-orange text-[10px] font-bold uppercase tracking-[.2em] mb-4">
                   Community Lead
-                </h3>
+                </h2>
                 {community.lead ? (
                   <div className="bg-white dark:bg-[#121214] rounded-3xl border border-primary/10 dark:border-white/10 overflow-hidden shadow-[0_10px_30px_rgba(15,36,96,0.05)] dark:shadow-[0_10px_30px_rgba(0,0,0,0.5)] p-6 text-center flex flex-col items-center">
                     {/* Lead photo circle */}
@@ -144,7 +144,7 @@ export default async function CommunityDetailPage({
                       )}
                     </div>
 
-                    <h4 className="font-display text-primary dark:text-white text-xl font-bold mb-1">{community.lead.name}</h4>
+                    <h3 className="font-display text-primary dark:text-white text-xl font-bold mb-1">{community.lead.name}</h3>
                     <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-accent-orange/10 text-accent-orange border border-accent-orange/20 mb-3">
                       {formatRole(community.lead.role)}
                     </span>
