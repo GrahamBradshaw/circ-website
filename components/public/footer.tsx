@@ -6,15 +6,17 @@ import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export async function Footer() {
-  const [settings, communities] = await Promise.all([
+  const [settings, databaseCommunities] = await Promise.all([
     getPublicCached("settings:singleton", () => prisma.settings.findUnique({
       where: { id: "singleton" },
     }), null),
     getPublicCached("footer:communities", () => prisma.community.findMany({
       select: { name: true, slug: true },
-      take: 6,
-    }), FALLBACK_COMMUNITIES.slice(0, 6)),
+    }), FALLBACK_COMMUNITIES),
   ])
+  const communities = [...new Map(
+    [...FALLBACK_COMMUNITIES, ...databaseCommunities].map((community) => [community.slug, community]),
+  ).values()]
 
   const navLinks = [
     { name: "Home", href: "/" },

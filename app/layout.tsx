@@ -20,15 +20,15 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
+    default: "CIRC MNUC | Computing Innovation and Research Club",
     template: "%s",
   },
   description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College, along Thangari Road in Mutomo, Gatundu South, Kiambu County, Kenya.",
   openGraph: {
     type: "website",
     locale: "en_KE",
-    siteName: "Computing Innovation and Research Club (CIRC MNUC)",
-    title: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
+    siteName: "CIRC MNUC",
+    title: "CIRC MNUC | Computing Innovation and Research Club",
     description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College, along Thangari Road in Mutomo, Gatundu South, Kiambu County, Kenya.",
     url: "/",
     images: [{ url: "/android-chrome-512x512.png", alt: "CIRC at Mama Ngina University College" }],
@@ -165,21 +165,6 @@ export default function RootLayout({
                 url: "https://mnu.ac.ke/",
               },
               knowsAbout: ["Computing", "Software development", "Artificial intelligence", "Data science", "Cybersecurity", "Internet of Things", "Technology research"],
-            }).replace(/</g, "\\u003c"),
-          }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebSite",
-              "@id": `${SITE_URL}/#website`,
-              name: "Computing Innovation and Research Club (CIRC MNUC)",
-              url: SITE_URL,
-              publisher: { "@id": `${SITE_URL}/#organization` },
-              about: { "@id": `${SITE_URL}/#organization` },
-              inLanguage: "en-KE",
             }).replace(/</g, "\\u003c"),
           }}
         />

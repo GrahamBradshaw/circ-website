@@ -14,8 +14,8 @@ import { createPageMetadata, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export const metadata = createPageMetadata({
-  title: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
-  description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College, along Thangari Road in Mutomo, Gatundu South, Kiambu County, Kenya.",
+  title: "CIRC MNUC | Computing Innovation and Research Club",
+  description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College in Mutomo, Kenya. Explore student technology communities, events and projects.",
   path: "/",
   keywords: ["Mama Ngina University", "MNU", "MNUC", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
 })
@@ -41,24 +41,23 @@ export default async function HomePage() {
     }), []),
   ])
 
-  const breadcrumbData = {
+  const websiteData = {
     "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "Home",
-        item: SITE_URL,
-      },
-    ],
+    "@type": "WebSite",
+    "@id": `${SITE_URL}/#website`,
+    name: "CIRC MNUC",
+    alternateName: ["Computing Innovation and Research Club", "CIRC"],
+    url: `${SITE_URL}/`,
+    publisher: { "@id": `${SITE_URL}/#organization` },
+    about: { "@id": `${SITE_URL}/#organization` },
+    inLanguage: "en-KE",
   }
 
   return (
     <div className="circ-home-design flex flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
       <TerminalHero />
