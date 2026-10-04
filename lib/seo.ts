@@ -16,7 +16,7 @@ const CORE_KEYWORDS = [
   "Mama Ngina University College",
   "Computer Science Club",
   "MNUC Computer Science Club",
-  "Mutomo, Gatundu South, Kiambu County, Kenya",
+  "Thangari Road, Mutomo, Gatundu South, Kiambu County, Kenya",
   "Kenyatta University",
 ]
 
