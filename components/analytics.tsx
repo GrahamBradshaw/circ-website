@@ -11,7 +11,6 @@ type ClarityTag = ((...args: unknown[]) => void) & { q?: unknown[][] }
 
 declare global {
   interface Window {
-    dataLayer?: unknown[]
     gtag?: GoogleTag
     clarity?: ClarityTag
   }
