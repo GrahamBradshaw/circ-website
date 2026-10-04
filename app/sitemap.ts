@@ -13,36 +13,41 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }),
     prisma.event.findMany({
       where: { published: true },
-      select: { id: true },
+      select: { id: true, createdAt: true },
     }).catch((error) => {
       console.error("Sitemap event query failed; publishing static routes only.", error)
       return []
     }),
   ])
 
-  const staticRoutes = [
-    "/",
-    "/communities",
-    "/events",
-    "/gallery",
-    "/join",
-    "/team",
-    "/privacy",
-    "/terms",
-    "/cookies",
-    "/ai-attribution",
+  const now = new Date().toISOString()
+
+  const staticRoutes: MetadataRoute.Sitemap = [
+    { url: SITE_URL, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
+    { url: `${SITE_URL}/communities`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE_URL}/events`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
+    { url: `${SITE_URL}/team`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/gallery`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/join`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/cookies`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+    { url: `${SITE_URL}/ai-attribution`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
   ]
 
   return [
-    ...staticRoutes.map((route) => ({
-      // Keep the homepage URL byte-for-byte aligned with the emitted canonical.
-      url: route === "/" ? SITE_URL : new URL(route, `${SITE_URL}/`).toString(),
-    })),
+    ...staticRoutes,
     ...communities.map(({ slug }) => ({
-      url: new URL(`/communities/${encodeURIComponent(slug)}`, `${SITE_URL}/`).toString(),
+      url: `${SITE_URL}/communities/${encodeURIComponent(slug)}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     })),
-    ...events.map(({ id }) => ({
-      url: new URL(`/events/${encodeURIComponent(id)}`, `${SITE_URL}/`).toString(),
+    ...events.map(({ id, createdAt }) => ({
+      url: `${SITE_URL}/events/${encodeURIComponent(id)}`,
+      lastModified: createdAt ? new Date(createdAt).toISOString() : now,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     })),
   ]
 }
