@@ -4,7 +4,7 @@ const FEATURES = [
   {
     icon: Code2,
     title: "Hands-On Projects",
-    description: "Build real software, not just theory — every community ships working projects.",
+    description: "Build real software and put theory into practice. Every community ships working projects.",
   },
   {
     icon: Users2,

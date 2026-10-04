@@ -74,7 +74,7 @@ async function main() {
     create: {
       id: "singleton",
       contactEmail: "circ@mnu.ac.ke",
-      aboutText: "Computing Innovation and Research Club — Mama Ngina University College.",
+      aboutText: "Computing Innovation and Research Club at Mama Ngina University College.",
     },
   });
   console.log(`Seeded settings`);

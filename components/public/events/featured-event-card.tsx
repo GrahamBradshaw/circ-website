@@ -21,7 +21,7 @@ export function FeaturedEventCard({ id, title, description, date, coverImage, ty
   return (
     <Link
       href={`/events/${id}`}
-      aria-label={`${title} — view event details`}
+      aria-label={`View details for ${title}`}
       className="group relative isolate flex h-[410px] w-[min(84vw,350px)] flex-shrink-0 flex-col justify-between overflow-hidden rounded-[1.35rem] bg-primary p-5 text-white shadow-[0_12px_35px_rgba(15,36,96,0.12)] transition duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_55px_rgba(15,36,96,0.22)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-orange/50 sm:h-[450px] sm:w-[360px] sm:p-6"
     >
       <Image src={coverImage} alt="" fill sizes="(max-width: 640px) 84vw, 360px" quality={60} className="-z-20 object-cover transition-transform duration-700 group-hover:scale-105" />

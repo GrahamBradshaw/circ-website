@@ -94,7 +94,7 @@ for src_path, dst_path, is_dark in SRC:
     print(f"  Raw bbox  : {bbox}")
 
     if bbox is None:
-        print("  WARNING: no content found — copying original unchanged")
+        print("  WARNING: no content found; copying original unchanged")
         shutil.copy(src_path, dst_path)
         continue
 

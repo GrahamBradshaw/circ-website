@@ -1,4 +1,4 @@
-CIRC MNUC — CLUB HISTORY
+CIRC MNUC: CLUB HISTORY
 Computing Innovation and Research Club at Mama Ngina University College, also commonly referred to as Mama Ngina University or MNU
 https://www.circ.co.ke/history
 
@@ -7,18 +7,18 @@ CIRC MNUC grew from the Computer Science Club founded at Mama Ngina University C
 
 CHRONOLOGY
 
-20 JANUARY 2022 — FOUNDING
+20 JANUARY 2022: FOUNDING
 Graham Bradshaw founded the Computer Science Club and served as its first Chairperson. Catherine Achieng assisted in the early leadership. The founding vision was to give students interested in computer science and technology a place to learn together, share knowledge, build skills, collaborate, and create opportunities.
 
 Dion Martin, who had transferred from Kenyatta University to Mama Ngina University College, took on the role of patron from 20 January 2022. He served until 15 March 2026, when he was recalled to Kenyatta University.
 
-SEPTEMBER 2023 — LEADERSHIP EXPANSION
+SEPTEMBER 2023: LEADERSHIP EXPANSION
 James Maina joined as Secretary, and Solomon Kaniaru joined the Organising Secretary's team. The expanded team coordinated activities, engaged students, and shared responsibility for the club's development.
 
-2023 — FIRST SPAS CONGRESSPERSON MILESTONE
+2023: FIRST SPAS CONGRESSPERSON MILESTONE
 Club Treasurer Alamalik Kweyu became the first student from Mama Ngina University College, also known as Mama Ngina University or MNU, to serve as SPAS Congressperson for the School of Pure and Applied Sciences.
 
-2024 — LEADERSHIP AND TECHNOLOGY OPPORTUNITIES
+2024: LEADERSHIP AND TECHNOLOGY OPPORTUNITIES
 In October, club member Mark Chore became SPAS Congressperson. He later served as Secretary General in the outgoing Student Governing Council. Shalom Malika, who served as SGC Vice President in 2024, was also associated with the club.
 
 Sir Harun Kamau began serving as assistant patron in 2024.
@@ -28,15 +28,15 @@ Through connections among students, university leadership, and external technolo
 THREE CONSECUTIVE BEST CLUB AWARDS
 The Computer Science Club earned the Best Club Award three consecutive times. The award was introduced in 2023. The repeated recognition reflected the contributions of successive leadership teams and members to student and university life.
 
-OCTOBER 2025 — STUDENT GOVERNING COUNCIL ELECTION
+OCTOBER 2025: STUDENT GOVERNING COUNCIL ELECTION
 After the October 2025 SGC elections, Mark Chore served as Secretary General. Arnold Chepkonga was the outgoing SPAS Congressperson, not an SGC electee. Mark and Arnold's tenures ended on the same day, and both are awaiting the October 2026 elections. Their service continued the club's record of members taking on wider student representation, following Alamalik Kweyu and Mark's earlier SPAS Congressperson term.
 
-MARCH 2026 — CIRC REBRAND AND COMMUNITIES
+MARCH 2026: CIRC REBRAND AND COMMUNITIES
 After more than four years as the Computer Science Club, the organization adopted the name Computing Innovation and Research Club (CIRC MNUC). The name reflected members' expanding interests in technology, innovation, research, and related fields. Following Dion Martin's recall to Kenyatta University on 15 March 2026, Dr Ruth took over as patron, and Sir Harun Kamau continued as assistant patron.
 
 CIRC introduced a community-based structure: focused spaces for students to learn, collaborate, build practical skills, explore shared interests, and contribute to projects. This broadened the original club's scope while carrying forward its culture of participation and talent development.
 
-2026 — SOLOMON KANIARU RECOGNITION
+2026: SOLOMON KANIARU RECOGNITION
 Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year. He was the only student and the only developer in the category and finished as second runner-up. The [nominee profile](https://aes.tuqiohub.africa/nominee?slug=solomon-kaniaru&event=aes-awards-2026) lists his nomination.
 
 CIRC aims to share its work with a global audience.

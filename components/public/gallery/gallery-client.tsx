@@ -117,7 +117,7 @@ export function GalleryClient({ images: initialImages, events, initialHasMore }:
               >
                 <Image
                   src={img.url}
-                  alt={img.caption || (img.event?.title ? `CIRC event highlight — ${img.event.title}` : "CIRC technology event and community photo")}
+                  alt={img.caption || (img.event?.title ? `CIRC event highlight: ${img.event.title}` : "CIRC technology event and community photo")}
                   width={600}
                   height={800}
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

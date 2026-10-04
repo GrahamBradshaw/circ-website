@@ -25,12 +25,12 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   return (
     <ClerkProvider>
       <div className="flex h-screen overflow-hidden bg-surface-2" data-clarity-mask="true">
-        {/* Sidebar — fixed width, full height */}
+        {/* Sidebar: fixed width and full height */}
         <aside className="w-60 flex-shrink-0 h-screen overflow-y-auto">
           <Sidebar />
         </aside>
 
-        {/* Main area — fills remaining space, scrolls independently */}
+        {/* Main area: fills the remaining space and scrolls independently */}
         <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
           <Topbar />
           <main className="flex-1 overflow-y-auto p-6">

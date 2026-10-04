@@ -52,7 +52,7 @@ export default async function AccessDeniedPage() {
 
       {/* Footer */}
       <p className="mt-8 text-xs text-muted uppercase tracking-widest">
-        CIRC — Computing Innovation &amp; Research Club
+        CIRC: Computing Innovation &amp; Research Club
       </p>
     </div>
   )

@@ -100,7 +100,7 @@ export function TeamTable({ initialMembers }: { initialMembers: Member[] }) {
                   {formatRole(member.role)}
                 </td>
                 <td className="px-4 py-4 border-b border-border font-body text-muted text-xs">
-                  {member.community ? member.community.replace(/_/g, " ") : "—"}
+                  {member.community ? member.community.replace(/_/g, " ") : "Unassigned"}
                 </td>
                 <td className="px-4 py-4 border-b border-border font-body text-muted text-xs">
                   {member.displayOrder}

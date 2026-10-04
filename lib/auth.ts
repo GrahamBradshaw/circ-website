@@ -15,7 +15,7 @@ export async function requireAdmin() {
 
   if (orgSlug !== ADMIN_ORG_SLUG) {
     return {
-      error: NextResponse.json({ success: false, error: "Forbidden — admin access required" }, { status: 403 }),
+      error: NextResponse.json({ success: false, error: "Forbidden: admin access required" }, { status: 403 }),
       userId: null,
     }
   }

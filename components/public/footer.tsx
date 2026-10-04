@@ -56,13 +56,13 @@ export async function Footer() {
       )}
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
-        {/* Column 1 — Brand */}
+        {/* Column 1: Brand */}
         <div>
           <div className="flex items-center gap-3 mb-3">
             <div className="relative flex-shrink-0" style={{ width: "56px", height: "36px" }}>
               <Image
                 src="/logos/circ-logo-dark.webp"
-                alt="CIRC Logo — Computing Innovation & Research Club"
+                alt="CIRC logo for the Computing Innovation and Research Club"
                 fill
                 unoptimized
                 className="object-contain"
@@ -75,11 +75,11 @@ export async function Footer() {
             &ldquo;Inspiring Innovation, Driving Progress and Creating a Brighter Future.&rdquo;
           </p>
           <p className="font-body text-white/40 text-xs mt-2 leading-relaxed">
-            {settings?.aboutText || "Computing Innovation and Research Club — Mama Ngina University College."}
+            {settings?.aboutText || "Computing Innovation and Research Club at Mama Ngina University College."}
           </p>
         </div>
 
-        {/* Column 2 — Navigation */}
+        {/* Column 2: Navigation */}
         <div>
           <p className="font-mono text-[#38BDF8] text-[9px] tracking-widest uppercase mb-4">
             NAVIGATION
@@ -101,7 +101,7 @@ export async function Footer() {
           </div>
         </div>
 
-        {/* Column 3 — Communities */}
+        {/* Column 3: Communities */}
         <div>
           <p className="font-mono text-[#38BDF8] text-[9px] tracking-widest uppercase mb-4">
             OUR HUBS
@@ -117,7 +117,7 @@ export async function Footer() {
           ))}
         </div>
 
-        {/* Column 4 — Connect */}
+        {/* Column 4: Connect */}
         <div>
           <p className="font-mono text-[#38BDF8] text-[9px] tracking-widest uppercase mb-4">
             GET IN TOUCH

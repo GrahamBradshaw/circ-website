@@ -9,7 +9,7 @@ const STEPS = [
   {
     number: "02",
     title: "Chat With Us",
-    description: "A quick, informal conversation with a community lead — no pressure.",
+    description: "Have a quick, informal conversation with a community lead. There is no pressure.",
   },
   {
     number: "03",
@@ -19,7 +19,7 @@ const STEPS = [
   {
     number: "04",
     title: "Build",
-    description: "Start shipping — workshops, hackathons, and real projects await.",
+    description: "Get started with workshops, hackathons, and real projects.",
   },
 ]
 
@@ -33,7 +33,7 @@ export function HowToJoin() {
           </p>
           <h2 className="section-heading">How to Join</h2>
           <p className="section-subheading max-w-xl mx-auto">
-            From application to your first project — here's what to expect.
+            Here&apos;s what to expect from your application through your first project.
           </p>
         </div>
 

@@ -109,7 +109,7 @@ export function EventForm({ event }: EventFormProps) {
           {published ? <Eye size={18} className="text-accent-green" /> : <EyeOff size={18} className="text-muted" />}
           <div>
             <p className="font-body text-sm font-bold">
-              {published ? "Event is Published & Live" : "Draft — Visible to Admins Only"}
+              {published ? "Event is published and live" : "Draft. Visible to admins only."}
             </p>
           </div>
         </div>

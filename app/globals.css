@@ -128,7 +128,7 @@
     animation: float 6s ease-in-out infinite;
   }
 
-  /* Mission Control — community lead card hover */
+  /* Mission Control: community lead card hover */
   .lead-card {
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
   }

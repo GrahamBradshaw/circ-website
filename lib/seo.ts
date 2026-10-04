@@ -56,7 +56,7 @@ export function createPageMetadata({
       title: pageTitle,
       description: pageDescription,
       url: path,
-      images: [{ url: image, alt: `${title} — Computing Innovation & Research Club` }],
+      images: [{ url: image, alt: `${title}: Computing Innovation & Research Club` }],
     },
     twitter: {
       card: "summary_large_image",

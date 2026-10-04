@@ -12,7 +12,7 @@ export default async function AdminSettingsPage() {
     twitter: "",
     instagram: "",
     github: "",
-    aboutText: "Computing Innovation and Research Club — Mama Ngina University College.",
+    aboutText: "Computing Innovation and Research Club at Mama Ngina University College.",
     maintenance: false,
   }
 

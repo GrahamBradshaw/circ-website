@@ -1,7 +1,7 @@
 {
-  "name": "CIRC — Computing Innovation & Research Club",
+  "name": "CIRC | Computing Innovation & Research Club",
   "short_name": "CIRC",
-  "description": "Computing Innovation and Research Club — Mama Ngina University College",
+  "description": "Computing Innovation and Research Club at Mama Ngina University College",
   "icons": [
     { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }

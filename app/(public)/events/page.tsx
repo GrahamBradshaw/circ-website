@@ -34,7 +34,7 @@ export default async function EventsPage() {
       <PageHero
         badge="EVENTS & ACTIVITIES"
         title="What's Happening"
-        subtitle="Hackathons, workshops, talks, and mentorship sessions — built for people who build things."
+        subtitle="Hackathons, workshops, talks, and mentorship for people who build things."
         size="md"
         image="/hero/hero-bg-3.73468c4c.webp"
         imageAlt="CIRC event photo"

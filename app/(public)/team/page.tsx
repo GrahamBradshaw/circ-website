@@ -66,7 +66,7 @@ export default async function TeamPage() {
               return (
                 <div key={member.id} className="group bg-white dark:bg-[#121214] rounded-3xl border border-primary/10 dark:border-white/10 p-7 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-[0_20px_45px_rgba(15,36,96,0.12)] dark:hover:shadow-[0_20px_45px_rgba(0,0,0,0.8)] transition-all duration-300 relative overflow-hidden">
 
-                  {/* Chairperson only — orange accent badge */}
+                  {/* Chairperson only: orange accent badge */}
                   {isChair && (
                     <div className="absolute top-4 right-4 bg-accent-orange text-white font-mono text-[9px] font-bold px-3 py-1 rounded-full tracking-wider z-10 shadow-sm">
                       CHAIR
@@ -75,7 +75,7 @@ export default async function TeamPage() {
 
                   {/* Circular photo */}
                   <div className="relative mb-5">
-                    {/* Outer glow ring — animates on hover */}
+                    {/* Outer glow ring animates on hover */}
                     <div className="absolute -inset-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-sm"
                       style={{
                         background: isChair

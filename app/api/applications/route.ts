@@ -43,7 +43,7 @@ export async function GET(req: Request) {
 }
 
 export async function POST(req: Request) {
-  // No auth — public endpoint
+  // This public endpoint does not require authentication.
   try {
     const body = await req.json()
     const application = await prisma.application.create({ data: body })

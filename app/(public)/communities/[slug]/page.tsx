@@ -90,7 +90,7 @@ export default async function CommunityDetailPage({
     <div className="flex flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <PageHero
-        badge={"COMMUNITY — " + community.name.toUpperCase()}
+        badge={"COMMUNITY: " + community.name.toUpperCase()}
         title={community.name}
         subtitle={community.description}
         size="md"

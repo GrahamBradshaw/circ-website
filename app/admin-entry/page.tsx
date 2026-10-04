@@ -27,7 +27,7 @@ export default function AdminEntryPage() {
       return
     }
 
-    // Set the org as active — this makes orgSlug available in all subsequent requests
+    // Set the active organization so orgSlug is available to later requests.
     if (setActive) {
         setActive({ organization: adminMembership.organization.id }).then(() => {
           router.push("/admin")
