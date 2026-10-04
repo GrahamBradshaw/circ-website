@@ -4,6 +4,8 @@ import { EventsClient } from "@/components/public/events/events-client"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 
+export const revalidate = 300
+
 export const metadata = createPageMetadata({
   title: "Computing and Technology Events in Kenya",
   description: "Find CIRC workshops, talks, hackathons, research activities, and technology events at Mama Ngina University College.",
@@ -34,7 +36,7 @@ export default async function EventsPage() {
         title="What's Happening"
         subtitle="Hackathons, workshops, talks, and mentorship sessions — built for people who build things."
         size="md"
-        image="/hero/hero-bg-3.jpg"
+        image="/hero/hero-bg-3.73468c4c.webp"
         imageAlt="CIRC event photo"
       />
       <div className="flex-1 pb-20 lg:pb-32">

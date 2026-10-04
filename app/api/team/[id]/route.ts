@@ -3,13 +3,14 @@ import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
+import { publicSuccessResponse } from "@/lib/api"
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { id } = await params
     const member = await getPublicCached(`api:team-member:${id}`, () => prisma.teamMember.findUnique({ where: { id } }), null)
     if (!member) return NextResponse.json({ success: false, error: "Not found" }, { status: 404 })
-    return NextResponse.json({ success: true, data: member })
+    return publicSuccessResponse(member)
   } catch {
     return NextResponse.json({ success: false, error: "Failed" }, { status: 500 })
   }

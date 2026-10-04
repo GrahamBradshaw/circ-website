@@ -17,11 +17,11 @@ interface CommunitiesSectionProps {
 }
 
 const COMMUNITY_PHOTOS = [
-  "/hero/hero-bg-3.jpg",
-  "/hero/hero-bg-4.jpg",
-  "/hero/hero-bg-2.jpg",
-  "/hero/hero-bg-5.jpg",
-  "/hero/hero-bg-1.jpg",
+  "/hero/hero-bg-3.73468c4c.webp",
+  "/hero/hero-bg-4.6502a1ab.webp",
+  "/hero/hero-bg-2.90cbe47a.webp",
+  "/hero/hero-bg-5.1af39077.webp",
+  "/hero/hero-bg-1.0239ec49.webp",
 ]
 
 export function CommunitiesSection({ communities }: CommunitiesSectionProps) {

@@ -2,7 +2,7 @@ import { NextRequest } from "next/server"
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
-import { successResponse, errorResponse } from "@/lib/api"
+import { publicSuccessResponse, successResponse, errorResponse } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { teamMemberSchema } from "@/lib/validators"
 
@@ -11,7 +11,7 @@ export async function GET() {
     const team = await getPublicCached("api:team:members", () => prisma.teamMember.findMany({
       orderBy: { displayOrder: "asc" },
     }), [])
-    return successResponse(team)
+    return publicSuccessResponse(team)
   } catch (error: any) {
     return errorResponse(error.message, 500)
   }

@@ -9,13 +9,34 @@ export async function GET(req: Request) {
 
     const { searchParams } = new URL(req.url)
     const status = searchParams.get("status")
+    const page = Math.max(1, Number.parseInt(searchParams.get("page") ?? "1", 10) || 1)
+    const pageSize = 25
+    const statuses = ["PENDING", "APPROVED", "REJECTED"] as const
+    if (status && !statuses.includes(status as (typeof statuses)[number])) {
+      return NextResponse.json({ success: false, error: "Invalid application status" }, { status: 400 })
+    }
+    const where = status ? { status: status as (typeof statuses)[number] } : undefined
 
-    const applications = await prisma.application.findMany({
-      where: status ? { status: status as any } : undefined,
-      orderBy: { submittedAt: "desc" },
+    const [applications, total, groupedStatuses] = await Promise.all([
+      prisma.application.findMany({
+        where,
+        orderBy: { submittedAt: "desc" },
+        skip: (page - 1) * pageSize,
+        take: pageSize,
+      }),
+      prisma.application.count({ where }),
+      prisma.application.groupBy({ by: ["status"], _count: { _all: true } }),
+    ])
+    const statusCounts = Object.fromEntries(
+      groupedStatuses.map(({ status: applicationStatus, _count }) => [applicationStatus, _count._all]),
+    )
+
+    return NextResponse.json({
+      success: true,
+      data: applications,
+      pagination: { page, pageSize, total, totalPages: Math.max(1, Math.ceil(total / pageSize)) },
+      statusCounts,
     })
-
-    return NextResponse.json({ success: true, data: applications })
   } catch (err: any) {
     return NextResponse.json({ success: false, error: err.message }, { status: 500 })
   }

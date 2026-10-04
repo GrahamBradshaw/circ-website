@@ -8,6 +8,8 @@ import { Calendar, MapPin, Tag, ExternalLink } from "lucide-react"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 
+export const revalidate = 300
+
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const event = await getPublicCached(`event:metadata:${id}`, () => prisma.event.findFirst({

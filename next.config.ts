@@ -30,6 +30,16 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
+        // These generated filenames are versioned with the asset content.
+        source: "/hero/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
         source: "/:path*",
         headers: [
           {

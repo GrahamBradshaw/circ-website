@@ -3,13 +3,14 @@ import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
+import { publicSuccessResponse } from "@/lib/api"
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
     const { slug } = await params
     const community = await getPublicCached(`api:community:${slug}`, () => prisma.community.findUnique({ where: { slug } }), null)
     if (!community) return NextResponse.json({ success: false, error: "Not found" }, { status: 404 })
-    return NextResponse.json({ success: true, data: community })
+    return publicSuccessResponse(community)
   } catch {
     return NextResponse.json({ success: false, error: "Failed" }, { status: 500 })
   }
@@ -40,6 +41,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ sl
 
     revalidatePath("/communities")
     revalidatePath(`/communities/${slug}`)
+    revalidatePath("/join")
     revalidatePath("/")
 
     return NextResponse.json({ success: true, data: community })

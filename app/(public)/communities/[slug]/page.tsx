@@ -9,6 +9,8 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
+export const revalidate = 300
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const community = await getPublicCached(`community:metadata:${slug}`, () => prisma.community.findUnique({

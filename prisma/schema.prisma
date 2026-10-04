@@ -21,6 +21,9 @@ model Event {
   communityId String?
   community   Community?     @relation(fields: [communityId], references: [id])
   gallery     GalleryImage[]
+
+  @@index([published, date])
+  @@index([communityId])
 }
 
 model TeamMember {
@@ -36,6 +39,8 @@ model TeamMember {
   displayOrder Int            @default(0)
   createdAt    DateTime       @default(now())
   ledCommunity Community?     @relation("CommunityLead")
+
+  @@index([role, displayOrder])
 }
 
 model Community {
@@ -58,6 +63,8 @@ model GalleryImage {
   eventId   String?
   createdAt DateTime @default(now())
   event     Event?   @relation(fields: [eventId], references: [id])
+
+  @@index([eventId, createdAt])
 }
 
 model Application {
@@ -73,6 +80,9 @@ model Application {
   skills      String
   status      AppStatus @default(PENDING)
   submittedAt DateTime  @default(now())
+
+  @@index([submittedAt])
+  @@index([status, submittedAt])
 }
 
 model Settings {

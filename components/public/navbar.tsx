@@ -32,7 +32,7 @@ export function Navbar() {
         <div className="relative flex-shrink-0" style={{ width: "56px", height: "36px" }}>
             {/* Light mode: dark logo GIF */}
             <Image
-              src="/circ-logo-dark.png"
+              src="/circ-logo-dark.webp"
               alt="CIRC Logo"
               fill
               className="object-contain dark:hidden"
@@ -40,7 +40,7 @@ export function Navbar() {
             />
             {/* Dark mode: white fading logo GIF */}
             <Image
-              src="/circ-logo-white.png"
+              src="/circ-logo-white.webp"
               alt="CIRC Logo"
               fill
               className="object-contain hidden dark:block"

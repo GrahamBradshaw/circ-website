@@ -2,7 +2,7 @@ import { NextRequest } from "next/server"
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
-import { successResponse, errorResponse } from "@/lib/api"
+import { publicSuccessResponse, successResponse, errorResponse } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { eventSchema } from "@/lib/validators"
 
@@ -24,9 +24,9 @@ export async function GET(req: NextRequest) {
     const events = await getPublicCached("api:events:published", () => prisma.event.findMany({
       where: { published: true },
       orderBy: { date: "asc" },
-      include: { gallery: true },
+      select: { id: true, title: true },
     }), [])
-    return successResponse(events)
+    return publicSuccessResponse(events)
   } catch (error: any) {
     const status = error.message === "Unauthorized" ? 401 : error.message === "Forbidden" ? 403 : 500
     return errorResponse(error.message, status)

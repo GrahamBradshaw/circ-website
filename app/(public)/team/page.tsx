@@ -15,7 +15,7 @@ export const metadata = createPageMetadata({
   keywords: ["CIRC student leaders", "MNUC technology community leads", "Kenyatta University student leadership", "computing club committee"],
 })
 
-export const dynamic = "force-dynamic"
+export const revalidate = 300
 
 const enumToSlug: Record<string, string> = {
   WEB_DEV: "web-development",
@@ -28,16 +28,16 @@ const enumToSlug: Record<string, string> = {
 }
 
 export default async function TeamPage() {
-  const members = await getPublicCached("team:members", () => prisma.teamMember.findMany({
-    where: { role: { notIn: ["COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"] as any } },
-    orderBy: { displayOrder: "asc" },
-  }), [])
-  const execs = members
-
-  const leads = await getPublicCached("team:community-leads", () => prisma.teamMember.findMany({
-    where: { role: { in: ["COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"] as any } },
-    orderBy: { displayOrder: "asc" },
-  }), [])
+  const [execs, leads] = await Promise.all([
+    getPublicCached("team:members", () => prisma.teamMember.findMany({
+      where: { role: { notIn: ["COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"] as any } },
+      orderBy: { displayOrder: "asc" },
+    }), []),
+    getPublicCached("team:community-leads", () => prisma.teamMember.findMany({
+      where: { role: { in: ["COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"] as any } },
+      orderBy: { displayOrder: "asc" },
+    }), []),
+  ])
 
   return (
     <div className="flex flex-col">
@@ -46,7 +46,7 @@ export default async function TeamPage() {
         title="The People Behind CIRC"
         subtitle="Executive committee and community leads driving innovation, research, and community forward."
         size="md"
-        image="/hero/hero-bg-4.jpg"
+        image="/hero/hero-bg-4.6502a1ab.webp"
         imageAlt="CIRC team photo"
       />
 

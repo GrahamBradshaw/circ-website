@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
-import { format, isAfter, isSameDay } from "date-fns"
+import { format } from "date-fns"
 import { EventCard } from "./event-card"
 import { cn } from "@/lib/utils"
 
@@ -20,32 +20,56 @@ interface EventsClientProps {
   featuredEvent: Event | null
 }
 
-export function EventsClient({ events, featuredEvent }: EventsClientProps) {
-  const [activeTab, setActiveTab] = useState<string>("ALL")
-  const [timeLeft, setTimeLeft] = useState<{ d: number, h: number, m: number, s: number } | null>(null)
-
-  const now = new Date()
+function EventCountdown({ date }: { date: Date }) {
+  const [timeLeft, setTimeLeft] = useState<{ d: number; h: number; m: number; s: number } | null>(null)
 
   useEffect(() => {
-    if (!featuredEvent) return
-
-    const timer = setInterval(() => {
-      const distance = new Date(featuredEvent.date).getTime() - new Date().getTime()
-      if (distance < 0) {
-        clearInterval(timer)
+    const update = () => {
+      const distance = new Date(date).getTime() - Date.now()
+      if (distance <= 0) {
         setTimeLeft(null)
-      } else {
-        setTimeLeft({
-          d: Math.floor(distance / (1000 * 60 * 60 * 24)),
-          h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
-          m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-          s: Math.floor((distance % (1000 * 60)) / 1000),
-        })
+        return false
       }
-    }, 1000)
 
-    return () => clearInterval(timer)
-  }, [featuredEvent])
+      setTimeLeft({
+        d: Math.floor(distance / (1000 * 60 * 60 * 24)),
+        h: Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+        m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
+        s: Math.floor((distance % (1000 * 60)) / 1000),
+      })
+      return true
+    }
+
+    if (!update()) return
+    const timer = window.setInterval(() => {
+      if (!update()) window.clearInterval(timer)
+    }, 1000)
+    return () => window.clearInterval(timer)
+  }, [date])
+
+  if (!timeLeft) return null
+
+  return (
+    <div className="flex flex-wrap justify-center gap-4 mb-8">
+      {[
+        { label: "Days", val: timeLeft.d },
+        { label: "Hours", val: timeLeft.h },
+        { label: "Mins", val: timeLeft.m },
+        { label: "Secs", val: timeLeft.s },
+      ].map((unit) => (
+        <div key={unit.label} className="flex flex-col items-center">
+          <div className="font-mono text-white text-3xl md:text-4xl font-bold tabular-nums bg-white/10 rounded-lg px-4 py-3 min-w-[72px] text-center">
+            {String(unit.val).padStart(2, "0")}
+          </div>
+          <span className="font-body text-white/60 text-[10px] mt-2 uppercase tracking-wider">{unit.label}</span>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export function EventsClient({ events, featuredEvent }: EventsClientProps) {
+  const [activeTab, setActiveTab] = useState<string>("ALL")
 
   const filteredEvents = events.filter(e => {
     if (activeTab === "ALL") return true
@@ -82,25 +106,7 @@ export function EventsClient({ events, featuredEvent }: EventsClientProps) {
               <span>MNU Main Hall</span>
             </div>
 
-            {timeLeft && (
-              <div className="flex flex-wrap justify-center gap-4 mb-8">
-                {[
-                  { label: "Days", val: timeLeft.d },
-                  { label: "Hours", val: timeLeft.h },
-                  { label: "Mins", val: timeLeft.m },
-                  { label: "Secs", val: timeLeft.s },
-                ].map((unit, i) => (
-                  <div key={unit.label} className="flex flex-col items-center">
-                    <div className="font-mono text-white text-3xl md:text-4xl font-bold tabular-nums bg-white/10 rounded-lg px-4 py-3 min-w-[72px] text-center">
-                      {String(unit.val).padStart(2, "0")}
-                    </div>
-                    <span className="font-body text-white/60 text-[10px] mt-2 uppercase tracking-wider">
-                      {unit.label}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
+            <EventCountdown date={featuredEvent.date} />
             
             <a href={featuredEvent.id} className="btn-primary-lg">
               Register Now

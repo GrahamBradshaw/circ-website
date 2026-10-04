@@ -4,6 +4,8 @@ import { GalleryClient } from "@/components/public/gallery/gallery-client"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 
+export const revalidate = 300
+
 export const metadata = createPageMetadata({
   title: "CIRC Projects and Event Gallery",
   description: "Photos and highlights from CIRC computing projects, student workshops, research activities, and events at Mama Ngina University College.",
@@ -14,31 +16,30 @@ export const metadata = createPageMetadata({
 export default async function GalleryPage() {
   let images: any[] = []
   let eventList: any[] = []
+  let hasMore = false
 
   try {
-    images = await getPublicCached("gallery:images-with-events", () => prisma.galleryImage.findMany({
-      include: {
-        event: {
-          select: { id: true, title: true }
-        }
-      },
-      orderBy: { createdAt: "desc" },
-    }), [])
-    eventList = await getPublicCached("gallery:published-events", () => prisma.event.findMany({
-      where: { published: true },
-      select: { id: true, title: true },
-    }), [])
+    const [galleryPage, eventsWithGallery] = await Promise.all([
+      getPublicCached("gallery:images-with-events:0:24", async () => {
+        const rows = await prisma.galleryImage.findMany({
+          include: { event: { select: { id: true, title: true } } },
+          orderBy: { createdAt: "desc" },
+          take: 25,
+        })
+        return { images: rows.slice(0, 24), hasMore: rows.length > 24 }
+      }, { images: [], hasMore: false }),
+      getPublicCached("gallery:events-with-images", () => prisma.event.findMany({
+        where: { gallery: { some: {} } },
+        select: { id: true, title: true },
+        orderBy: { date: "desc" },
+      }), []),
+    ])
+    images = galleryPage.images
+    hasMore = galleryPage.hasMore
+    eventList = eventsWithGallery
   } catch (err) {
     console.error("Gallery DB error:", err)
   }
-
-  const eventNames = Array.from(
-    new Set(
-      images
-        .map((img) => img.event?.title)
-        .filter((title): title is string => !!title)
-    )
-  ).sort()
 
   return (
     <div className="flex flex-col min-h-screen bg-surface-2 dark:bg-[#09090B] transition-colors">
@@ -47,7 +48,7 @@ export default async function GalleryPage() {
         title="Event & Project Gallery"
         subtitle="Moments from our events, workshops, hackathons, and community activities."
         size="sm"
-        image="/hero/hero-bg-5.jpg"
+        image="/hero/hero-bg-5.1af39077.webp"
         imageAlt="CIRC gallery photo"
       />
 
@@ -66,7 +67,8 @@ export default async function GalleryPage() {
       ) : (
         <GalleryClient
           images={images}
-          eventNames={eventNames}
+          events={eventList}
+          initialHasMore={hasMore}
         />
       )}
     </div>

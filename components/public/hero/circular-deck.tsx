@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
-import gsap from "gsap"
 import Image from "next/image"
 
 // ─── Circular 3D Position Calculator ──────────────────────────────────────────
@@ -82,13 +81,15 @@ export function CircularDeck({ slides }: { slides: string[] }) {
   const N = slides.length
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
   const rotObj = useRef({ val: 0 })
+  const gsapRef = useRef<typeof import("gsap").gsap | null>(null)
   const activeDotRef = useRef(0)
-  const tweenRef = useRef<gsap.core.Tween | null>(null)
+  const tweenRef = useRef<{ kill: () => void } | null>(null)
   const [activeDot, setActiveDot] = useState(0)
 
   // Render cards at a specific continuous rotation value
   const applyRotation = (currentRot: number, currentVw: number) => {
-    if (N === 0) return
+    const gsap = gsapRef.current
+    if (N === 0 || !gsap) return
 
     cardRefs.current.forEach((el, i) => {
       if (!el) return
@@ -128,6 +129,8 @@ export function CircularDeck({ slides }: { slides: string[] }) {
 
   // Smooth animation to a target rotation
   const rotateTo = (targetRot: number, duration = 0.85) => {
+    const gsap = gsapRef.current
+    if (!gsap || N === 0) return
     if (tweenRef.current) tweenRef.current.kill()
 
     tweenRef.current = gsap.to(rotObj.current, {
@@ -148,9 +151,17 @@ export function CircularDeck({ slides }: { slides: string[] }) {
   // Position slides once, and recalculate only when the viewport changes.
   useEffect(() => {
     const updatePositions = () => applyRotation(rotObj.current.val, window.innerWidth)
-    updatePositions()
-    window.addEventListener("resize", updatePositions, { passive: true })
-    return () => window.removeEventListener("resize", updatePositions)
+    let cancelled = false
+    void import("gsap").then(({ gsap }) => {
+      if (cancelled) return
+      gsapRef.current = gsap
+      updatePositions()
+      window.addEventListener("resize", updatePositions, { passive: true })
+    })
+    return () => {
+      cancelled = true
+      window.removeEventListener("resize", updatePositions)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

@@ -22,6 +22,8 @@ export default function AdminGalleryPage() {
   const [images, setImages] = useState<GalleryImage[]>([])
   const [events, setEvents] = useState<Event[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [hasMore, setHasMore] = useState(false)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [uploading, setUploading] = useState<{ name: string; progress: number }[]>([])
   const [toast, setToast] = useState<{msg: string, type: 'success'|'error'} | null>(null)
   
@@ -42,6 +44,7 @@ export default function AdminGalleryPage() {
           const galleryData = await galleryRes.json()
           const eventsData = await eventsRes.json()
           setImages(Array.isArray(galleryData.data) ? galleryData.data : [])
+          setHasMore(Boolean(galleryData.pagination?.hasMore))
           setEvents(Array.isArray(eventsData.data) ? eventsData.data : [])
         }
       } catch (err) {
@@ -52,6 +55,23 @@ export default function AdminGalleryPage() {
     }
     fetchData()
   }, [])
+
+  async function loadMoreImages() {
+    if (loadingMore || !hasMore) return
+    setLoadingMore(true)
+    try {
+      const response = await fetch(`/api/gallery?skip=${images.length}&limit=24`)
+      const result = await response.json()
+      if (response.ok && result.success) {
+        setImages((current) => [...current, ...result.data])
+        setHasMore(result.pagination.hasMore)
+      }
+    } catch {
+      showToast("Could not load more images", "error")
+    } finally {
+      setLoadingMore(false)
+    }
+  }
 
   async function handleUpload(files: FileList | File[]) {
     const fileArray = Array.from(files)
@@ -240,6 +260,18 @@ export default function AdminGalleryPage() {
           </div>
         )}
       </div>
+      {hasMore && (
+        <div className="mt-8 flex justify-center">
+          <button
+            type="button"
+            onClick={loadMoreImages}
+            disabled={loadingMore}
+            className="rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-primary disabled:opacity-60"
+          >
+            {loadingMore ? "Loading…" : "Load more images"}
+          </button>
+        </div>
+      )}
     </div>
   )
 }

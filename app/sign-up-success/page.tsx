@@ -1,9 +1,11 @@
+import Image from "next/image"
+
 export default function SignUpSuccessPage() {
   return (
     <div className="min-h-screen bg-surface-2 flex flex-col items-center justify-center px-6 text-center">
       <div className="max-w-md">
         <div className="flex justify-center mb-6">
-          <img src="/logo.png" alt="CIRC" className="w-14 h-14 object-contain" />
+          <Image src="/logo.webp" alt="CIRC" width={56} height={56} className="object-contain" />
         </div>
         <h1 className="font-display text-primary text-3xl font-bold mb-3">
           Account Created

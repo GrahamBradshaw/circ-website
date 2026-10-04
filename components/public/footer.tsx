@@ -6,14 +6,15 @@ import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export async function Footer() {
-  const settings = await getPublicCached("settings:singleton", () => prisma.settings.findUnique({
-    where: { id: "singleton" },
-  }), null)
-
-  const communities = await getPublicCached("footer:communities", () => prisma.community.findMany({
-    select: { name: true, slug: true },
-    take: 6,
-  }), FALLBACK_COMMUNITIES.slice(0, 6))
+  const [settings, communities] = await Promise.all([
+    getPublicCached("settings:singleton", () => prisma.settings.findUnique({
+      where: { id: "singleton" },
+    }), null),
+    getPublicCached("footer:communities", () => prisma.community.findMany({
+      select: { name: true, slug: true },
+      take: 6,
+    }), FALLBACK_COMMUNITIES.slice(0, 6)),
+  ])
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -35,7 +36,7 @@ export async function Footer() {
           <div className="flex items-center gap-3 mb-3">
             <div className="relative flex-shrink-0" style={{ width: "56px", height: "36px" }}>
               <Image
-                src="/logos/circ-logo-dark.gif"
+                src="/logos/circ-logo-dark.webp"
                 alt="CIRC Logo — Computing Innovation & Research Club"
                 fill
                 unoptimized

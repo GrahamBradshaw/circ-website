@@ -116,6 +116,8 @@ export const metadata = createPageMetadata({
   keywords: ["web development community", "programming club", "AI and machine learning", "data science", "Web3 and blockchain", "Internet of Things", "networking and cybersecurity", "SPAS", "Kenyatta University technology"],
 })
 
+export const revalidate = 300
+
 export default async function CommunitiesPage() {
   const communities = await getPublicCached("communities:with-leads", () => prisma.community.findMany({
     include: {
@@ -130,7 +132,7 @@ export default async function CommunitiesPage() {
         title="Our Communities"
         subtitle="Seven disciplines. One shared mission. Find your people and build something meaningful."
         size="lg"
-        image="/hero/hero-bg-2.jpg"
+        image="/hero/hero-bg-2.90cbe47a.webp"
         imageAlt="CIRC community members collaborating"
       />
 

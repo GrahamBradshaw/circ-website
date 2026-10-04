@@ -7,3 +7,15 @@ export function successResponse(data: any, status = 200) {
 export function errorResponse(error: string, status = 400) {
   return NextResponse.json({ success: false, error }, { status })
 }
+
+export function publicSuccessResponse(data: unknown, status = 200) {
+  return NextResponse.json(
+    { success: true, data },
+    {
+      status,
+      headers: {
+        "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+      },
+    },
+  )
+}

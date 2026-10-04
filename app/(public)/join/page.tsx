@@ -12,7 +12,7 @@ export const metadata = createPageMetadata({
   keywords: ["join technology club Kenya", "MNUC student clubs", "Kenyatta University student technology", "SPAS students", "computing student community"],
 })
 
-export const dynamic = 'force-dynamic'
+export const revalidate = 300
 
 export default async function JoinPage() {
   const communities = await getPublicCached("join:communities", () => prisma.community.findMany({
@@ -35,7 +35,7 @@ export default async function JoinPage() {
         }
         subtitle="Join a community of innovators, researchers, and builders. Applications are reviewed on a rolling basis."
         size="md"
-        image="/hero/hero-bg-1.jpg"
+        image="/hero/hero-bg-1.0239ec49.webp"
         imageAlt="CIRC members working together"
       >
         <div className="flex flex-wrap justify-center gap-2 mt-2">

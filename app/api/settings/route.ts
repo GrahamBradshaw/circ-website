@@ -3,6 +3,7 @@ import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache
 import { NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
+import { publicSuccessResponse } from "@/lib/api"
 
 export async function GET() {
   try {
@@ -11,7 +12,7 @@ export async function GET() {
       if (!current) current = await prisma.settings.create({ data: { id: "singleton" } })
       return current
     }, null)
-    return NextResponse.json({ success: true, data: settings })
+    return publicSuccessResponse(settings)
   } catch (err) {
     return NextResponse.json({ success: false, error: "Failed to fetch settings" }, { status: 500 })
   }
@@ -33,6 +34,7 @@ export async function PATCH(req: Request) {
     revalidatePath("/events")
     revalidatePath("/team")
     revalidatePath("/gallery")
+    revalidatePath("/join")
     return NextResponse.json({ success: true, data: settings })
   } catch (err) {
     console.error(err)

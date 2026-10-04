@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { CheckCircle, XCircle, Eye, Clock } from "lucide-react"
+import { CheckCircle, XCircle, Eye } from "lucide-react"
 
 type Application = {
   id: string
@@ -24,6 +24,11 @@ export default function ApplicationsPage() {
   const [applications, setApplications] = useState<Application[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState("ALL")
+  const [page, setPage] = useState(1)
+  const [pageCount, setPageCount] = useState(1)
+  const [total, setTotal] = useState(0)
+  const [statusCounts, setStatusCounts] = useState<Record<string, number>>({})
+  const [refreshKey, setRefreshKey] = useState(0)
   const [selected, setSelected] = useState<Application | null>(null)
   const [toast, setToast] = useState<string | null>(null)
 
@@ -32,13 +37,32 @@ export default function ApplicationsPage() {
     setTimeout(() => setToast(null), 3500)
   }
 
-  async function fetchApplications() {
-    setLoading(true)
-    const res = await fetch("/api/applications")
-    const data = await res.json()
-    if (data.success) setApplications(data.data)
-    setLoading(false)
-  }
+  useEffect(() => {
+    const controller = new AbortController()
+    async function fetchApplications() {
+      setLoading(true)
+      try {
+        const query = new URLSearchParams({ page: String(page) })
+        if (filter !== "ALL") query.set("status", filter)
+        const response = await fetch(`/api/applications?${query.toString()}`, { signal: controller.signal })
+        const result = await response.json()
+        if (result.success) {
+          setApplications(result.data)
+          setTotal(result.pagination.total)
+          const nextPageCount = result.pagination.totalPages
+          setPageCount(nextPageCount)
+          setStatusCounts(result.statusCounts)
+          if (page > nextPageCount) setPage(nextPageCount)
+        }
+      } catch (error) {
+        if (!controller.signal.aborted) console.error("Failed to load applications", error)
+      } finally {
+        if (!controller.signal.aborted) setLoading(false)
+      }
+    }
+    void fetchApplications()
+    return () => controller.abort()
+  }, [filter, page, refreshKey])
 
   async function updateStatus(id: string, status: string) {
     const res = await fetch(`/api/applications/${id}`, {
@@ -49,13 +73,10 @@ export default function ApplicationsPage() {
     if (res.ok) {
       setApplications(prev => prev.map(a => a.id === id ? { ...a, status: status as any } : a))
       if (selected?.id === id) setSelected(prev => prev ? { ...prev, status: status as any } : null)
+      setRefreshKey((key) => key + 1)
       showToast(`Application ${status.toLowerCase()}`)
     }
   }
-
-  useEffect(() => { fetchApplications() }, [])
-
-  const filtered = filter === "ALL" ? applications : applications.filter(a => a.status === filter)
 
   const badgeClass = (s: string) => {
     if (s === "APPROVED") return "bg-green-50 text-green-700"
@@ -73,19 +94,19 @@ export default function ApplicationsPage() {
 
       <div className="flex items-center justify-between">
         <h1 className="font-display text-primary text-2xl font-bold">Applications</h1>
-        <span className="font-body text-muted text-sm">{applications.length} total</span>
+        <span className="font-body text-muted text-sm">{total} total</span>
       </div>
 
       <div className="flex gap-2 flex-wrap">
         {STATUS_FILTERS.map(f => (
           <button
             key={f}
-            onClick={() => setFilter(f)}
+            onClick={() => { setPage(1); setFilter(f) }}
             className={`font-body text-sm px-4 py-2 rounded-full border transition-all ${
               filter === f ? "bg-primary text-white border-primary" : "border-border text-muted hover:border-primary hover:text-primary"
             }`}
           >
-            {f} ({f === "ALL" ? applications.length : applications.filter(a => a.status === f).length})
+              {f} ({f === "ALL" ? total : statusCounts[f] ?? 0})
           </button>
         ))}
       </div>
@@ -93,7 +114,7 @@ export default function ApplicationsPage() {
       <div className="bg-surface rounded-xl border border-border overflow-hidden">
         {loading ? (
           <div className="p-12 text-center font-body text-muted text-sm">Loading applications...</div>
-        ) : filtered.length === 0 ? (
+        ) : applications.length === 0 ? (
           <div className="p-12 text-center font-body text-muted text-sm italic">No applications found.</div>
         ) : (
           <table className="w-full text-sm">
@@ -105,7 +126,7 @@ export default function ApplicationsPage() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map(app => (
+              {applications.map(app => (
                 <tr key={app.id} className="hover:bg-surface-2 transition-colors">
                   <td className="px-4 py-4 border-b border-border">
                     <div className="font-body text-main text-sm font-medium">{app.fullName}</div>
@@ -144,6 +165,26 @@ export default function ApplicationsPage() {
           </table>
         )}
       </div>
+
+      {!loading && total > 0 && (
+        <div className="flex items-center justify-between gap-4">
+          <span className="font-body text-muted text-sm">Page {page} of {pageCount}</span>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.max(1, current - 1))}
+              disabled={page <= 1}
+              className="rounded-lg border border-border px-4 py-2 text-sm disabled:opacity-50"
+            >Previous</button>
+            <button
+              type="button"
+              onClick={() => setPage((current) => Math.min(pageCount, current + 1))}
+              disabled={page >= pageCount}
+              className="rounded-lg border border-border px-4 py-2 text-sm disabled:opacity-50"
+            >Next</button>
+          </div>
+        </div>
+      )}
 
       {selected && (
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4" onClick={() => setSelected(null)}>
