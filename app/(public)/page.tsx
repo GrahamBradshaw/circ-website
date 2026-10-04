@@ -4,10 +4,13 @@ import { TerminalHero } from "@/components/public/hero/terminal-hero"
 import { CommunitiesSection } from "@/components/public/communities/communities-section"
 import { EventsStrip } from "@/components/public/events/events-strip"
 import { LeadershipTeaser } from "@/components/public/team/leadership-teaser"
+import { LocationMapSection } from "@/components/public/location-map"
 import { JoinCTA } from "@/components/public/home/join-cta"
 import { Suspense } from "react"
+import Link from "next/link"
+import { ExternalLink } from "lucide-react"
 import { UnauthorizedToast } from "@/components/public/unauthorized-toast"
-import { createPageMetadata } from "@/lib/seo"
+import { createPageMetadata, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export const metadata = createPageMetadata({
@@ -50,8 +53,25 @@ export default async function HomePage() {
   // Use only DB images — the carousel handles repeating them if < 6
   const heroSlides = galleryImages.map((image) => image.url)
 
+  const breadcrumbData = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: SITE_URL,
+      },
+    ],
+  }
+
   return (
     <div className="circ-home-design flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c") }}
+      />
       <Suspense><UnauthorizedToast /></Suspense>
       <TerminalHero
         slides={heroSlides}
@@ -95,7 +115,7 @@ export default async function HomePage() {
                 <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted dark:text-gray-400">Our community</p>
                 <h3 className="mb-4 font-display text-2xl font-bold tracking-tight text-primary dark:text-white md:text-3xl">Learn, build, and explore together</h3>
                 <p className="font-body text-base leading-8 text-main dark:text-gray-200">
-                CIRC (Computing Innovation and Research Club) is a student club at <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://mnu.ac.ke/" target="_blank" rel="noreferrer">Mama Ngina University College (MNUC)</a>, a constituent college of <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://www.ku.ac.ke/ku-history-profile/" target="_blank" rel="noreferrer">Kenyatta University</a>, located in Mutomo, Gatundu South, Kiambu County, Kenya. Formerly known as the Computer Science Club, CIRC brings students together through communities, workshops, events and projects to build practical computing skills and explore technology and research.
+                CIRC (Computing Innovation and Research Club) is a student club at <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://mnu.ac.ke/" target="_blank" rel="noreferrer">Mama Ngina University College (MNUC)</a>, a constituent college of <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://www.ku.ac.ke/ku-history-profile/" target="_blank" rel="noreferrer">Kenyatta University</a>, located in <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange inline-flex items-center gap-1" href="https://share.google/5NucqVDcuhPzsBwSS" target="_blank" rel="noreferrer">Mutomo, Gatundu South, Kiambu County, Kenya <ExternalLink size={12} className="inline" /></a>. Formerly known as the Computer Science Club, CIRC brings students together through <Link href="/communities" className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange">7 specialized communities</Link>, <Link href="/events" className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange">workshops &amp; events</Link>, and <Link href="/gallery" className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange">collaborative projects</Link> to build practical computing skills and explore technology and research.
                 </p>
               </div>
             </article>
@@ -106,7 +126,7 @@ export default async function HomePage() {
                 <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted dark:text-gray-400">What we explore</p>
                 <h3 className="mb-4 font-display text-2xl font-bold tracking-tight text-primary dark:text-white md:text-3xl">Computing across disciplines</h3>
                 <p className="font-body text-base leading-8 text-main dark:text-gray-200">
-                CIRC activities cover web and software development, programming, artificial intelligence and machine learning, data science, cybersecurity, Web3 and the Internet of Things. Students in relevant programmes at the <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://spas.mnu.ac.ke/" target="_blank" rel="noreferrer">School of Pure and Applied Sciences (SPAS)</a>—including Computer Science, Information Technology, Mathematics and Computer Science, and Statistics and Programming—can explore the club alongside the wider MNUC student community.
+                CIRC activities cover web and software development, programming, artificial intelligence and machine learning, data science, cybersecurity, Web3 and the Internet of Things (<Link href="/communities" className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange">explore our communities</Link>). Students in relevant programmes at the <a className="font-medium text-primary dark:text-accent-sky underline decoration-accent-sky decoration-2 underline-offset-4 hover:text-accent-orange" href="https://spas.mnu.ac.ke/" target="_blank" rel="noreferrer">School of Pure and Applied Sciences (SPAS)</a>—including Computer Science, Information Technology, Mathematics and Computer Science, and Statistics and Programming—can <Link href="/join" className="font-semibold text-accent-orange underline decoration-accent-orange decoration-2 underline-offset-4 hover:text-orange-600">apply to join the club</Link> alongside the wider MNUC student community.
                 </p>
               </div>
             </article>
@@ -123,7 +143,10 @@ export default async function HomePage() {
       {/* Section D: Leadership */}
       <LeadershipTeaser members={execs} />
 
-      {/* Section E: Join CTA */}
+      {/* Section E: Location Map */}
+      <LocationMapSection />
+
+      {/* Section F: Join CTA */}
       <JoinCTA />
     </div>
   )
