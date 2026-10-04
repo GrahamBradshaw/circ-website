@@ -282,12 +282,10 @@
   0%, 100% {
     opacity: 0.86;
     transform: scale(1);
-    filter: brightness(0.96) contrast(1.02);
   }
   50% {
     opacity: 1;
-    transform: scale(1.035);
-    filter: brightness(1.08) contrast(1.06) drop-shadow(0 0 25px rgba(249, 115, 22, 0.28));
+    transform: scale(1.02);
   }
 }
 
@@ -304,7 +302,7 @@
 
 .animate-photo-glow {
   animation: photo-fade-glow 6s ease-in-out infinite;
-  will-change: transform, opacity, filter;
+  will-change: transform, opacity;
 }
 
 .animate-ambient-pulse {

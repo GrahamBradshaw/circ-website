@@ -1,5 +1,3 @@
-'use client'
-
 import { ReactNode } from "react"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
@@ -94,8 +92,10 @@ export function PageHero({ badge, title, subtitle, size = "md", children, image,
               src={image}
               alt={imageAlt ?? "CIRC community photo"}
               fill
+              sizes="100vw"
+              quality={60}
               className="object-cover object-center"
-              priority
+              preload
             />
           </div>
 

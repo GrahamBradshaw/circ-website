@@ -67,7 +67,8 @@ export function Analytics({ gaMeasurementId }: { gaMeasurementId?: string }) {
       return
     }
 
-    loadClarity()
+    const clarityLoadTimer = window.setTimeout(loadClarity, 1500)
+    return () => window.clearTimeout(clarityLoadTimer)
   }, [isPrivate])
 
   return !isPrivate && gaMeasurementId

@@ -37,7 +37,6 @@ export function Navbar() {
               fill
               className="object-contain dark:hidden"
               sizes="56px"
-              priority
             />
             {/* Dark mode: white fading logo GIF */}
             <Image
@@ -46,7 +45,6 @@ export function Navbar() {
               fill
               className="object-contain hidden dark:block"
               sizes="56px"
-              priority
             />
           </div>
           <div className="flex flex-col">

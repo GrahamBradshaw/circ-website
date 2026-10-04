@@ -23,7 +23,7 @@ export const metadata = createPageMetadata({
 export const revalidate = 300
 
 export default async function HomePage() {
-  const [communities, upcomingEvents, execs, memberCount, communityCount, eventCount, galleryImages] = await Promise.all([
+  const [communities, upcomingEvents, execs] = await Promise.all([
     getPublicCached("home:communities", () => prisma.community.findMany(), FALLBACK_COMMUNITIES),
     getPublicCached("home:upcoming-events", () => prisma.event.findMany({
       where: {
@@ -39,19 +39,7 @@ export default async function HomePage() {
       },
       orderBy: { displayOrder: "asc" },
     }), []),
-    getPublicCached("home:member-count", () => prisma.teamMember.count(), 120),
-    getPublicCached("home:community-count", () => prisma.community.count(), 6),
-    getPublicCached("home:event-count", () => prisma.event.count({ where: { published: true } }), 30),
-    getPublicCached("home:gallery-images", () => prisma.galleryImage.findMany({
-      orderBy: { createdAt: "desc" },
-      take: 6,
-      select: { url: true },
-    }), []),
-
   ])
-
-  // Use only DB images — the carousel handles repeating them if < 6
-  const heroSlides = galleryImages.map((image) => image.url)
 
   const breadcrumbData = {
     "@context": "https://schema.org",
@@ -73,15 +61,7 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
-      <TerminalHero
-        slides={heroSlides}
-        stats={{
-          members: memberCount,
-          communities: communityCount,
-          eventsRun: eventCount,
-          projectsBuilt: 30,
-        }}
-      />
+      <TerminalHero />
 
       <section
         className="relative overflow-hidden bg-white dark:bg-[#121215] py-24 md:py-32 border-y border-black/5 dark:border-white/10 transition-colors"
