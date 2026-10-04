@@ -19,6 +19,9 @@ const STATS = [
   { value: 30, label: "Events Hosted", suffix: "+" },
   { value: 7, label: "Communities", suffix: "" },
   { value: 30, label: "Projects Built", suffix: "+" },
+  { value: 2022, label: "Founded", suffix: "" },
+  { value: 3, label: "Club awards", suffix: "" },
+  { value: 2026, label: "Rebranded to CIRC", suffix: "" },
 ]
 
 // ─── TerminalHero (Page Hero Section) ─────────────────────────────────────────
@@ -72,16 +75,16 @@ export function TerminalHero() {
             </div>
 
             {/* Keep statistics stable during first paint to prevent layout shifts. */}
-            <div className="mt-8 grid max-w-[33rem] grid-cols-2 gap-3 rounded-[1.5rem] border border-primary/10 dark:border-white/10 bg-white/80 dark:bg-[#141416]/90 p-3 shadow-[0_18px_45px_rgba(15,36,96,0.06)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur-sm">
+            <div className="mt-8 grid max-w-[33rem] grid-cols-2 gap-2 rounded-[1.5rem] border border-primary/10 dark:border-white/10 bg-white/80 dark:bg-[#141416]/90 p-3 shadow-[0_18px_45px_rgba(15,36,96,0.06)] dark:shadow-[0_18px_45px_rgba(0,0,0,0.6)] backdrop-blur-sm xl:grid-cols-4">
               {STATS.map((metric) => (
-                <div key={metric.label} className="rounded-2xl border border-primary/5 dark:border-white/5 bg-[#f9fafb] dark:bg-[#18181B] px-4 py-4 text-left">
-                  <div className="flex items-end gap-1 font-display text-3xl font-bold tracking-tight text-primary dark:text-white sm:text-4xl">
+                <div key={metric.label} className="rounded-2xl border border-primary/5 dark:border-white/5 bg-[#f9fafb] dark:bg-[#18181B] px-2 py-3 text-center sm:px-3 sm:py-4 xl:text-left">
+                  <div className="flex items-end justify-center gap-1 font-display text-2xl font-bold tracking-tight text-primary dark:text-white sm:text-3xl xl:justify-start">
                     <span className="tabular-nums">{metric.value}</span>
                     {metric.suffix && (
-                      <span className="pb-1 text-2xl text-primary/80 dark:text-gray-300 sm:text-3xl">{metric.suffix}</span>
+                      <span className="pb-0.5 text-xl text-primary/80 dark:text-gray-300 sm:text-2xl">{metric.suffix}</span>
                     )}
                   </div>
-                  <span className="mt-1 block font-body text-[9px] font-semibold uppercase tracking-[0.18em] text-muted dark:text-gray-400 sm:text-[10px]">
+                  <span className="mt-1 block font-body text-[8px] font-semibold uppercase tracking-[0.12em] text-muted dark:text-gray-400 sm:text-[9px]">
                     {metric.label}
                   </span>
                 </div>

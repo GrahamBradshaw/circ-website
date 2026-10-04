@@ -72,7 +72,7 @@ export function PageHero({ badge, title, subtitle, size = "md", children, image,
       {/* Subtle bottom breadcrumb/location footer */}
       <div className={`flex items-center justify-center gap-2 font-body text-[10px] font-medium uppercase tracking-[0.16em] text-primary/60 dark:text-gray-400 sm:text-xs ${image ? "mt-6 pb-6" : "mt-8"}`}>
         <MapPin size={13} className="text-accent-orange" />
-        CIRC · Mama Ngina University College
+        CIRC at Mama Ngina University College
       </div>
 
       {/* Animated glowing, breathing, fading photo strip */}

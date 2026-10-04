@@ -18,6 +18,7 @@ export async function Footer() {
 
   const navLinks = [
     { name: "Home", href: "/" },
+    { name: "Club History", href: "/history" },
     { name: "Communities", href: "/communities" },
     { name: "Events", href: "/events" },
     { name: "Team", href: "/team" },
@@ -128,17 +129,11 @@ export async function Footer() {
 
       {/* Bottom bar */}
       <div
-        className="max-w-7xl mx-auto px-6 mt-0 pb-6 flex flex-col sm:flex-row items-center justify-between gap-3"
+        className="max-w-7xl mx-auto px-6 mt-0 pb-6 flex items-center justify-center"
         style={{ borderTop: "1px solid rgba(56,189,248,0.06)", paddingTop: "1.5rem" }}
       >
-        <span className="font-mono text-[9px] tracking-widest text-white/20">
-          © {new Date().getFullYear()} CIRC — MAMA NGINA UNIVERSITY COLLEGE
-        </span>
-        <span className="font-mono text-[9px] tracking-widest text-white/40">
-          Official website of CIRC MNUC
-        </span>
-        <span className="font-mono text-[9px] tracking-widest text-white/20">
-          AY 2025/26 // ALL RIGHTS RESERVED
+        <span className="font-body text-xs text-white/40">
+          © {new Date().getFullYear()} CIRC MNUC. All rights reserved.
         </span>
       </div>
     </footer>

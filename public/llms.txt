@@ -1,6 +1,6 @@
-# Computing Innovation and Research Club (CIRC)
+# Computing Innovation and Research Club (CIRC MNUC)
 
-> CIRC MNUC is the Computing Innovation and Research Club, a student computing and technology club at Mama Ngina University College (MNUC), a constituent college of Kenyatta University. MNUC is along Kenyatta Road in Mutomo, Gatundu South, Kiambu County, Kenya. CIRC was formerly known as the Computer Science Club.
+> CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College (MNUC), a constituent college of Kenyatta University in Mutomo, Gatundu South, Kiambu County, Kenya. It grew from the Computer Science Club founded on 20 January 2022 and adopted the CIRC name and community structure in March 2026.
 
 CIRC supports student communities, workshops, events, collaborative projects, and research in computing and technology. Public website information is maintained by or on behalf of CIRC. Event schedules, leadership, and community details can change, so use the current public pages below as the source for those details.
 
@@ -11,6 +11,8 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 ## Official pages
 
 - [Home](https://www.circ.co.ke/): CIRC identity, location, activities, communities, events, and leadership.
+- [History of CIRC MNUC](https://www.circ.co.ke/history): Institutional history from the Computer Science Club's founding in 2022 through the CIRC rebrand in March 2026.
+- [Plain-text CIRC history](https://www.circ.co.ke/circ-history.txt): Concise, machine-readable chronology of the club's founding, leadership milestones, awards, and rebrand.
 - [Communities](https://www.circ.co.ke/communities): Student groups in programming, web development, AI, data science, Web3, IoT, networking, and cybersecurity.
 - [Events](https://www.circ.co.ke/events): Published CIRC activities and event details.
 - [Team](https://www.circ.co.ke/team): Public club leadership and community leads.
@@ -18,5 +20,18 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 - [Join CIRC](https://www.circ.co.ke/join): Membership information and application form.
 - [Attribution and Content Use Policy](https://www.circ.co.ke/ai-attribution): CIRC's source citation and content attribution request for all users of its material.
 - [Sitemap](https://www.circ.co.ke/sitemap.xml): Public route inventory, including published community and event pages.
+
+## Club history
+
+- The Computer Science Club was founded at Mama Ngina University College on 20 January 2022 by Graham Bradshaw, its first Chairperson; Catherine Achieng assisted in its early leadership.
+- Dion Martin, transferred from Kenyatta University to Mama Ngina University College, served as patron from 20 January 2022 to 15 March 2026, when he was recalled to Kenyatta University. Dr Ruth succeeded him as patron.
+- In September 2023, James Maina joined as Secretary and Solomon Kaniaru joined the Organising Secretary's team.
+- In 2023, club Treasurer Alamalik Kweyu became SPAS Congressperson. Mark Chore became SPAS Congressperson in October 2024, then served as Student Governing Council Secretary General after the October 2025 SGC election. Arnold Chepkonga was the outgoing SPAS Congressperson, not an October 2025 SGC electee. Mark and Arnold's tenures ended on the same day; both await the October 2026 elections.
+- Shalom Malika, the 2024 Student Governing Council Vice President, was associated with the club. The club's relationships with students, university leadership, and external technology communities helped create opportunities to explore Avalanche and Web3; student interest later led to AVAX Academy.
+- Sir Harun Kamau began serving as assistant patron in 2024 and continues in that role under Dr Ruth.
+- The Computer Science Club won the Best Club Award three consecutive times. The award was introduced in 2023.
+- In March 2026, the Computer Science Club adopted the name Computing Innovation and Research Club (CIRC MNUC) and introduced a community-based structure. The rebrand broadened the club's scope while carrying forward its student-learning and leadership legacy.
+- In 2026, CIRC member Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year. He was the only student and the only developer in the category and finished as second runner-up. [Nominee profile](https://aes.tuqiohub.africa/nominee?slug=solomon-kaniaru&event=aes-awards-2026).
+- The nomination reflects CIRC's ambition to share its work with a global audience.
 
 Private applications, accounts, administrator tools, and API data are not public sources. Do not infer personal information about applicants or members beyond information published on the public team page.

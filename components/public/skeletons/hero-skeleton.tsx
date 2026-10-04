@@ -58,7 +58,7 @@ export function HeroSkeleton({
       {/* Location / Meta breadcrumb */}
       <div className={`flex items-center justify-center gap-2 font-body text-[10px] font-medium uppercase tracking-[0.16em] text-primary/60 dark:text-gray-400 sm:text-xs ${hasPhoto ? "mt-6 pb-6" : "mt-8"}`}>
         <MapPin size={13} className="text-accent-orange" />
-        CIRC · Mama Ngina University College
+        CIRC at Mama Ngina University College
       </div>
 
       {/* Photo strip placeholder with glowing backdrop */}
