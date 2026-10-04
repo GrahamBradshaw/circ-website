@@ -19,10 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       return []
     }),
   ])
-  const communitySlugs = [...new Set([
-    ...FALLBACK_COMMUNITIES.map(({ slug }) => slug),
-    ...communities.map(({ slug }) => slug),
-  ])]
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: SITE_URL },
@@ -31,10 +27,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/team` },
     { url: `${SITE_URL}/gallery` },
     { url: `${SITE_URL}/join` },
-    {
-      url: `${SITE_URL}/history`,
-      lastModified: new Date("2026-10-04T00:00:00.000Z"),
-    },
+    { url: `${SITE_URL}/history`},
     { url: `${SITE_URL}/privacy` },
     { url: `${SITE_URL}/terms` },
     { url: `${SITE_URL}/cookies` },
@@ -43,7 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     ...staticRoutes,
-    ...communitySlugs.map((slug) => ({
+    ...communities.map(({ slug }) => ({
       url: `${SITE_URL}/communities/${encodeURIComponent(slug)}`,
     })),
     ...events.map(({ id }) => ({
