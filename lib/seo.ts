@@ -27,7 +27,7 @@ export function createPageMetadata({
   keywords = [],
   image = "/android-chrome-512x512.png",
 }: PageSeoInput): Metadata {
-  const pageTitle = path === "/" ? title : `${title} | CIRC`
+  const pageTitle = path === "/" ? title : `${title} | CIRC MNUC`
   const pageDescription = plainTextDescription(description) || `Learn about ${title} at Mama Ngina University College.`
   const pageKeywords = [...new Set([...CORE_KEYWORDS, ...keywords])]
 
@@ -50,7 +50,7 @@ export function createPageMetadata({
     openGraph: {
       type: "website",
       locale: "en_KE",
-      siteName: "Computing Innovation & Research Club (CIRC)",
+      siteName: "Computing Innovation and Research Club (CIRC MNUC)",
       title: pageTitle,
       description: pageDescription,
       url: path,

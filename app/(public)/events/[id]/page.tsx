@@ -74,7 +74,8 @@ export default async function EventDetailPage({
     image: new URL(event.coverImage, SITE_URL).toString(),
     organizer: {
       "@type": "Organization",
-      name: "Computing Innovation & Research Club (CIRC)",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Computing Innovation and Research Club (CIRC MNUC)",
       url: SITE_URL,
     },
     url: eventUrl,

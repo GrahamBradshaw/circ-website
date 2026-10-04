@@ -62,7 +62,8 @@ export default async function CommunityDetailPage({
       description: plainTextDescription(community.description),
       parentOrganization: {
         "@type": "Organization",
-        name: "Computing Innovation & Research Club (CIRC)",
+        "@id": `${SITE_URL}/#organization`,
+        name: "Computing Innovation and Research Club (CIRC MNUC)",
         url: SITE_URL,
       },
       knowsAbout: community.focusTags,

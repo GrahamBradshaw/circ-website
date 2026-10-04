@@ -19,22 +19,22 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CIRC MNUC | Computing Innovation and Research Club – Mutomo, Gatundu South",
+    default: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
     template: "%s",
   },
   description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College, along Thangari Road in Mutomo, Gatundu South, Kiambu County, Kenya.",
   openGraph: {
     type: "website",
     locale: "en_KE",
-    siteName: "Computing Innovation & Research Club (CIRC)",
-    title: "CIRC MNUC | Computing Innovation and Research Club",
+    siteName: "Computing Innovation and Research Club (CIRC MNUC)",
+    title: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
     description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College, along Thangari Road in Mutomo, Gatundu South, Kiambu County, Kenya.",
     url: "/",
     images: [{ url: "/android-chrome-512x512.png", alt: "CIRC at Mama Ngina University College" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CIRC MNUC | Computing Innovation and Research Club",
+    title: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
     description: "Student technology communities, events, and research at Mama Ngina University College, Kenya.",
     images: ["/android-chrome-512x512.png"],
   },
@@ -147,7 +147,8 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
-              name: "Computing Innovation & Research Club (CIRC)",
+              "@id": `${SITE_URL}/#organization`,
+              name: "Computing Innovation and Research Club (CIRC MNUC)",
               alternateName: ["CIRC MNUC", "CIRC", "Computer Science Club", "MNUC Computer Science Club"],
               url: SITE_URL,
               logo: `${SITE_URL}/logo.webp`,
@@ -182,8 +183,11 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              name: "Computing Innovation & Research Club (CIRC)",
+              "@id": `${SITE_URL}/#website`,
+              name: "Computing Innovation and Research Club (CIRC MNUC)",
               url: SITE_URL,
+              publisher: { "@id": `${SITE_URL}/#organization` },
+              about: { "@id": `${SITE_URL}/#organization` },
               inLanguage: "en-KE",
             }).replace(/</g, "\\u003c"),
           }}
