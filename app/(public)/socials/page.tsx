@@ -4,10 +4,10 @@ import { getSocialProfiles } from "@/lib/social-links"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "CIRC MNUC Social Media Profiles",
-  description: "Find CIRC MNUC’s official social media profiles and follow club updates from Mama Ngina University College.",
+  title: "CIRC MNUC Instagram and Social Media Profiles",
+  description: "Find the Computing Innovation and Research Club’s official Instagram profile and other social media links at Mama Ngina University College.",
   path: "/socials",
-  keywords: ["CIRC MNUC socials", "CIRC social media", "Computing Innovation and Research Club Instagram", "CIRC LinkedIn", "CIRC GitHub"],
+  keywords: ["CIRC MNUC socials", "CIRC social media", "Computing Innovation and Research Club Instagram", "CIRC Instagram @circ_mnu", "CIRC LinkedIn", "CIRC GitHub"],
 })
 
 export default async function SocialsPage() {

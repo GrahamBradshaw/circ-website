@@ -28,10 +28,16 @@ function normalizeSocialUrl(value: string | null | undefined, allowedHosts: stri
 }
 
 export function getSocialProfiles(settings: SocialSettings): SocialProfile[] {
+  const configuredInstagram = normalizeSocialUrl(settings?.instagram, ["instagram.com"])
+
   return [
     { platform: "GitHub", label: "GitHub", href: normalizeSocialUrl(settings?.github, ["github.com"]) },
     { platform: "X", label: "X (Twitter)", href: normalizeSocialUrl(settings?.twitter, ["x.com", "twitter.com"]) },
-    { platform: "Instagram", label: "Instagram", href: normalizeSocialUrl(settings?.instagram, ["instagram.com"]) },
+    {
+      platform: "Instagram",
+      label: configuredInstagram ? "Instagram" : "Instagram (@circ_mnu)",
+      href: configuredInstagram ?? "https://www.instagram.com/circ_mnu/",
+    },
     { platform: "LinkedIn", label: "LinkedIn", href: normalizeSocialUrl(settings?.linkedin, ["linkedin.com"]) },
   ].filter((profile): profile is SocialProfile => Boolean(profile.href))
 }
