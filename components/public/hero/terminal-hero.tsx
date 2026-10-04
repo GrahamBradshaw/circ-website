@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react"
 import gsap from "gsap"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowRight, ChevronDown, ChevronLeft, ChevronRight, MapPin } from "lucide-react"
+import { ArrowRight, ChevronDown, MapPin } from "lucide-react"
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -261,17 +261,8 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
         ))}
       </div>
 
-      {/* Navigation Controls: Prev / Dots / Next */}
-      <div className="relative z-20 flex items-center gap-4">
-        <button
-          type="button"
-          aria-label="Previous slide"
-          onClick={() => rotateTo(rotObj.current.val - 1)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 bg-white/80 text-primary shadow-sm backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-white hover:scale-105 active:scale-95 cursor-pointer"
-        >
-          <ChevronLeft size={16} />
-        </button>
-
+      {/* Slide indicators */}
+      <div className="relative z-20 flex items-center justify-center">
         <ol className="flex items-center gap-1" aria-label="Slide indicators">
           {slides.map((_, i) => (
             <li key={i} className="list-none">
@@ -296,15 +287,6 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
             </li>
           ))}
         </ol>
-
-        <button
-          type="button"
-          aria-label="Next slide"
-          onClick={() => rotateTo(rotObj.current.val + 1)}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-primary/10 bg-white/80 text-primary shadow-sm backdrop-blur-sm transition-all hover:border-primary/30 hover:bg-white hover:scale-105 active:scale-95 cursor-pointer"
-        >
-          <ChevronRight size={16} />
-        </button>
       </div>
     </div>
   )
