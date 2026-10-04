@@ -44,14 +44,16 @@ export function TerminalHero() {
               </span>
             </div>
 
-            <h1 className="max-w-[31rem] font-display text-[clamp(3.2rem,7vw,6.2rem)] font-bold leading-[0.88] tracking-[-0.075em] text-primary dark:text-white transition-colors">
-              We build the
-              <br />
-              <span className="relative inline-block font-extrabold italic text-accent-orange">next generation</span>
+            <h1 className="max-w-[37rem] font-display text-[clamp(2.25rem,4.2vw,3.7rem)] font-bold leading-[0.96] tracking-[-0.065em] text-primary dark:text-white transition-colors">
+              <span className="block">Computing Innovation</span>
+              <span className="block font-extrabold italic text-accent-orange">&amp; Research Club</span>
+              <span className="mt-2 block">
+                Building the <span className="font-extrabold italic text-accent-orange">next Generation</span>
+              </span>
             </h1>
 
             <p className="mt-6 max-w-[32rem] text-base leading-relaxed text-muted dark:text-gray-400 sm:text-lg transition-colors">
-              A student-led community at Mama Ngina University College building skills in software, data, AI, and emerging technology.
+              CIRC MNUC is a student-led computing and research club at Mama Ngina University College, building skills in software, data, AI, and emerging technology.
             </p>
 
             <div className="mt-8 flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row">
