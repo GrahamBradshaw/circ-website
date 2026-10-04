@@ -48,6 +48,8 @@ export const metadata: Metadata = {
     "Computing Innovation and Research Club",
     "CIRC Kenya",
     "Mama Ngina University College",
+    "Mama Ngina University",
+    "MNU",
     "MNUC technology club",
     "Kenyatta University constituent college",
     "School of Pure and Applied Sciences SPAS",
@@ -159,6 +161,7 @@ export default function RootLayout({
               parentOrganization: {
                 "@type": "CollegeOrUniversity",
                 name: "Mama Ngina University College",
+                alternateName: ["Mama Ngina University", "MNU", "MNUC"],
                 url: "https://mnu.ac.ke/",
               },
               knowsAbout: ["Computing", "Software development", "Artificial intelligence", "Data science", "Cybersecurity", "Internet of Things", "Technology research"],

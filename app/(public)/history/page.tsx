@@ -2,10 +2,10 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "CIRC MNUC History: From Computer Science Club to CIRC",
-  description: "Read the history of the Computing Innovation and Research Club at Mama Ngina University College, from its 2022 Computer Science Club beginnings to the CIRC rebrand in 2026.",
+  title: "CIRC MNUC History at Mama Ngina University College (MNU)",
+  description: "Explore CIRC history at Mama Ngina University College, also known as Mama Ngina University or MNU, from its 2022 founding to the 2026 rebrand.",
   path: "/history",
-  keywords: ["CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history"],
+  keywords: ["CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
 })
 
 const milestones = [
@@ -27,9 +27,9 @@ const milestones = [
   },
   {
     date: "2023",
-    title: "Members represent their school",
+    title: "Alamalik Kweyu becomes the first SPAS Congressperson",
     paragraphs: [
-      "Club Treasurer Alamalik Kweyu was elected SPAS Congressperson for the School of Pure and Applied Sciences.",
+      "Club Treasurer Alamalik Kweyu became the first student from Mama Ngina University College, also known as Mama Ngina University or MNU, to serve as SPAS Congressperson for the School of Pure and Applied Sciences.",
     ],
   },
   {
@@ -107,6 +107,9 @@ export default function HistoryPage() {
           <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-primary dark:text-white sm:text-3xl">A student club with room to grow</h2>
           <p className="mt-3 font-body leading-7 text-muted dark:text-gray-300">
             Founded in 2022, the Computer Science Club grew through student leadership, campus recognition and shared technology projects. In 2026, it became CIRC MNUC.
+          </p>
+          <p className="mt-3 text-sm leading-6 text-muted dark:text-gray-400">
+            Mama Ngina University College is also commonly referred to as Mama Ngina University or MNU.
           </p>
           <div className="mt-6 grid max-w-xl grid-cols-3 gap-2.5 text-center sm:gap-4">
             {[

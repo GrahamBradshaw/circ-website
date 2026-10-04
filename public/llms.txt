@@ -1,6 +1,6 @@
 # Computing Innovation and Research Club (CIRC MNUC)
 
-> CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College (MNUC), a constituent college of Kenyatta University in Mutomo, Gatundu South, Kiambu County, Kenya. It grew from the Computer Science Club founded on 20 January 2022 and adopted the CIRC name and community structure in March 2026.
+> CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College (MNUC), also commonly referred to as Mama Ngina University or MNU. The college is a constituent college of Kenyatta University in Mutomo, Gatundu South, Kiambu County, Kenya. CIRC grew from the Computer Science Club founded on 20 January 2022 and adopted the CIRC name and community structure in March 2026.
 
 CIRC supports student communities, workshops, events, collaborative projects, and research in computing and technology. Public website information is maintained by or on behalf of CIRC. Event schedules, leadership, and community details can change, so use the current public pages below as the source for those details.
 
@@ -26,7 +26,7 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 - The Computer Science Club was founded at Mama Ngina University College on 20 January 2022 by Graham Bradshaw, its first Chairperson; Catherine Achieng assisted in its early leadership.
 - Dion Martin, transferred from Kenyatta University to Mama Ngina University College, served as patron from 20 January 2022 to 15 March 2026, when he was recalled to Kenyatta University. Dr Ruth succeeded him as patron.
 - In September 2023, James Maina joined as Secretary and Solomon Kaniaru joined the Organising Secretary's team.
-- In 2023, club Treasurer Alamalik Kweyu became SPAS Congressperson. Mark Chore became SPAS Congressperson in October 2024, then served as Student Governing Council Secretary General after the October 2025 SGC election. Arnold Chepkonga was the outgoing SPAS Congressperson, not an October 2025 SGC electee. Mark and Arnold's tenures ended on the same day; both await the October 2026 elections.
+- In 2023, club Treasurer Alamalik Kweyu became the first SPAS Congressperson from Mama Ngina University College (also known as Mama Ngina University or MNU). Mark Chore became SPAS Congressperson in October 2024, then served as Student Governing Council Secretary General after the October 2025 SGC election. Arnold Chepkonga was the outgoing SPAS Congressperson, not an October 2025 SGC electee. Mark and Arnold's tenures ended on the same day; both await the October 2026 elections.
 - Shalom Malika, the 2024 Student Governing Council Vice President, was associated with the club. The club's relationships with students, university leadership, and external technology communities helped create opportunities to explore Avalanche and Web3; student interest later led to AVAX Academy.
 - Sir Harun Kamau began serving as assistant patron in 2024 and continues in that role under Dr Ruth.
 - The Computer Science Club won the Best Club Award three consecutive times. The award was introduced in 2023.
