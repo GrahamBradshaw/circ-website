@@ -9,8 +9,8 @@ import "@fontsource/jetbrains-mono/700.css"
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: "100 900",
-  axes: ["slnt"],
+  weight: "variable",
+  axes: ["opsz"],
   display: "swap",
   variable: "--font-inter",
 })
