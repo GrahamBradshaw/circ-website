@@ -4,6 +4,7 @@ import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
+import { SITE_URL } from "@/lib/seo"
 
 export async function Footer() {
   const [settings, databaseCommunities] = await Promise.all([
@@ -17,6 +18,13 @@ export async function Footer() {
   const communities = [...new Map(
     [...FALLBACK_COMMUNITIES, ...databaseCommunities].map((community) => [community.slug, community]),
   ).values()]
+  const socialLinks = [
+    { href: settings?.github, Icon: Github, label: "GitHub" },
+    { href: settings?.twitter, Icon: Twitter, label: "X or Twitter" },
+    { href: settings?.instagram, Icon: Instagram, label: "Instagram" },
+    { href: settings?.linkedin, Icon: Linkedin, label: "LinkedIn" },
+  ].filter(({ href }) => href && /^https?:\/\//i.test(href))
+  const socialProfiles = socialLinks.map(({ href }) => href).filter((href): href is string => Boolean(href))
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -32,6 +40,19 @@ export async function Footer() {
     <footer
       className="w-full bg-[#070708] border-t border-white/10"
     >
+      {socialProfiles.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": `${SITE_URL}/#organization`,
+              sameAs: socialProfiles,
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
+      )}
       <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
         {/* Column 1 — Brand */}
@@ -104,18 +125,14 @@ export async function Footer() {
             {settings?.contactEmail || "circ@mnu.ac.ke"}
           </p>
           <div className="flex items-center gap-3 mt-3">
-            {[
-              { href: settings?.github || "#", Icon: Github, label: "GitHub" },
-              { href: settings?.twitter || "#", Icon: Twitter, label: "Twitter" },
-              { href: settings?.instagram || "#", Icon: Instagram, label: "Instagram" },
-              { href: settings?.linkedin || "#", Icon: Linkedin, label: "LinkedIn" },
-            ].map(({ href, Icon, label }) => (
+            {socialLinks.map(({ href, Icon, label }) => (
               <a
                 key={label}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
+                title={label}
                 className="w-8 h-8 rounded-lg flex items-center justify-center text-white/30 hover:text-white/70 transition-colors"
                 style={{
                   background: "rgba(56,189,248,0.05)",
@@ -123,6 +140,7 @@ export async function Footer() {
                 }}
               >
                 <Icon size={14} />
+                <span className="sr-only">{label}</span>
               </a>
             ))}
           </div>

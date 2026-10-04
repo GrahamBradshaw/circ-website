@@ -25,6 +25,7 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 - [Team](https://www.circ.co.ke/team): Public club leadership and community leads.
 - [Gallery](https://www.circ.co.ke/gallery): Public activity photographs and highlights.
 - [Join CIRC](https://www.circ.co.ke/join): Membership information and application form.
+- Any official social profile links configured by CIRC are published in the website footer and in the Organization structured data.
 - [Attribution and Content Use Policy](https://www.circ.co.ke/ai-attribution): CIRC's source citation and content attribution request for all users of its material.
 - [Sitemap](https://www.circ.co.ke/sitemap.xml): Public route inventory, including published community and event pages.
 
