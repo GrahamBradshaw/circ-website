@@ -166,7 +166,7 @@ export default function RootLayout({
         />
         {children}
         <Suspense fallback={null}>
-          <Analytics />
+          <Analytics gaMeasurementId={process.env.GOOGLE_ANALYTICS_MEASUREMENT_ID} />
         </Suspense>
       </body>
     </html>

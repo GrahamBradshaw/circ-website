@@ -2,8 +2,8 @@
 
 import { usePathname } from "next/navigation"
 import { useEffect } from "react"
+import { GoogleAnalytics } from "@next/third-parties/google"
 
-const GA_MEASUREMENT_ID = "G-G0PTNXCJ2Y"
 const CLARITY_PROJECT_ID = process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID
 
 type GoogleTag = ((...args: unknown[]) => void) & { loaded?: boolean }
@@ -30,30 +30,6 @@ function isPrivatePath(pathname: string) {
   return PRIVATE_PATHS.some((path) => pathname === path || pathname.startsWith(`${path}/`))
 }
 
-function loadGoogleAnalytics() {
-  if (!window.gtag) {
-    window.dataLayer = window.dataLayer || []
-    const gtag: GoogleTag = (...args) => { window.dataLayer?.push(args) }
-    window.gtag = gtag
-    gtag("consent", "default", {
-      analytics_storage: "denied",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied",
-    })
-    gtag("js", new Date())
-    gtag("config", GA_MEASUREMENT_ID, { send_page_view: false })
-  }
-  window.gtag("consent", "update", { analytics_storage: "granted" })
-  if (!document.getElementById("circ-google-analytics")) {
-    const script = document.createElement("script")
-    script.id = "circ-google-analytics"
-    script.async = true
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`
-    document.head.appendChild(script)
-  }
-}
-
 function loadClarity() {
   if (!CLARITY_PROJECT_ID) return
   if (!window.clarity) {
@@ -73,13 +49,14 @@ function loadClarity() {
   }
 }
 
-export function Analytics() {
+export function Analytics({ gaMeasurementId }: { gaMeasurementId?: string }) {
   const pathname = usePathname()
+  const isPrivate = isPrivatePath(pathname)
 
   useEffect(() => {
-    if (isPrivatePath(pathname)) {
+    if (isPrivate) {
       const trackersLoaded = Boolean(
-        document.getElementById("circ-google-analytics") ||
+        document.getElementById("_next-ga") ||
         document.getElementById("circ-microsoft-clarity"),
       )
       if (!trackersLoaded) return
@@ -91,13 +68,10 @@ export function Analytics() {
       return
     }
 
-    loadGoogleAnalytics()
     loadClarity()
-    window.gtag?.("event", "page_view", {
-      page_location: new URL(pathname, window.location.origin).href,
-      page_title: document.title,
-    })
-  }, [pathname])
+  }, [isPrivate])
 
-  return null
+  return !isPrivate && gaMeasurementId
+    ? <GoogleAnalytics gaId={gaMeasurementId} />
+    : null
 }
