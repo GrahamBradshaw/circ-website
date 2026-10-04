@@ -2,9 +2,18 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Analytics } from "@/components/analytics"
 import { SITE_URL } from "@/lib/seo"
+import { Inter } from "next/font/google"
 import "./globals.css"
 import "@fontsource/jetbrains-mono/400.css"
 import "@fontsource/jetbrains-mono/700.css"
+
+const inter = Inter({
+  subsets: ["latin"],
+  weight: "100 900",
+  axes: ["slnt"],
+  display: "swap",
+  variable: "--font-inter",
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -75,7 +84,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={inter.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -100,14 +109,6 @@ export default function RootLayout({
               })();
             `,
           }}
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap"
-          rel="stylesheet"
-        />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&display=swap"
-          rel="stylesheet"
         />
       </head>
       <body className="font-body antialiased">

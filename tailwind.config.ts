@@ -38,8 +38,8 @@ const config: Config = {
         border: "#E2E8F0",
       },
       fontFamily: {
-        display: ["Clash Display", "sans-serif"],
-        body:    ["Satoshi", "sans-serif"],
+        display: ["var(--font-inter)", "Arial", "sans-serif"],
+        body:    ["var(--font-inter)", "Arial", "sans-serif"],
         mono:    ["JetBrains Mono", "monospace"],
       },
       borderRadius: {

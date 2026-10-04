@@ -60,7 +60,7 @@ export function CommunitiesSection({ communities }: CommunitiesSectionProps) {
                 href={`/communities/${community.slug}`}
                 className="group relative isolate flex min-h-[390px] flex-col justify-between overflow-hidden rounded-[1.35rem] bg-primary p-6 text-white shadow-[0_12px_35px_rgba(15,36,96,0.12)] transition duration-500 hover:-translate-y-1.5 hover:shadow-[0_24px_55px_rgba(15,36,96,0.22)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-orange/50 sm:min-h-[430px] sm:p-7"
               >
-                <Image src={image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" className="-z-20 object-cover transition-transform duration-700 group-hover:scale-105" />
+                <Image src={image} alt="" fill sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" quality={60} className="-z-20 object-cover transition-transform duration-700 group-hover:scale-105" />
                 <div aria-hidden="true" className="absolute inset-0 -z-10 bg-gradient-to-b from-primary-dark/55 via-primary-dark/30 to-primary-dark/95" />
 
                 <div className="flex items-start justify-between gap-4">

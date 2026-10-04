@@ -246,8 +246,9 @@ function CircularDeck({ slides = HARDCODED_SLIDES }: { slides?: string[] }) {
               alt={`CIRC showcase photo ${i + 1}`}
               fill
               sizes="(max-width: 479px) 264px, (max-width: 767px) 304px, (max-width: 991px) 368px, 448px"
+              quality={60}
               priority={i === 0}
-              loading={i === 0 ? undefined : "lazy"}
+              loading="eager"
               draggable={false}
               style={{
                 objectFit: "cover",
