@@ -30,7 +30,7 @@ const HARDCODED_SLIDES = [
 const STATS = [
   { value: 400, label: "Active Members", suffix: "+" },
   { value: 30, label: "Events Hosted", suffix: "+" },
-  { value: 6, label: "Communities", suffix: "" },
+  { value: 7, label: "Communities", suffix: "" },
   { value: 30, label: "Projects Built", suffix: "+" },
 ]
 
