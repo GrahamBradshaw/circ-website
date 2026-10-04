@@ -14,6 +14,13 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 - [History of CIRC MNUC](https://www.circ.co.ke/history): Institutional history from the Computer Science Club's founding in 2022 through the CIRC rebrand in March 2026.
 - [Plain-text CIRC history](https://www.circ.co.ke/circ-history.txt): Concise, machine-readable chronology of the club's founding, leadership milestones, awards, and rebrand.
 - [Communities](https://www.circ.co.ke/communities): Student groups in programming, web development, AI, data science, Web3, IoT, networking, and cybersecurity.
+- [Web Development](https://www.circ.co.ke/communities/web-development): Frontend and full-stack development with modern web tools.
+- [Data Science and Modelling](https://www.circ.co.ke/communities/data-science): Statistics, data visualisation, machine learning, and data modelling.
+- [AI and Machine Learning](https://www.circ.co.ke/communities/ai-ml): Artificial intelligence, neural networks, language processing, and computer vision.
+- [Web3 and Blockchain](https://www.circ.co.ke/communities/web3-blockchain): Blockchain, smart contracts, and decentralised applications.
+- [Programming Community](https://www.circ.co.ke/communities/programming): Programming fundamentals, algorithms, and software skills.
+- [Internet of Things](https://www.circ.co.ke/communities/iot): Connected devices, sensors, hardware, and software projects.
+- [Networking and Cybersecurity](https://www.circ.co.ke/communities/networking-cybersecurity): Networking, ethical security testing, cryptography, and digital safety.
 - [Events](https://www.circ.co.ke/events): Published CIRC activities and event details.
 - [Team](https://www.circ.co.ke/team): Public club leadership and community leads.
 - [Gallery](https://www.circ.co.ke/gallery): Public activity photographs and highlights.

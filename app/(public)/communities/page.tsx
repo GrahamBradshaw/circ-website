@@ -119,11 +119,14 @@ export const metadata = createPageMetadata({
 export const revalidate = 300
 
 export default async function CommunitiesPage() {
-  const communities = await getPublicCached("communities:with-leads", () => prisma.community.findMany({
+  const databaseCommunities = await getPublicCached("communities:with-leads", () => prisma.community.findMany({
     include: {
       lead: true,
     },
   }), FALLBACK_COMMUNITIES)
+  const communities = [...new Map(
+    [...FALLBACK_COMMUNITIES, ...databaseCommunities].map((community) => [community.slug, community]),
+  ).values()]
 
   return (
     <div className="flex flex-col">

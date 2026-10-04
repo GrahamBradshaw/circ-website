@@ -11,12 +11,27 @@ import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
 export const revalidate = 300
 
+// Pre-render community detail routes so crawlers receive public HTML on first
+// visit. Keep known pages available during builds if the database is offline.
+export async function generateStaticParams() {
+  const fallbackSlugs = FALLBACK_COMMUNITIES.map(({ slug }) => slug)
+  try {
+    const communities = await prisma.community.findMany({ select: { slug: true } })
+    const slugs = new Set([...fallbackSlugs, ...communities.map(({ slug }) => slug)])
+    return [...slugs].map((slug) => ({ slug }))
+  } catch (error) {
+    console.error("Community route generation failed; using known public communities.", error)
+    return fallbackSlugs.map((slug) => ({ slug }))
+  }
+}
+
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
-  const community = await getPublicCached(`community:metadata:${slug}`, () => prisma.community.findUnique({
+  const databaseCommunity = await getPublicCached(`community:metadata:${slug}`, () => prisma.community.findUnique({
     where: { slug },
     select: { name: true, description: true, focusTags: true },
   }), FALLBACK_COMMUNITIES.find((item) => item.slug === slug) ?? null)
+  const community = databaseCommunity ?? FALLBACK_COMMUNITIES.find((item) => item.slug === slug) ?? null
   if (!community) return { title: "Community Not Found", robots: { index: false, follow: false } }
 
   return createPageMetadata({
@@ -34,7 +49,7 @@ export default async function CommunityDetailPage({
 }) {
   const { slug } = await params
   
-  const community = await getPublicCached(`community:detail:${slug}`, () => prisma.community.findUnique({
+  const databaseCommunity = await getPublicCached(`community:detail:${slug}`, () => prisma.community.findUnique({
     where: { slug },
     include: {
       lead: true,
@@ -45,6 +60,7 @@ export default async function CommunityDetailPage({
       },
     },
   }), FALLBACK_COMMUNITIES.find((item) => item.slug === slug) ?? null)
+  const community = databaseCommunity ?? FALLBACK_COMMUNITIES.find((item) => item.slug === slug) ?? null
 
   if (!community) {
     notFound()
