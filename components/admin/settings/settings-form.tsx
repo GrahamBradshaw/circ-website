@@ -96,6 +96,9 @@ export function SettingsForm({ initialData }: SettingsFormProps) {
         <h3 className="font-display text-primary text-lg font-semibold mb-5 flex items-center gap-2">
           <Globe size={20} className="text-accent-sky" /> Social Connectivity
         </h3>
+        <p className="font-body text-muted text-xs -mt-3 mb-5">
+          Add CIRC’s official profile address for each platform. Full URLs and addresses without https:// are supported.
+        </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className={labelClass}>LinkedIn</label>

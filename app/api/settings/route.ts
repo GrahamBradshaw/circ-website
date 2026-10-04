@@ -33,6 +33,7 @@ export async function PATCH(req: Request) {
     revalidatePath("/communities")
     revalidatePath("/events")
     revalidatePath("/team")
+    revalidatePath("/socials")
     revalidatePath("/gallery")
     revalidatePath("/join")
     return NextResponse.json({ success: true, data: settings })

@@ -5,6 +5,7 @@ import { getPublicCached } from "@/lib/redis-cache"
 import { Github, Twitter, Instagram, Linkedin } from "lucide-react"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 import { SITE_URL } from "@/lib/seo"
+import { getSocialProfiles } from "@/lib/social-links"
 
 export async function Footer() {
   const [settings, databaseCommunities] = await Promise.all([
@@ -18,13 +19,13 @@ export async function Footer() {
   const communities = [...new Map(
     [...FALLBACK_COMMUNITIES, ...databaseCommunities].map((community) => [community.slug, community]),
   ).values()]
-  const socialLinks = [
-    { href: settings?.github, Icon: Github, label: "GitHub" },
-    { href: settings?.twitter, Icon: Twitter, label: "X or Twitter" },
-    { href: settings?.instagram, Icon: Instagram, label: "Instagram" },
-    { href: settings?.linkedin, Icon: Linkedin, label: "LinkedIn" },
-  ].filter(({ href }) => href && /^https?:\/\//i.test(href))
-  const socialProfiles = socialLinks.map(({ href }) => href).filter((href): href is string => Boolean(href))
+  const socialProfiles = getSocialProfiles(settings)
+  const socialLinks = socialProfiles.map((profile) => ({
+    ...profile,
+    Icon: profile.platform === "GitHub" ? Github
+      : profile.platform === "X" ? Twitter
+        : profile.platform === "Instagram" ? Instagram : Linkedin,
+  }))
 
   const navLinks = [
     { name: "Home", href: "/" },
@@ -131,19 +132,24 @@ export async function Footer() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label={label}
+                aria-label={`Follow CIRC on ${label}`}
                 title={label}
-                className="w-8 h-8 rounded-lg flex items-center justify-center text-white/30 hover:text-white/70 transition-colors"
+              className="min-h-8 rounded-lg flex items-center gap-2 px-2.5 text-white/50 hover:text-white/90 transition-colors"
                 style={{
                   background: "rgba(56,189,248,0.05)",
                   border: "1px solid rgba(56,189,248,0.1)",
                 }}
               >
                 <Icon size={14} />
-                <span className="sr-only">{label}</span>
+                <span className="font-body text-xs">{label}</span>
               </a>
             ))}
           </div>
+          {socialLinks.length > 0 && (
+            <Link href="/socials" className="mt-3 inline-block font-body text-xs text-white/50 hover:text-white transition-colors">
+              All CIRC social profiles
+            </Link>
+          )}
         </div>
       </div>
 
