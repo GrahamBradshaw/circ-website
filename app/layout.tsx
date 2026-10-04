@@ -39,6 +39,9 @@ export const metadata: Metadata = {
   },
   alternates: { canonical: "/" },
   applicationName: "CIRC",
+  verification: {
+    google: "HswHGpatHGOjDuhlScdSyICzJfWexOEs4CG-AlaR-G4",
+  },
   keywords: [
     "Computing Innovation and Research Club",
     "CIRC Kenya",
