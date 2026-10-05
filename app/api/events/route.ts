@@ -5,6 +5,7 @@ import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache
 import { publicSuccessResponse, successResponse, errorResponse } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { eventSchema } from "@/lib/validators"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET(req: NextRequest) {
   try {
@@ -47,6 +48,7 @@ export async function POST(req: NextRequest) {
 
     revalidatePath("/events")
     revalidatePath("/")
+    await notifyIndexNow(["/", "/events", `/events/${encodeURIComponent(event.id)}`])
 
     return successResponse(event, 201)
   } catch (error: any) {

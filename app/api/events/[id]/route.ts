@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma"
 import { invalidatePublicContentCache } from "@/lib/redis-cache"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -38,6 +39,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     revalidatePath(`/events/${id}`)
     revalidatePath("/")
     revalidatePath("/admin/events")
+    await notifyIndexNow(["/", "/events", `/events/${encodeURIComponent(id)}`])
 
     return NextResponse.json({ success: true, data: event })
   } catch (err: any) {
@@ -61,6 +63,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
     revalidatePath("/events")
     revalidatePath("/")
     revalidatePath("/admin/events")
+    await notifyIndexNow(["/", "/events", `/events/${encodeURIComponent(id)}`])
 
     return NextResponse.json({ success: true })
   } catch (err: any) {

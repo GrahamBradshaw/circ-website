@@ -21,27 +21,31 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ])
 
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: SITE_URL },
-    { url: `${SITE_URL}/communities` },
-    { url: `${SITE_URL}/events` },
-    { url: `${SITE_URL}/team` },
-    { url: `${SITE_URL}/socials` },
-    { url: `${SITE_URL}/gallery` },
-    { url: `${SITE_URL}/join` },
-    { url: `${SITE_URL}/history`},
-    { url: `${SITE_URL}/privacy` },
-    { url: `${SITE_URL}/terms` },
-    { url: `${SITE_URL}/cookies` },
-    { url: `${SITE_URL}/ai-attribution` },
+    { url: SITE_URL, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/communities`, changeFrequency: "weekly", priority: 0.9 },
+    { url: `${SITE_URL}/events`, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/team`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/socials`, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${SITE_URL}/gallery`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/join`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/history`, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/privacy`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/terms`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/cookies`, changeFrequency: "yearly", priority: 0.2 },
+    { url: `${SITE_URL}/ai-attribution`, changeFrequency: "yearly", priority: 0.3 },
   ]
 
   return [
     ...staticRoutes,
     ...communities.map(({ slug }) => ({
       url: `${SITE_URL}/communities/${encodeURIComponent(slug)}`,
+      changeFrequency: "monthly" as const,
+      priority: 0.8,
     })),
     ...events.map(({ id }) => ({
       url: `${SITE_URL}/events/${encodeURIComponent(id)}`,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
     })),
   ]
 }

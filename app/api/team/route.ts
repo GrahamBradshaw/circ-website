@@ -5,6 +5,7 @@ import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache
 import { publicSuccessResponse, successResponse, errorResponse } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { teamMemberSchema } from "@/lib/validators"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET() {
   try {
@@ -32,6 +33,7 @@ export async function POST(req: NextRequest) {
     revalidatePath("/team")
     revalidatePath("/")
     revalidatePath("/admin/team")
+    await notifyIndexNow(["/", "/team"])
 
     return successResponse(member, 201)
   } catch (error: any) {

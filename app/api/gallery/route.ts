@@ -5,6 +5,7 @@ import { successResponse, errorResponse } from "@/lib/api"
 import { requireAdmin } from "@/lib/auth"
 import { gallerySchema } from "@/lib/validators"
 import { revalidatePath } from "next/cache"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET(req: Request) {
   try {
@@ -53,6 +54,7 @@ export async function POST(req: Request) {
     await invalidatePublicContentCache()
 
     revalidatePath("/gallery")
+    await notifyIndexNow(["/gallery"])
     return NextResponse.json({ success: true, data: image }, { status: 201 })
   } catch (err: any) {
     return NextResponse.json({ success: false, error: "Failed to save image" }, { status: 500 })

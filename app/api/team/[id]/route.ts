@@ -4,6 +4,7 @@ import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
 import { publicSuccessResponse } from "@/lib/api"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
@@ -36,6 +37,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     revalidatePath("/team")
     revalidatePath("/")
     revalidatePath("/admin/team")
+    await notifyIndexNow(["/", "/team"])
 
     return NextResponse.json({ success: true, data: member })
   } catch (err: any) {
@@ -59,6 +61,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
     revalidatePath("/team")
     revalidatePath("/")
     revalidatePath("/admin/team")
+    await notifyIndexNow(["/", "/team"])
 
     return NextResponse.json({ success: true })
   } catch (err: any) {

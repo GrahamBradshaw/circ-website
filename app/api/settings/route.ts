@@ -4,6 +4,7 @@ import { NextResponse } from "next/server"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
 import { publicSuccessResponse } from "@/lib/api"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET() {
   try {
@@ -36,6 +37,7 @@ export async function PATCH(req: Request) {
     revalidatePath("/socials")
     revalidatePath("/gallery")
     revalidatePath("/join")
+    await notifyIndexNow(["/", "/communities", "/events", "/team", "/socials", "/gallery", "/join"])
     return NextResponse.json({ success: true, data: settings })
   } catch (err) {
     console.error(err)

@@ -58,7 +58,7 @@ const milestones = [
   },
   {
     date: "March 2026",
-    title: "The club becomes CIRC",
+    title: "The club rebrands as CIRC",
     paragraphs: [
       "The Computer Science Club adopted the name Computing Innovation and Research Club. Dr Ruth became patron after Dion Martin's recall, with Sir Harun Kamau continuing as assistant patron.",
       "CIRC introduced focused communities where students learn, collaborate and build projects across technology and research.",

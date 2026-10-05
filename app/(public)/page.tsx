@@ -12,6 +12,7 @@ import { ExternalLink } from "lucide-react"
 import { UnauthorizedToast } from "@/components/public/unauthorized-toast"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
+import { getSocialProfiles } from "@/lib/social-links"
 
 export const metadata = createPageMetadata({
   title: "CIRC MNUC | Computing Innovation and Research Club",
@@ -23,7 +24,7 @@ export const metadata = createPageMetadata({
 export const revalidate = 300
 
 export default async function HomePage() {
-  const [communities, upcomingEvents, execs] = await Promise.all([
+  const [communities, upcomingEvents, execs, settings] = await Promise.all([
     getPublicCached("home:communities", () => prisma.community.findMany(), FALLBACK_COMMUNITIES),
     getPublicCached("home:upcoming-events", () => prisma.event.findMany({
       where: {
@@ -39,7 +40,12 @@ export default async function HomePage() {
       },
       orderBy: { displayOrder: "asc" },
     }), []),
+    getPublicCached("home:social-profiles", () => prisma.settings.findUnique({
+      where: { id: "singleton" },
+      select: { github: true, twitter: true, instagram: true, linkedin: true },
+    }), null),
   ])
+  const socialProfiles = getSocialProfiles(settings)
 
   const websiteData = {
     "@context": "https://schema.org",
@@ -52,12 +58,24 @@ export default async function HomePage() {
     about: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en-KE",
   }
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": `${SITE_URL}/#organization`,
+    name: "Computing Innovation and Research Club (CIRC MNUC)",
+    url: SITE_URL,
+    sameAs: socialProfiles.map(({ href }) => href),
+  }
 
   return (
     <div className="circ-home-design flex flex-col">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
       <TerminalHero />

@@ -4,6 +4,7 @@ import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
 import { publicSuccessResponse } from "@/lib/api"
+import { notifyIndexNow } from "@/lib/indexnow"
 
 export async function GET(req: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
   try {
@@ -43,6 +44,7 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ sl
     revalidatePath(`/communities/${slug}`)
     revalidatePath("/join")
     revalidatePath("/")
+    await notifyIndexNow(["/", "/communities", `/communities/${encodeURIComponent(slug)}`, "/join"])
 
     return NextResponse.json({ success: true, data: community })
   } catch (err: any) {
