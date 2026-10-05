@@ -2,8 +2,8 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "CIRC MNUC History at Mama Ngina University College (MNU)",
-  description: "Explore CIRC history at Mama Ngina University College, also known as Mama Ngina University or MNU, from its 2022 founding to the 2026 rebrand.",
+  title: "Computer Science Club History at Mama Ngina University College",
+  description: "Learn how Mama Ngina University College's Computer Science Club grew into the Computing Innovation and Research Club (CIRC MNUC) in 2026.",
   path: "/history",
   keywords: ["CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
 })
@@ -96,8 +96,8 @@ export default function HistoryPage() {
       />
       <PageHero
         badge="OUR STORY 2022 TO TODAY"
-        title="The History of CIRC MNUC"
-        subtitle="How a student computer science club grew into a community for computing, innovation and research."
+        title="Computer Science Club to CIRC MNUC"
+        subtitle="The history of the student computing club that grew into CIRC, a community for computing, innovation and research."
         size="md"
       />
 
