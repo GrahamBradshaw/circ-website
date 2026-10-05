@@ -43,6 +43,10 @@ export const metadata: Metadata = {
   applicationName: "CIRC",
   verification: {
     google: "HswHGpatHGOjDuhlScdSyICzJfWexOEs4CG-AlaR-G4",
+    yandex: "d4a2b549f1955318",
+    other: {
+      "msvalidate.01": "EDDB31F2840D76A7E103286A266CB6E3",
+    },
   },
   keywords: [
     "Computing Innovation and Research Club",
