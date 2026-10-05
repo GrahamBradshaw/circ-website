@@ -39,11 +39,14 @@ function needsClerk(request: NextRequest) {
 }
 
 export default function proxy(request: NextRequest, event: NextFetchEvent) {
-  // Enforce HTTPS in production environments behind proxies
+  // Use one canonical public host so crawlers do not split indexing signals.
   const proto = request.headers.get("x-forwarded-proto")
-  if (process.env.NODE_ENV === "production" && proto === "http") {
+  const forwardedHost = request.headers.get("x-forwarded-host")?.split(",")[0]?.trim()
+  const host = (forwardedHost ?? request.headers.get("host") ?? "").split(":")[0].toLowerCase()
+  if (process.env.NODE_ENV === "production" && (proto === "http" || host === "circ.co.ke")) {
     const httpsUrl = request.nextUrl.clone()
     httpsUrl.protocol = "https:"
+    httpsUrl.host = "www.circ.co.ke"
     return NextResponse.redirect(httpsUrl, 301)
   }
 
