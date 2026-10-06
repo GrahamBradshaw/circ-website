@@ -9,6 +9,7 @@ const NULL_SENTINEL = { __circRedisNull: true }
 
 let redisClient: Redis | null | undefined
 let warnedAboutRedis = false
+let warnedAboutDatabase = false
 
 type RedisValue = string | number | boolean | null | Record<string, unknown> | unknown[]
 
@@ -30,6 +31,12 @@ function warnRedis() {
   if (warnedAboutRedis) return
   warnedAboutRedis = true
   console.warn("Redis cache is unavailable; using PostgreSQL directly.")
+}
+
+function warnDatabaseFallback() {
+  if (warnedAboutDatabase) return
+  warnedAboutDatabase = true
+  console.warn("Database unavailable; rendering fallback public content.")
 }
 
 function restoreDates<T>(value: T): T {
@@ -63,12 +70,13 @@ export async function getPublicCached<T>(
       return await loadFromDatabase()
     } catch (error) {
       databaseFailed = true
-      console.error(`Public content query failed for ${key}; rendering fallback content.`, error)
+      warnDatabaseFallback()
       return fallback
     }
   }
 
   const redis = getRedis()
+  // Redis is a cache: only use it if the key exists. If there is a miss, fetch from DB and then repopulate Redis.
   if (!redis) return loadWithFallback()
 
   let epoch = 0
@@ -99,6 +107,7 @@ export async function getPublicCached<T>(
     return loadWithFallback()
   }
 
+  // Cache miss: read from the database, then save that value back into Redis.
   const value = await loadWithFallback()
   if (!databaseFailed) {
     try {
