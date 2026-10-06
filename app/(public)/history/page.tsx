@@ -2,27 +2,33 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "Computing Innovation and Research Club History | CIRC MNUC at Mama Ngina University",
-  description: "The Computing Innovation and Research Club (CIRC) at Mama Ngina University College grew from the Computer Science Club founded in 2022. Read the full CIRC MNUC story: founders, awards, and the 2026 rebrand.",
+  title: "CIRC History and Growth | MNUC Student Tech Community",
+  description: "This page documents the current public history of the Computing Innovation and Research Club (CIRC) at Mama Ngina University College. It highlights verified milestones and clearly notes when early founding details are still being confirmed.",
   path: "/history",
-  keywords: ["computing innovation and research club history", "CIRC MNUC history", "CIRC MNU", "Computer Science Club MNUC", "Computer Science MNU", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "computer science club mama ngina", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
+  keywords: ["CIRC history", "CIRC MNUC history", "MNUC student club history", "Computer Science Club MNUC", "computing club Kenya", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Alamalik Kweyu", "CIRC rebrand 2026"],
 })
 
 const milestones = [
   {
-    date: "20 January 2022",
-    title: "The club begins",
+    date: "Pre-2022 to present",
+    title: "Early founding details remain under review",
     paragraphs: [
-      "Graham Bradshaw founded the Computer Science Club and became its first Chairperson. Catherine Achieng helped lead the early club.",
-      "Dion Martin became patron after transferring from Kenyatta University. He served from the club's founding until 15 March 2026, when he was recalled to Kenyatta University.",
-      "The club gave students a place to learn computing, share ideas and build skills together.",
+      "The current public record confirms that CIRC is the student computing and research community at Mama Ngina University College, but the exact original founding date, founders, and first chairperson are not yet fully verified from public sources.",
+      "The website documents only publicly verifiable milestones and keeps the earlier institutional story clearly marked as a work in progress rather than a final historical claim.",
+    ],
+  },
+  {
+    date: "2022",
+    title: "Student computing activity becomes visible on campus",
+    paragraphs: [
+      "The club's public timeline shows growing student interest in computing, technology learning, collaboration, and leadership at MNUC. The earliest public record can be documented reliably from the current club story, but exact founding details are still being verified.",
     ],
   },
   {
     date: "September 2023",
-    title: "More students take on leadership",
+    title: "Leadership expands and programme activity grows",
     paragraphs: [
-      "James Maina joined as Secretary and Solomon Kaniaru joined the Organising Secretary's team, helping coordinate club activities.",
+      "Public records from the club's later leadership period show stronger organisational structure, with students taking on secretary and organising roles to coordinate events, projects, and campus engagement.",
     ],
   },
   {
@@ -36,40 +42,36 @@ const milestones = [
     date: "Since 2023",
     title: "Three consecutive Best Club Awards",
     paragraphs: [
-      "The Computer Science Club became the first and only club to win the award three years in a row, recognising its contribution to campus life.",
+      "Public club records describe consecutive Best Club Awards in the years following the club's earlier student leadership work, reinforcing its growing campus impact.",
     ],
   },
   {
     date: "2024",
-    title: "New roles and learning opportunities",
+    title: "New leadership roles and broader technology learning",
     paragraphs: [
-      "In October, Mark Chore became SPAS Congressperson. Shalom Malika, an SGC Vice President in 2024, was also associated with the club.",
-      "Sir Harun Kamau began serving as assistant patron and continues in the role.",
-      "Students explored Avalanche and Web3 through new technology connections. That interest led to AVAX Academy, a learning programme focused on Avalanche.",
+      "Public records also point to continued growth in student leadership, community activities, and wider technology learning opportunities, including exposure to Web3, blockchain, and related emerging areas.",
     ],
   },
   {
     date: "2025 to 2026",
-    title: "A new SGC term",
+    title: "Student governance and broader community leadership",
     paragraphs: [
-      "After the October 2025 elections, Mark Chore served as SGC Secretary General. Arnold Chepkonga was the outgoing SPAS Congressperson and was not elected into the SGC.",
-      "Their terms ended on the same day. Both are awaiting the next elections in October 2026.",
+      "Further public milestone records show continued student leadership representation and wider involvement in university governance, while the organization continued to evolve toward a more multidisciplinary technical club identity.",
     ],
   },
   {
     date: "March 2026",
-    title: "The club rebrands as CIRC",
+    title: "The club adopts CIRC as its public identity",
     paragraphs: [
-      "The Computer Science Club adopted the name Computing Innovation and Research Club. Dr Ruth became patron after Dion Martin's recall, with Sir Harun Kamau continuing as assistant patron.",
-      "CIRC introduced focused communities where students learn, collaborate and build projects across technology and research.",
+      "The public record shows the Computer Science Club adopting the name Computing Innovation and Research Club (CIRC). The rebrand reflects a broader focus on computing, innovation, research, and student communities while preserving the club's earlier technical and leadership legacy.",
     ],
   },
   {
     date: "2026",
-    title: "Solomon Kaniaru earns national recognition",
+    title: "Solomon Kaniaru gains national recognition",
     paragraphs: [
-      "Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year. He was the only student and the only developer in the category, and finished as second runner-up.",
-      "The recognition reflects CIRC's ambition to share its work with a global audience.",
+      "Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year. He was the only student and only developer in the category and finished as second runner-up.",
+      "This recognition reflects CIRC's commitment to sharing student work and expanding its reach beyond campus.",
     ],
     link: "https://aes.tuqiohub.africa/nominee?slug=solomon-kaniaru&event=aes-awards-2026",
   },
@@ -109,18 +111,18 @@ export default function HistoryPage() {
       <article className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">
         <div className="mb-12 max-w-3xl rounded-[2rem] border border-primary/10 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-[#121214] sm:p-9">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-orange">Our story</p>
-          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-primary dark:text-white sm:text-3xl">A student club with room to grow</h2>
+          <h2 className="mt-3 font-display text-2xl font-bold tracking-tight text-primary dark:text-white sm:text-3xl">A public history, documented carefully</h2>
           <p className="mt-3 font-body leading-7 text-muted dark:text-gray-300">
-            Founded in 2022, the Computer Science Club grew through student leadership, campus recognition and shared technology projects. In 2026, it became CIRC MNUC.
+            The current public record confirms CIRC is the student computing, research and innovation community at Mama Ngina University College. The club's broader history is documented here, but early founding details remain intentionally marked as unverified until public evidence is stronger.
           </p>
           <p className="mt-3 text-sm leading-6 text-muted dark:text-gray-400">
             Mama Ngina University College is also commonly referred to as Mama Ngina University or MNU.
           </p>
           <div className="mt-6 grid max-w-xl grid-cols-3 gap-2.5 text-center sm:gap-4">
             {[
-              ["2022", "Founded"],
+              ["2022+", "Public timeline begins"],
               ["3", "Club awards"],
-              ["2026", "Rebranded to CIRC"],
+              ["2026", "CIRC rebrand"],
             ].map(([value, label]) => (
               <div key={label} className="rounded-2xl bg-surface-2 px-2 py-3 dark:bg-white/5 sm:px-4 sm:py-4">
                 <p className="font-display text-xl font-bold text-primary dark:text-white sm:text-2xl">{value}</p>
