@@ -3,7 +3,7 @@ import { MapPin, Navigation, ExternalLink } from "lucide-react"
 export function LocationMapSection({ tone = "white" }: { tone?: "white" | "tinted" }) {
   const latitude = -1.037054
   const longitude = 36.923318
-  const mapEmbedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=17&ie=UTF8&iwloc=&output=embed`
+  const mapEmbedUrl = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.1648742287534!2d36.92074851195063!3d-1.0369835989486642!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f374003e37133%3A0xb7326128e8e5a7f9!2sComputing%20Innovation%20%26%20Research%20Club!5e0!3m2!1ssw!2ske!4v1791311332911!5m2!1ssw!2ske"
   const mapsDirectUrl = "https://share.google/5NucqVDcuhPzsBwSS"
 
   const sectionTone =

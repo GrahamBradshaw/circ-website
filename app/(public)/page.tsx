@@ -18,7 +18,7 @@ import { formatRole } from "@/lib/utils"
 
 export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club | CIRC at Mama Ngina University College",
-  description: "The Computing Innovation and Research Club (CIRC) is the official computing and Computer Science Club at Mama Ngina University College (MNU, MNUC) in Mutomo, Kenya. Explore 7 student technology communities, events, and projects.",
+  description: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya — student technology, research, software, AI, data science, and innovation community near Thika Road and connected to Kenyatta University.",
   path: "/",
   keywords: ["computing innovation and research club", "CIRC", "CIRC MNUC", "CIRC MNU", "Mama Ngina University", "MNU", "MNUC", "Computer Science", "computer science club mama ngina", "computer science club mnu", "Computer Science MNU", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
 })

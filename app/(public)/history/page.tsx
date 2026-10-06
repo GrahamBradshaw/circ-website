@@ -3,7 +3,7 @@ import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
   title: "CIRC History and Growth | MNUC Student Tech Community",
-  description: "This page documents the current public history of the Computing Innovation and Research Club (CIRC) at Mama Ngina University College. It highlights verified milestones and clearly notes when early founding details are still being confirmed.",
+  description: "History of the Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College, Kenya. Public record of CIRC's growth, leadership, student innovation, and rebrand near Thika Road and Kenyatta University.",
   path: "/history",
   keywords: ["CIRC history", "CIRC MNUC history", "MNUC student club history", "Computer Science Club MNUC", "computing club Kenya", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Alamalik Kweyu", "CIRC rebrand 2026"],
 })

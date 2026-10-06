@@ -8,7 +8,7 @@ import { createPageMetadata } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 export const metadata = createPageMetadata({
   title: "Join CIRC at Mama Ngina University College",
-  description: "Apply to join the Computing Innovation & Research Club (CIRC) at Mama Ngina University College. Build practical skills in computing, software, AI, data science, and technology.",
+  description: "Apply to join the Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Kiambu County, Kenya. Student technology, coding, AI, data science, and innovation club near Thika Road and Kenyatta University.",
   path: "/join",
   keywords: ["join technology club Kenya", "MNUC student clubs", "Kenyatta University student technology", "SPAS students", "computing student community"],
 })
