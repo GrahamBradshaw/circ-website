@@ -39,7 +39,25 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: plainTextDescription(`${community.description} Join this CIRC technology community at Mama Ngina University College.`),
     path: `/communities/${encodeURIComponent(slug)}`,
     keywords: [...community.focusTags, `${community.name} community`, "MNUC technology community", "SPAS computing"],
+    image: communityHeroImage(slug),
   })
+}
+
+// Each community gets its own hero strip photo (matches the style of
+// Join / Team / Events / Contact). Falls back to hero-bg-2 when the slug
+// is unknown, e.g. a newly created community without a mapping yet.
+const COMMUNITY_HERO_IMAGES: Record<string, string> = {
+  "web-development": "/hero/hero-bg-1.0239ec49.webp",
+  "ai-ml": "/hero/hero-bg-2.90cbe47a.webp",
+  "data-science": "/hero/hero-bg-3.73468c4c.webp",
+  iot: "/hero/hero-bg-4.6502a1ab.webp",
+  "web3-blockchain": "/hero/hero-bg-5.1af39077.webp",
+  programming: "/hero/hero-bg-1.0239ec49.webp",
+  "networking-cybersecurity": "/hero/hero-bg-3.73468c4c.webp",
+}
+
+function communityHeroImage(slug: string): string {
+  return COMMUNITY_HERO_IMAGES[slug] ?? "/hero/hero-bg-2.90cbe47a.webp"
 }
 
 export default async function CommunityDetailPage({
@@ -86,6 +104,8 @@ export default async function CommunityDetailPage({
     },
   }
 
+  const heroImage = communityHeroImage(slug)
+
   return (
     <div className="flex flex-col">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
@@ -94,6 +114,8 @@ export default async function CommunityDetailPage({
         title={community.name}
         subtitle={community.description}
         size="md"
+        image={heroImage}
+        imageAlt={`${community.name} community at CIRC`}
       />
 
       {/* Content Section */}

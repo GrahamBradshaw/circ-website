@@ -16,6 +16,12 @@ const nextConfig: NextConfig = {
     return config
   },
   allowedDevOrigins: ["192.168.0.102"],
+  async redirects() {
+    return [
+      // Standalone /socials page was folded into /contact.
+      { source: "/socials", destination: "/contact", permanent: true },
+    ]
+  },
   images: {
     qualities: [60, 75],
     remotePatterns: [

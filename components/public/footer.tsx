@@ -35,6 +35,7 @@ export async function Footer() {
     { name: "Team", href: "/team" },
     { name: "Gallery", href: "/gallery" },
     { name: "Join", href: "/join" },
+    { name: "Contact", href: "/contact" },
   ]
 
   return (
@@ -145,11 +146,9 @@ export async function Footer() {
               </a>
             ))}
           </div>
-          {socialLinks.length > 0 && (
-            <Link href="/socials" className="mt-3 inline-block font-body text-xs text-white/50 hover:text-white transition-colors">
-              All CIRC social profiles
-            </Link>
-          )}
+          <p className="mt-3 font-body text-xs text-white/30">
+            Follow CIRC on GitHub, X, Instagram &amp; LinkedIn.
+          </p>
         </div>
       </div>
 

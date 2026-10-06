@@ -1,13 +1,18 @@
 import { MapPin, Navigation, ExternalLink } from "lucide-react"
 
-export function LocationMapSection() {
+export function LocationMapSection({ tone = "white" }: { tone?: "white" | "tinted" }) {
   const latitude = -1.037054
   const longitude = 36.923318
   const mapEmbedUrl = `https://maps.google.com/maps?q=${latitude},${longitude}&t=&z=17&ie=UTF8&iwloc=&output=embed`
   const mapsDirectUrl = "https://share.google/5NucqVDcuhPzsBwSS"
 
+  const sectionTone =
+    tone === "tinted"
+      ? "bg-surface-2 dark:bg-[#09090B]"
+      : "bg-white dark:bg-[#121215]"
+
   return (
-    <section className="relative overflow-hidden bg-white dark:bg-[#121215] py-20 border-b border-black/5 dark:border-white/10 transition-colors">
+    <section className={`relative overflow-hidden ${sectionTone} py-20 border-b border-black/5 dark:border-white/10 transition-colors`}>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <div>

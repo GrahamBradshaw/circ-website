@@ -34,10 +34,10 @@ export async function PATCH(req: Request) {
     revalidatePath("/communities")
     revalidatePath("/events")
     revalidatePath("/team")
-    revalidatePath("/socials")
     revalidatePath("/gallery")
     revalidatePath("/join")
-    await notifyIndexNow(["/", "/communities", "/events", "/team", "/socials", "/gallery", "/join"])
+    revalidatePath("/contact")
+    await notifyIndexNow(["/", "/communities", "/events", "/team", "/gallery", "/join", "/contact"])
     return NextResponse.json({ success: true, data: settings })
   } catch (err) {
     console.error(err)
