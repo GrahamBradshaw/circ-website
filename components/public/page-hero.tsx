@@ -1,7 +1,12 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { ReactNode } from "react"
 import { MapPin } from "lucide-react"
 import Image from "next/image"
 
+// This component is used on public pages to create a strong, modern hero section.
+// It gives each page a clear title, subtitle, and optional image area.
 interface PageHeroProps {
   badge: string
   title: string | ReactNode
@@ -14,7 +19,10 @@ interface PageHeroProps {
   imageAlt?: string
 }
 
+// This function PageHero handles the main work in this file and explains what this logic is doing in simple English.
 export function PageHero({ badge, title, subtitle, size = "md", children, image, imageAlt }: PageHeroProps) {
+  // The hero layout is made to feel premium and readable.
+  // The badge, title, subtitle, and optional image all work together to tell visitors what the page is about.
   return (
     <section
       className="relative overflow-hidden bg-surface-2 dark:bg-[#09090B] text-main dark:text-gray-100 border-b border-primary/10 dark:border-white/10 transition-colors duration-200"

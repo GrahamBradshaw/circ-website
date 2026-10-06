@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Image from "next/image"
 import Link from "next/link"
 import { format } from "date-fns"
@@ -12,6 +15,7 @@ interface EventCardProps {
   type: string
 }
 
+// This function EventCard handles the main work in this file and explains what this logic is doing in simple English.
 export function EventCard({ id, title, description, date, coverImage, type }: EventCardProps) {
   const typeKey = type.toLowerCase()
   const badgeClass = `badge-type-${typeKey}`

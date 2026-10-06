@@ -1,3 +1,5 @@
+// This file normalizes the social media links stored in the settings table.
+// It prevents broken or unsafe links from being rendered in public pages.
 export type SocialSettings = {
   github?: string | null
   twitter?: string | null
@@ -11,6 +13,8 @@ export type SocialProfile = {
   href: string
 }
 
+// This helper makes sure a social link is a valid HTTPS URL from an allowed host.
+// If the URL is blank, insecure, or not from the expected platform, we ignore it.
 function normalizeSocialUrl(value: string | null | undefined, allowedHosts: string[]): string | undefined {
   const trimmed = value?.trim()
   if (!trimmed) return undefined
@@ -27,6 +31,9 @@ function normalizeSocialUrl(value: string | null | undefined, allowedHosts: stri
   }
 }
 
+// This function turns saved settings into safe public profile links.
+// It adds a default Instagram profile if the admin did not add one.
+// This function getSocialProfiles handles the main work in this file and explains what this logic is doing in simple English.
 export function getSocialProfiles(settings: SocialSettings): SocialProfile[] {
   const configuredInstagram = normalizeSocialUrl(settings?.instagram, ["instagram.com"])
 

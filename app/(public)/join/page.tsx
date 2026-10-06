@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { useState } from "react"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
@@ -6,6 +9,9 @@ import { JoinFaqs } from "@/components/public/join/join-faqs"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
+// This page is the main joining flow for new members.
+// It sets the page title and description for search engines and social previews.
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "Join CIRC at Mama Ngina University College",
   description: "Apply to join the Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Kiambu County, Kenya. Student technology, coding, AI, data science, and innovation club near Thika Road and Kenyatta University.",
@@ -13,8 +19,11 @@ export const metadata = createPageMetadata({
   keywords: ["join technology club Kenya", "MNUC student clubs", "Kenyatta University student technology", "SPAS students", "computing student community"],
 })
 
+// This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
+// These are the common questions people ask before they apply.
+// We put them here so the page can show the answers in one place and also generate FAQ schema for SEO.
 const faqItems = [
   {
     question: "Who can apply to join CIRC?",
@@ -58,7 +67,12 @@ const faqItems = [
   },
 ]
 
+// This page loads the available clubs and then renders the application form beside help content.
+// The goal is to make the membership process easy to understand and easy to complete.
+// This function JoinPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function JoinPage() {
+  // Load the list of communities from the cache if available.
+  // If it is not in cache, we fetch it from PostgreSQL and store it for later.
   const communities = await getPublicCached("join:communities", () => prisma.community.findMany({
     select: {
       id: true,
@@ -68,6 +82,8 @@ export default async function JoinPage() {
     orderBy: { name: "asc" },
   }), FALLBACK_COMMUNITIES)
 
+  // Build FAQ schema for search engines so the join page can show structured data.
+  // This helps crawlers understand the questions and answers on the page.
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",

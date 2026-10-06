@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 import { Slot } from "radix-ui"

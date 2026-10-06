@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import type { Metadata } from "next"
 import Script from "next/script"
 import { GoogleTagManager } from "@next/third-parties/google"
@@ -17,6 +20,9 @@ const inter = Inter({
   variable: "--font-inter",
 })
 
+// This is the global metadata for the whole application.
+// Next.js reads this object to set the default title, description, social cards, and SEO tags.
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -149,6 +155,9 @@ export const metadata: Metadata = {
   },
 }
 
+// This is the root layout for the application.
+// Every page is wrapped by this layout, so the global site metadata and scripts are shared everywhere.
+// This function RootLayout handles the main work in this file and explains what this logic is doing in simple English.
 export default function RootLayout({
   children,
 }: {

@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
@@ -7,6 +10,7 @@ import { gallerySchema } from "@/lib/validators"
 import { revalidatePath } from "next/cache"
 import { notifyIndexNow } from "@/lib/indexnow"
 
+// This function GET handles the main work in this file and explains what this logic is doing in simple English.
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url)
@@ -36,6 +40,7 @@ export async function GET(req: Request) {
   }
 }
 
+// This function POST handles the main work in this file and explains what this logic is doing in simple English.
 export async function POST(req: Request) {
   const { error } = await requireAdmin()
   if (error) return error

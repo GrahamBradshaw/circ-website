@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import { PageHero } from "@/components/public/page-hero"
@@ -6,6 +9,7 @@ import { ContactCards, ContactSocials } from "@/components/public/contact/contac
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 import { getSocialProfiles } from "@/lib/social-links"
 
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "Contact CIRC at Mama Ngina University College",
   description: "Contact the Computing Innovation and Research Club (CIRC) at Mama Ngina University College.",
@@ -13,8 +17,10 @@ export const metadata = createPageMetadata({
   keywords: ["contact CIRC", "CIRC email", "CIRC Mama Ngina contact", "CIRC social media"],
 })
 
+// This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
+// This function ContactPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function ContactPage() {
   const settings = await getPublicCached("contact:settings", () => prisma.settings.findUnique({
     where: { id: "singleton" },

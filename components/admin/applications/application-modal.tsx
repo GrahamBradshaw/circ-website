@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { X, User, GraduationCap, Mail, Phone, Calendar, CheckCircle2, XCircle, Clock } from "lucide-react"
@@ -9,6 +12,7 @@ interface ApplicationModalProps {
   onUpdateStatus: (id: string, status: "APPROVED" | "REJECTED") => void
 }
 
+// This function ApplicationModal handles the main work in this file and explains what this logic is doing in simple English.
 export function ApplicationModal({ application, onClose, onUpdateStatus }: ApplicationModalProps) {
   if (!application) return null
 

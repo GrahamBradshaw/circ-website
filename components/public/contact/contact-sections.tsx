@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Link from "next/link"
 import { ArrowUpRight, Github, Instagram, Linkedin, Mail, MapPin, Twitter, Users } from "lucide-react"
 import type { SocialProfile } from "@/lib/social-links"
@@ -23,6 +26,7 @@ function socialHandle(href: string): string {
   }
 }
 
+// This function ContactCards handles the main work in this file and explains what this logic is doing in simple English.
 export function ContactCards({ contactEmail }: { contactEmail: string }) {
   return (
     <section className="bg-surface-2 dark:bg-[#09090B] py-14 transition-colors">
@@ -77,6 +81,7 @@ export function ContactCards({ contactEmail }: { contactEmail: string }) {
   )
 }
 
+// This function ContactSocials handles the main work in this file and explains what this logic is doing in simple English.
 export function ContactSocials({ socialProfiles }: { socialProfiles: SocialProfile[] }) {
   if (socialProfiles.length === 0) return null
   return (

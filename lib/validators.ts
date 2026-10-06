@@ -1,5 +1,11 @@
+// This file is part of the CIRC website.
+// It belongs to the library layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { z } from "zod"
 
+// These schemas are used to validate form input before it is saved to the database.
+// They help catch bad values like empty fields, invalid URLs, or missing required data.
+// This constant eventSchema stores shared values used by this file so the logic stays easier to follow.
 export const eventSchema = z.object({
   title: z.string().min(1, "Title is required"),
   description: z.string().min(1, "Description is required"),
@@ -11,6 +17,7 @@ export const eventSchema = z.object({
   published: z.boolean().default(false),
 })
 
+// This constant teamMemberSchema stores shared values used by this file so the logic stays easier to follow.
 export const teamMemberSchema = z.object({
   name: z.string().min(1, "Name is required"),
   role: z.enum(["CHAIRPERSON", "VICE_CHAIRPERSON", "SECRETARY", "TREASURER", "EVENT_ORGANIZER", "COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"]),
@@ -26,6 +33,7 @@ export const teamMemberSchema = z.object({
   displayOrder: z.number().int().default(0),
 })
 
+// This constant applicationSchema stores shared values used by this file so the logic stays easier to follow.
 export const applicationSchema = z.object({
   fullName: z.string().min(1, "Full name is required"),
   studentId: z.string().min(1, "Student ID is required"),
@@ -38,12 +46,14 @@ export const applicationSchema = z.object({
   skills: z.string().min(30, "At least 30 characters required"),
 })
 
+// This constant gallerySchema stores shared values used by this file so the logic stays easier to follow.
 export const gallerySchema = z.object({
   url: z.string().url("Valid image URL is required"),
   caption: z.string().optional(),
   eventId: z.string().optional().nullable(),
 })
 
+// This constant settingsSchema stores shared values used by this file so the logic stays easier to follow.
 export const settingsSchema = z.object({
   clubName: z.string().min(1, "Club name is required"),
   email: z.string().email("Invalid email address"),

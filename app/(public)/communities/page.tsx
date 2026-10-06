@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import Image from "next/image"
@@ -109,6 +112,7 @@ const TECH_TAGS = [
   },
 ]
 
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club Communities | CIRC at Mama Ngina University",
   description: "Explore the 7 CIRC student communities at Mama Ngina University College: web development, programming, AI and machine learning, data science, Web3, IoT, networking, and cybersecurity.",
@@ -116,8 +120,10 @@ export const metadata = createPageMetadata({
   keywords: ["computing innovation and research club communities", "CIRC communities", "web development community", "programming club", "AI and machine learning", "data science", "Web3 and blockchain", "Internet of Things", "networking and cybersecurity", "SPAS", "Kenyatta University technology"],
 })
 
+// This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
+// This function CommunitiesPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function CommunitiesPage() {
   const databaseCommunities = await getPublicCached("communities:with-leads", () => prisma.community.findMany({
     include: {

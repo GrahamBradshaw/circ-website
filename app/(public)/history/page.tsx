@@ -1,6 +1,10 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "CIRC History and Growth | MNUC Student Tech Community",
   description: "History of the Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College, Kenya. Public record of CIRC's growth, leadership, student innovation, and rebrand near Thika Road and Kenyatta University.",
@@ -92,6 +96,7 @@ const articleData = {
   inLanguage: "en-KE",
 }
 
+// This function HistoryPage handles the main work in this file and explains what this logic is doing in simple English.
 export default function HistoryPage() {
   return (
     <div className="flex min-h-screen flex-col bg-surface-2 dark:bg-[#09090B] transition-colors">

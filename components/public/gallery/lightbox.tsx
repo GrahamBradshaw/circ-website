@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { useEffect } from "react"
@@ -19,6 +22,7 @@ interface LightboxProps {
   onPrev: () => void
 }
 
+// This function Lightbox handles the main work in this file and explains what this logic is doing in simple English.
 export function Lightbox({ images, currentIndex, onClose, onNext, onPrev }: LightboxProps) {
   const currentImage = images[currentIndex]
 

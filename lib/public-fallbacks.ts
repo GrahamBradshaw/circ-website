@@ -1,9 +1,9 @@
-/**
- * Public copy keeps the site crawlable and useful during a database outage.
- * The database remains the source of truth whenever it is available.
- */
+// This file holds the public fallback communities used when the database is unavailable.
+// The main idea is simple: the website should still show useful content even if the CMS data is down.
+// The real database is still preferred whenever it is reachable.
 const createdAt = new Date("2024-01-01T00:00:00.000Z")
 
+// This constant FALLBACK_COMMUNITIES stores shared values used by this file so the logic stays easier to follow.
 export const FALLBACK_COMMUNITIES = [
   {
     id: "public-web-development",

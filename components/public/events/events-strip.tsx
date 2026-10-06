@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { FeaturedEventCard } from "./featured-event-card"
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
@@ -15,6 +18,7 @@ interface EventsStripProps {
   events: Event[]
 }
 
+// This function EventsStrip handles the main work in this file and explains what this logic is doing in simple English.
 export function EventsStrip({ events }: EventsStripProps) {
   return (
     <section className="overflow-hidden bg-white dark:bg-[#121215] py-24 md:py-32 border-b border-black/5 dark:border-white/10 transition-colors">

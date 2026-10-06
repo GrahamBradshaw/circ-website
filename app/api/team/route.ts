@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { NextRequest } from "next/server"
 import { revalidatePath } from "next/cache"
 import { prisma } from "@/lib/prisma"
@@ -7,6 +10,7 @@ import { requireAdmin } from "@/lib/auth"
 import { teamMemberSchema } from "@/lib/validators"
 import { notifyIndexNow } from "@/lib/indexnow"
 
+// This function GET handles the main work in this file and explains what this logic is doing in simple English.
 export async function GET() {
   try {
     const team = await getPublicCached("api:team:members", () => prisma.teamMember.findMany({
@@ -18,6 +22,7 @@ export async function GET() {
   }
 }
 
+// This function POST handles the main work in this file and explains what this logic is doing in simple English.
 export async function POST(req: NextRequest) {
   try {
     const { error } = await requireAdmin()

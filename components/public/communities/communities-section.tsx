@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowUpRight, ArrowRight } from "lucide-react"
@@ -24,6 +27,7 @@ const COMMUNITY_PHOTOS = [
   "/hero/hero-bg-1.0239ec49.webp",
 ]
 
+// This function CommunitiesSection handles the main work in this file and explains what this logic is doing in simple English.
 export function CommunitiesSection({ communities }: CommunitiesSectionProps) {
   const visibleCommunities = communities.slice(0, 6)
   const totalCount = communities.length

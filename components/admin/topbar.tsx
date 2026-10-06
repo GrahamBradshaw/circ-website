@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { UserButton } from "@clerk/nextjs"
@@ -7,6 +10,7 @@ interface TopbarProps {
   title?: string
 }
 
+// This function Topbar handles the main work in this file and explains what this logic is doing in simple English.
 export function Topbar({ title = "Admin Panel" }: TopbarProps) {
   return (
     <header className="h-14 bg-surface border-b border-border flex items-center justify-between px-6 flex-shrink-0">

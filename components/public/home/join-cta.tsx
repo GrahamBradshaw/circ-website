@@ -1,5 +1,9 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Link from "next/link"
 
+// This function JoinCTA handles the main work in this file and explains what this logic is doing in simple English.
 export function JoinCTA() {
   return (
     <section className="bg-primary dark:bg-[radial-gradient(ellipse_at_top,_#181822_0%,_#111116_65%,_#0B0B0E_100%)] py-24 relative overflow-hidden border-t border-black/10 dark:border-white/10 transition-colors">

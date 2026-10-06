@@ -1,5 +1,9 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import React from "react"
 
+// This constant COMMUNITY_ICONS stores shared values used by this file so the logic stays easier to follow.
 export const COMMUNITY_ICONS: Record<string, React.FC<{ className?: string; style?: React.CSSProperties }>> = {
 
   "web-development": ({ className, style }) => (
@@ -85,6 +89,7 @@ export const COMMUNITY_ICONS: Record<string, React.FC<{ className?: string; styl
   ),
 }
 
+// This constant COMMUNITY_COLORS stores shared values used by this file so the logic stays easier to follow.
 export const COMMUNITY_COLORS: Record<string, { bg: string; text: string; icon: string }> = {
   "web-development":  { bg: "#EFF6FF", text: "#1E40AF", icon: "#1E3A8A" },
   "ai-ml":            { bg: "#F0FDF4", text: "#15803D", icon: "#16A34A" },

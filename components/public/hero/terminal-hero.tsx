@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Link from "next/link"
 import { ArrowRight, ChevronDown, MapPin } from "lucide-react"
 import { CircularDeck } from "@/components/public/hero/circular-deck"
@@ -26,6 +29,7 @@ const STATS = [
 
 // ─── TerminalHero (Page Hero Section) ─────────────────────────────────────────
 
+// This function TerminalHero handles the main work in this file and explains what this logic is doing in simple English.
 export function TerminalHero() {
   return (
     <section className="relative w-full min-h-screen overflow-hidden bg-surface-2 dark:bg-[#080809] text-main dark:text-gray-100 transition-colors">

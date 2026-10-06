@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { useState } from "react"
@@ -7,7 +10,12 @@ interface FaqItem {
   answer: string
 }
 
+// This component controls the FAQ accordion.
+// Only one question stays open at a time so the page feels cleaner and easier to read.
+// This function JoinFaqs handles the main work in this file and explains what this logic is doing in simple English.
 export function JoinFaqs({ items }: { items: FaqItem[] }) {
+  // openIndex keeps track of which answer is currently expanded.
+  // We use null to mean that no question is open.
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (

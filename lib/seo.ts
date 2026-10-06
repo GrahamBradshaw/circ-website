@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the library layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import type { Metadata } from "next"
 
 type PageSeoInput = {
@@ -10,8 +13,14 @@ type PageSeoInput = {
   noIndex?: boolean
 }
 
+// This file is the central SEO source for the website.
+// It defines the official site URL and keyword groups that help search engines
+// understand the club, the location, and the wider student-tech ecosystem.
+// This constant SITE_URL stores shared values used by this file so the logic stays easier to follow.
 export const SITE_URL = "https://www.circ.co.ke"
 
+// These keywords describe the nearby universities and colleges around the CIRC area.
+// This helps the site rank for local and campus-related searches, not just the brand name.
 const INSTITUTION_KEYWORDS = [
  "KCA University",
  "KCA University Ruaraka",
@@ -79,6 +88,9 @@ const INSTITUTION_KEYWORDS = [
  "student tech clubs in Kiambu County",
 ]
 
+// This second keyword group focuses on long-tail, search-intent phrases like
+// "innovation clubs in Kenyatta University" and "research clubs near JKUAT".
+// These phrases are useful because many students search for clubs by institution name.
 const CLUB_QUERY_KEYWORDS = [
  "innovation clubs in KCA University",
  "innovation clubs near KCA University",
@@ -227,6 +239,8 @@ const CLUB_QUERY_KEYWORDS = [
  "university computing clubs Kenya",
 ]
 
+// This is the main keyword list combined from local institutions and club searches.
+// We merge them here so every public page gets a strong, consistent SEO signal.
 const CORE_KEYWORDS = [
  "Computing Innovation and Research Club",
  "computing innovation and research club",
@@ -270,6 +284,9 @@ const CORE_KEYWORDS = [
 ]
 
 
+// This function builds the metadata object that Next.js uses for a page.
+// It adds the title, description, keywords, canonical URL, and social sharing tags.
+// This function createPageMetadata handles the main work in this file and explains what this logic is doing in simple English.
 export function createPageMetadata({
   title,
   description,
@@ -278,10 +295,19 @@ export function createPageMetadata({
   image = "/android-chrome-512x512.png",
   noIndex = false,
 }: PageSeoInput): Metadata {
+  // For the homepage, we keep the simple title. For all other pages, we add a short brand suffix.
   const pageTitle = path === "/" ? title : `${title} | CIRC MNUC`
+
+  // Clean the description so it is safe for metadata tags and social cards.
   const pageDescription = plainTextDescription(description) || `Learn about ${title} at Mama Ngina University College.`
+
+  // Merge global keywords with page-specific keywords and remove duplicates.
   const pageKeywords = [...new Set([...CORE_KEYWORDS, ...keywords].map((value) => value.trim()).filter(Boolean))]
+
+  // Build the final URL that search engines should treat as the official page source.
   const canonicalUrl = new URL(path, SITE_URL).toString()
+
+  // Make sure the image path always resolves to a full absolute URL.
   const absoluteImage = new URL(image, SITE_URL).toString()
 
   return {
@@ -320,6 +346,9 @@ export function createPageMetadata({
   }
 }
 
+// This helper removes HTML tags and keeps the description readable for meta tags.
+// It also shortens long text so it stays friendly to search engines and social previews.
+// This function plainTextDescription handles the main work in this file and explains what this logic is doing in simple English.
 export function plainTextDescription(value: string, maxLength = 160): string {
   const plainText = value
     .replace(/<[^>]*>/g, " ")

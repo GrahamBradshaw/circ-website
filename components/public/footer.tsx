@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Link from "next/link"
 import Image from "next/image"
 import { prisma } from "@/lib/prisma"
@@ -7,7 +10,11 @@ import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 import { SITE_URL } from "@/lib/seo"
 import { getSocialProfiles } from "@/lib/social-links"
 
+// This component renders the site footer.
+// It shows the brand, navigation, communities, contact details, and social links.
+// This function Footer handles the main work in this file and explains what this logic is doing in simple English.
 export async function Footer() {
+  // Load the public settings and communities in parallel to keep the page fast.
   const [settings, databaseCommunities] = await Promise.all([
     getPublicCached("settings:singleton", () => prisma.settings.findUnique({
       where: { id: "singleton" },
@@ -16,9 +23,11 @@ export async function Footer() {
       select: { name: true, slug: true },
     }), FALLBACK_COMMUNITIES),
   ])
+  // Merge database communities with fallback communities so the footer still works even if the database is down.
   const communities = [...new Map(
     [...FALLBACK_COMMUNITIES, ...databaseCommunities].map((community) => [community.slug, community]),
   ).values()]
+  // Turn the saved social settings into links we can render in the footer.
   const socialProfiles = getSocialProfiles(settings)
   const socialLinks = socialProfiles.map((profile) => ({
     ...profile,
@@ -27,6 +36,7 @@ export async function Footer() {
         : profile.platform === "Instagram" ? Instagram : Linkedin,
   }))
 
+  // These are the main website paths shown in the footer navigation.
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "Club History", href: "/history" },

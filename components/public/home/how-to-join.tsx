@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import Link from "next/link"
 
 const STEPS = [
@@ -23,6 +26,7 @@ const STEPS = [
   },
 ]
 
+// This function HowToJoin handles the main work in this file and explains what this logic is doing in simple English.
 export function HowToJoin() {
   return (
     <section className="py-20 bg-surface">

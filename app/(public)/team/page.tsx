@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import Image from "next/image"
@@ -8,6 +11,7 @@ import { COMMUNITY_COLORS } from "@/components/public/communities/community-icon
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 
+// This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "CIRC Leadership and Community Leads",
   description: "Meet the student leaders and technology community leads of the Computing Innovation & Research Club at Mama Ngina University College.",
@@ -15,6 +19,7 @@ export const metadata = createPageMetadata({
   keywords: ["CIRC student leaders", "MNUC technology community leads", "Kenyatta University student leadership", "computing club committee"],
 })
 
+// This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
 const enumToSlug: Record<string, string> = {
@@ -27,6 +32,7 @@ const enumToSlug: Record<string, string> = {
   NETWORKING_CYBERSECURITY: "networking-cybersecurity",
 }
 
+// This function TeamPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function TeamPage() {
   const [execs, leads] = await Promise.all([
     getPublicCached("team:members", () => prisma.teamMember.findMany({

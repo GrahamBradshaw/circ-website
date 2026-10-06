@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { useEffect, useState } from "react"
@@ -71,6 +74,7 @@ function TestimonialCard({ item }: { item: Testimonial }) {
   )
 }
 
+// This function TestimonialsSection handles the main work in this file and explains what this logic is doing in simple English.
 export function TestimonialsSection({ items, intervalMs = 5000 }: TestimonialsSectionProps) {
   const [start, setStart] = useState(0)
   const count = items.length

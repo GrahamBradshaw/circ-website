@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 'use client'
 
 import { useState } from "react"
@@ -14,6 +17,7 @@ type Event = {
   published: boolean
 }
 
+// This function EventsTable handles the main work in this file and explains what this logic is doing in simple English.
 export function EventsTable({ initialEvents }: { initialEvents: Event[] }) {
   const [events, setEvents] = useState(initialEvents)
   const [toast, setToast] = useState<string | null>(null)

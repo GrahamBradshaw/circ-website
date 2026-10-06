@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { MapPin } from "lucide-react"
 import { Skeleton } from "@/components/ui/skeleton"
 
@@ -8,6 +11,7 @@ interface HeroSkeletonProps {
   size?: "lg" | "md" | "sm"
 }
 
+// This function HeroSkeleton handles the main work in this file and explains what this logic is doing in simple English.
 export function HeroSkeleton({
   badgeWidth = "w-36",
   hasPhoto = true,

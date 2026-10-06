@@ -1,6 +1,11 @@
+// This file is part of the CIRC website.
+// It belongs to the library layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import "server-only"
 import { Redis } from "@upstash/redis"
 
+// This file keeps the public website fast by caching common content in Redis.
+// The idea is simple: if a page section is already cached, use it. If not, fetch it from PostgreSQL.
 const CACHE_PREFIX = "circ:public-content:v1"
 const EPOCH_KEY = `${CACHE_PREFIX}:epoch`
 const INDEX_KEY = `${CACHE_PREFIX}:keys`
@@ -13,6 +18,8 @@ let warnedAboutDatabase = false
 
 type RedisValue = string | number | boolean | null | Record<string, unknown> | unknown[]
 
+// Connect to Redis only if the environment has the required keys.
+// If Redis is not configured, the app falls back to PostgreSQL directly.
 function getRedis(): Redis | null {
   if (redisClient !== undefined) return redisClient
 
@@ -39,6 +46,8 @@ function warnDatabaseFallback() {
   console.warn("Database unavailable; rendering fallback public content.")
 }
 
+// Redis stores data as plain JSON-like values. Some values such as dates come back as strings,
+// so we turn them back into JavaScript Date objects to keep the app working normally.
 function restoreDates<T>(value: T): T {
   if (Array.isArray(value)) return value.map((item) => restoreDates(item)) as T
   if (!value || typeof value !== "object") return value
@@ -58,6 +67,10 @@ function restoreDates<T>(value: T): T {
   return result as T
 }
 
+// This function is the main public cache helper.
+// It checks Redis first. If the requested item is there, we return it immediately.
+// If it is missing, we query PostgreSQL and save the result back to Redis for later use.
+// This function getPublicCached handles the main work in this file and explains what this logic is doing in simple English.
 export async function getPublicCached<T>(
   key: string,
   loadFromDatabase: () => Promise<T>,
@@ -76,7 +89,8 @@ export async function getPublicCached<T>(
   }
 
   const redis = getRedis()
-  // Redis is a cache: only use it if the key exists. If there is a miss, fetch from DB and then repopulate Redis.
+  // Redis is only a fast cache layer.
+  // If Redis is not available, we skip it and fetch the data directly from PostgreSQL.
   if (!redis) return loadWithFallback()
 
   let epoch = 0
@@ -107,7 +121,8 @@ export async function getPublicCached<T>(
     return loadWithFallback()
   }
 
-  // Cache miss: read from the database, then save that value back into Redis.
+  // Cache miss: this is the place where we fetch from PostgreSQL.
+  // Once the database returns the data, we store it in Redis so the next request is faster.
   const value = await loadWithFallback()
   if (!databaseFailed) {
     try {
@@ -122,6 +137,7 @@ export async function getPublicCached<T>(
   return value
 }
 
+// This function invalidatePublicContentCache handles the main work in this file and explains what this logic is doing in simple English.
 export async function invalidatePublicContentCache(): Promise<void> {
   const redis = getRedis()
   if (!redis) return

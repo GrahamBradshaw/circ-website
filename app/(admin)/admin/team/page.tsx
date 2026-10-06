@@ -1,8 +1,12 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { TeamTable } from "@/components/admin/team-table"
 import Link from "next/link"
 import { Plus } from "lucide-react"
 
+// This function TeamPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function TeamPage() {
   const members = await prisma.teamMember.findMany({
     orderBy: [{ displayOrder: "asc" }, { createdAt: "asc" }],

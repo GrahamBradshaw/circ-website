@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 'use client'
 
 import { useState } from "react"
@@ -6,6 +9,8 @@ import Image from "next/image"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 
+// These are the top-level navigation items for the public website.
+// They are shared by both the desktop nav and the mobile menu.
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Communities", href: "/communities" },
@@ -17,10 +22,15 @@ const navLinks = [
   { name: "Contact", href: "/contact" },
 ]
 
+// The navbar is the main site header.
+// It shows the CIRC branding and lets users move between pages on desktop and mobile.
+// This function Navbar handles the main work in this file and explains what this logic is doing in simple English.
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
+  // This checks whether the current page matches the nav link.
+  // If it does, we show the link in the active state.
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/"
     return pathname.startsWith(href)

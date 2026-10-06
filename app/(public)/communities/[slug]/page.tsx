@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import { notFound } from "next/navigation"
@@ -9,10 +12,12 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
+// This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
 // Pre-render community detail routes so crawlers receive public HTML on first
 // visit. Keep known pages available during builds if the database is offline.
+// This function generateStaticParams handles the main work in this file and explains what this logic is doing in simple English.
 export async function generateStaticParams() {
   const fallbackSlugs = FALLBACK_COMMUNITIES.map(({ slug }) => slug)
   try {
@@ -25,6 +30,7 @@ export async function generateStaticParams() {
   }
 }
 
+// This function generateMetadata handles the main work in this file and explains what this logic is doing in simple English.
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const databaseCommunity = await getPublicCached(`community:metadata:${slug}`, () => prisma.community.findUnique({
@@ -60,6 +66,7 @@ function communityHeroImage(slug: string): string {
   return COMMUNITY_HERO_IMAGES[slug] ?? "/hero/hero-bg-2.90cbe47a.webp"
 }
 
+// This function CommunityDetailPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function CommunityDetailPage({
   params,
 }: {

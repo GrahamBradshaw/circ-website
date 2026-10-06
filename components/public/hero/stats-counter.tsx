@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import { useEffect, useRef } from "react"
@@ -15,6 +18,7 @@ const stats = [
   { value: 30, label: "Projects Built", suffix: "+" },
 ]
 
+// This function StatsCounter handles the main work in this file and explains what this logic is doing in simple English.
 export function StatsCounter() {
   const containerRef = useRef<HTMLDivElement>(null)
   const numbersRef = useRef<(HTMLSpanElement | null)[]>([])

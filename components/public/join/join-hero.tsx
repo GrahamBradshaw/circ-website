@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { GraduationCap, Zap, Users, Briefcase, Code2, Heart } from "lucide-react"
 
 const benefits = [
@@ -9,6 +12,7 @@ const benefits = [
   { icon: Heart, label: "Vibrant Community" },
 ]
 
+// This function JoinHero handles the main work in this file and explains what this logic is doing in simple English.
 export function JoinHero() {
   return (
     <section className="bg-surface-2 py-20">

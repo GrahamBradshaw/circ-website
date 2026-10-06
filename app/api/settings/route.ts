@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the app layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached, invalidatePublicContentCache } from "@/lib/redis-cache"
 import { NextResponse } from "next/server"
@@ -6,6 +9,7 @@ import { revalidatePath } from "next/cache"
 import { publicSuccessResponse } from "@/lib/api"
 import { notifyIndexNow } from "@/lib/indexnow"
 
+// This function GET handles the main work in this file and explains what this logic is doing in simple English.
 export async function GET() {
   try {
     const settings = await getPublicCached("api:settings:singleton", async () => {
@@ -19,6 +23,7 @@ export async function GET() {
   }
 }
 
+// This function PATCH handles the main work in this file and explains what this logic is doing in simple English.
 export async function PATCH(req: Request) {
   try {
     const { error } = await requireAdmin()

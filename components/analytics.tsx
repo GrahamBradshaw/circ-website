@@ -1,3 +1,6 @@
+// This file is part of the CIRC website.
+// It belongs to the component layer and contains the logic for this feature.
+// Read it from top to bottom to understand how the page, component, or data flow works.
 "use client"
 
 import Script from "next/script"
@@ -52,6 +55,7 @@ function loadClarity() {
   }
 }
 
+// This function Analytics handles the main work in this file and explains what this logic is doing in simple English.
 export function Analytics({ gaMeasurementId }: { gaMeasurementId?: string }) {
   const pathname = usePathname()
   const isPrivate = isPrivatePath(pathname)
