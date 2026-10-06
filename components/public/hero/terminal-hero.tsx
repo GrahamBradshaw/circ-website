@@ -53,10 +53,18 @@ export function TerminalHero() {
               <span className="mt-2 block">
                 Building the <span className="font-extrabold italic text-accent-orange">next Generation</span>
               </span>
+              {/* Crawlable exact-match phrase for search engines; visually hidden so the design stays untouched. */}
+              <span className="sr-only">
+                Computing Innovation and Research Club — CIRC MNUC, the Computer Science Club at Mama Ngina University College, Mama Ngina University, MNU, MNUC, Mutomo, Gatundu South, Kiambu County, Kenya.
+              </span>
             </h1>
 
             <p className="mt-6 max-w-[32rem] text-base leading-relaxed text-muted dark:text-gray-400 sm:text-lg transition-colors">
               CIRC MNUC is a student-led computing and research club at Mama Ngina University College, building skills in software, data, AI, and emerging technology.
+              {/* Crawlable exact-match reinforcement; visually hidden so the design stays untouched. */}
+              <span className="sr-only">
+                {" "}CIRC is the official computing and Computer Science Club at Mama Ngina University College.
+              </span>
             </p>
 
             <div className="mt-8 flex w-full flex-col items-start gap-3 sm:w-auto sm:flex-row">

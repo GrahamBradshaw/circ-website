@@ -15,10 +15,10 @@ import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 import { getSocialProfiles } from "@/lib/social-links"
 
 export const metadata = createPageMetadata({
-  title: "CIRC MNUC | Computing Innovation and Research Club",
-  description: "The Computer Science Club at Mama Ngina University College is now CIRC MNUC, the Computing Innovation and Research Club. Explore student technology communities, events, and projects in Mutomo, Kenya.",
+  title: "Computing Innovation and Research Club | CIRC at Mama Ngina University College",
+  description: "The Computing Innovation and Research Club (CIRC) is the official computing and Computer Science Club at Mama Ngina University College (MNU, MNUC) in Mutomo, Kenya. Explore 7 student technology communities, events, and projects.",
   path: "/",
-  keywords: ["Mama Ngina University", "MNU", "MNUC", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
+  keywords: ["computing innovation and research club", "Mama Ngina University", "MNU", "MNUC", "computer science club mama ngina", "computer science club mnu", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
 })
 
 export const revalidate = 300
@@ -63,6 +63,7 @@ export default async function HomePage() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: "Computing Innovation and Research Club (CIRC MNUC)",
+    alternateName: ["CIRC MNUC", "CIRC", "Computer Science Club", "Computer Science Club Mama Ngina", "MNUC Computer Science Club"],
     url: SITE_URL,
     sameAs: socialProfiles.map(({ href }) => href),
   }

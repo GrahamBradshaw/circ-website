@@ -27,6 +27,17 @@ export default function robots(): MetadataRoute.Robots {
         allow: ["/", "/communities/"],
         disallow,
       },
+      {
+        // Explicit allowance so Bing (Bingbot, MSNBot, AdIdxBot) crawls public pages.
+        userAgent: "Bingbot",
+        allow: ["/", "/communities/"],
+        disallow,
+      },
+      {
+        userAgent: "msnbot",
+        allow: ["/", "/communities/"],
+        disallow,
+      },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
   }

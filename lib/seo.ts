@@ -13,12 +13,16 @@ type PageSeoInput = {
 export const SITE_URL = "https://www.circ.co.ke"
 
 const CORE_KEYWORDS = [
-  "Computing Innovation & Research Club",
+  "Computing Innovation and Research Club",
+  "computing innovation and research club",
+  "CIRC MNUC",
   "CIRC Kenya",
   "Mama Ngina University College",
   "Mama Ngina University",
   "MNU",
   "Computer Science Club",
+  "computer science club mama ngina",
+  "computer science club mnu",
   "MNUC Computer Science Club",
   "Thangari Road, Mutomo, Gatundu South, Kiambu County, Kenya",
   "Kenyatta University",
