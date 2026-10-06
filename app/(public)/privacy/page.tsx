@@ -6,6 +6,7 @@ export const metadata = createPageMetadata({
   description: "Read how the Computing Innovation & Research Club at Mama Ngina University College handles website, membership application, and analytics information.",
   path: "/privacy",
   keywords: ["CIRC privacy policy", "MNUC website privacy", "membership application data"],
+  noIndex: true,
 })
 
 export default function PrivacyPage() {

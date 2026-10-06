@@ -6,6 +6,7 @@ export const metadata = createPageMetadata({
   description: "Learn how the CIRC website at Mama Ngina University College uses essential storage and analytics technologies.",
   path: "/cookies",
   keywords: ["CIRC cookie policy", "website analytics cookies", "MNUC website cookies"],
+  noIndex: true,
 })
 
 export default function CookiesPage() {

@@ -6,6 +6,8 @@ type PageSeoInput = {
   path: string
   keywords?: string[]
   image?: string
+  /** Set true for legal/policy pages so they never outrank real content. */
+  noIndex?: boolean
 }
 
 export const SITE_URL = "https://www.circ.co.ke"
@@ -28,41 +30,46 @@ export function createPageMetadata({
   path,
   keywords = [],
   image = "/android-chrome-512x512.png",
+  noIndex = false,
 }: PageSeoInput): Metadata {
   const pageTitle = path === "/" ? title : `${title} | CIRC MNUC`
   const pageDescription = plainTextDescription(description) || `Learn about ${title} at Mama Ngina University College.`
   const pageKeywords = [...new Set([...CORE_KEYWORDS, ...keywords])]
+  const canonicalUrl = new URL(path, SITE_URL).toString()
+  const absoluteImage = new URL(image, SITE_URL).toString()
 
   return {
     title: pageTitle,
     description: pageDescription,
     keywords: pageKeywords,
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: {
-        index: true,
-        follow: true,
-        "max-image-preview": "large",
-        "max-snippet": -1,
-        "max-video-preview": -1,
-      },
-    },
-    alternates: { canonical: path },
+    robots: noIndex
+      ? { index: false, follow: true }
+      : {
+          index: true,
+          follow: true,
+          googleBot: {
+            index: true,
+            follow: true,
+            "max-image-preview": "large",
+            "max-snippet": -1,
+            "max-video-preview": -1,
+          },
+        },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       type: "website",
       locale: "en_KE",
       siteName: "Computing Innovation and Research Club (CIRC MNUC)",
       title: pageTitle,
       description: pageDescription,
-      url: path,
-      images: [{ url: image, alt: `${title}: Computing Innovation & Research Club` }],
+      url: canonicalUrl,
+      images: [{ url: absoluteImage, alt: `${title}: Computing Innovation & Research Club` }],
     },
     twitter: {
       card: "summary_large_image",
       title: pageTitle,
       description: pageDescription,
-      images: [image],
+      images: [absoluteImage],
     },
   }
 }

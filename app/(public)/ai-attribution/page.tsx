@@ -6,6 +6,7 @@ export const metadata = createPageMetadata({
   description: "CIRC asks people and organizations who reuse its website content to identify CIRC as the source and link to the specific page where possible.",
   path: "/ai-attribution",
   keywords: ["CIRC content attribution", "CIRC source citation policy", "content reuse attribution"],
+  noIndex: true,
 })
 
 export default function AiAttributionPage() {

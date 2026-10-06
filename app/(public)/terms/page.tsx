@@ -6,6 +6,7 @@ export const metadata = createPageMetadata({
   description: "Terms for using the Computing Innovation & Research Club website and participating in club activities at Mama Ngina University College.",
   path: "/terms",
   keywords: ["CIRC website terms", "club participation terms", "MNUC website terms"],
+  noIndex: true,
 })
 
 export default function TermsPage() {
