@@ -110,10 +110,10 @@ const TECH_TAGS = [
 ]
 
 export const metadata = createPageMetadata({
-  title: "Technology Communities at Mama Ngina University College",
-  description: "Explore CIRC student communities in web development, programming, AI and machine learning, data science, Web3, IoT, networking, and cybersecurity.",
+  title: "Computing Innovation and Research Club Communities | CIRC at Mama Ngina University",
+  description: "Explore the 7 CIRC student communities at Mama Ngina University College: web development, programming, AI and machine learning, data science, Web3, IoT, networking, and cybersecurity.",
   path: "/communities",
-  keywords: ["web development community", "programming club", "AI and machine learning", "data science", "Web3 and blockchain", "Internet of Things", "networking and cybersecurity", "SPAS", "Kenyatta University technology"],
+  keywords: ["computing innovation and research club communities", "CIRC communities", "web development community", "programming club", "AI and machine learning", "data science", "Web3 and blockchain", "Internet of Things", "networking and cybersecurity", "SPAS", "Kenyatta University technology"],
 })
 
 export const revalidate = 300

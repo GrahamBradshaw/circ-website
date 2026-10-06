@@ -2,10 +2,10 @@ import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 
 export const metadata = createPageMetadata({
-  title: "Computer Science Club History at Mama Ngina University College",
-  description: "Learn how Mama Ngina University College's Computer Science Club grew into the Computing Innovation and Research Club (CIRC MNUC) in 2026.",
+  title: "Computing Innovation and Research Club History | CIRC MNUC at Mama Ngina University",
+  description: "The Computing Innovation and Research Club (CIRC) at Mama Ngina University College grew from the Computer Science Club founded in 2022. Read the full CIRC MNUC story: founders, awards, and the 2026 rebrand.",
   path: "/history",
-  keywords: ["CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
+  keywords: ["computing innovation and research club history", "CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "computer science club mama ngina", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
 })
 
 const milestones = [
@@ -80,6 +80,9 @@ const articleData = {
   "@type": "Article",
   headline: "The History, Growth and Legacy of CIRC MNUC",
   description: "The history of the Computer Science Club at Mama Ngina University College and its transition to the Computing Innovation and Research Club (CIRC MNUC) in March 2026.",
+  image: `${SITE_URL}/hero/hero-bg-2.90cbe47a.webp`,
+  datePublished: "2022-01-20",
+  dateModified: "2026-03-01",
   mainEntityOfPage: `${SITE_URL}/history`,
   about: { "@id": `${SITE_URL}/#organization` },
   author: { "@id": `${SITE_URL}/#organization` },
@@ -99,6 +102,8 @@ export default function HistoryPage() {
         title="Computer Science Club to CIRC MNUC"
         subtitle="The history of the student computing club that grew into CIRC, a community for computing, innovation and research."
         size="md"
+        image="/hero/hero-bg-2.90cbe47a.webp"
+        imageAlt="History of the Computing Innovation and Research Club at Mama Ngina University College"
       />
 
       <article className="mx-auto w-full max-w-6xl px-5 py-12 sm:px-8 sm:py-16">

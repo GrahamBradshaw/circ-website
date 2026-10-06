@@ -35,10 +35,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!community) return { title: "Community Not Found", robots: { index: false, follow: false } }
 
   return createPageMetadata({
-    title: `${community.name} Community`,
-    description: plainTextDescription(`${community.description} Join this CIRC technology community at Mama Ngina University College.`),
+    title: `${community.name} Community | CIRC at Mama Ngina University`,
+    description: plainTextDescription(`${community.description} Join the ${community.name} community — one of 7 student groups in the Computing Innovation and Research Club at Mama Ngina University College.`),
     path: `/communities/${encodeURIComponent(slug)}`,
-    keywords: [...community.focusTags, `${community.name} community`, "MNUC technology community", "SPAS computing"],
+    keywords: [...community.focusTags, `${community.name} community`, `${community.name} Mama Ngina`, "CIRC communities", "MNUC technology community", "SPAS computing"],
     image: communityHeroImage(slug),
   })
 }
@@ -157,6 +157,30 @@ export default async function CommunityDetailPage({
                   </div>
                 </div>
               )}
+
+              {/* Internal links: How this community connects to CIRC */}
+              <div className="space-y-4 pt-6 border-t border-primary/10 dark:border-white/10">
+                <h3 className="font-display text-primary dark:text-white text-2xl font-bold">Part of CIRC</h3>
+                <p className="font-body text-main dark:text-gray-200 text-base leading-relaxed">
+                  The {community.name} community is one of 7 student groups in the{" "}
+                  <Link href="/" className="font-semibold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 hover:decoration-accent-orange">
+                    Computing Innovation and Research Club
+                  </Link>{" "}
+                  at Mama Ngina University College.{" "}
+                  <Link href="/communities" className="font-semibold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 hover:decoration-accent-orange">
+                    Explore all communities
+                  </Link>
+                  ,{" "}
+                  <Link href="/events" className="font-semibold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 hover:decoration-accent-orange">
+                    join our events
+                  </Link>
+                  , or{" "}
+                  <Link href="/history" className="font-semibold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 hover:decoration-accent-orange">
+                    read the history of CIRC MNUC
+                  </Link>
+                  .
+                </p>
+              </div>
             </div>
 
             {/* Right: Sidebar */}
