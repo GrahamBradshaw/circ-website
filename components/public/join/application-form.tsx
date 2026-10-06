@@ -101,8 +101,11 @@ export function ApplicationForm({ communities }: ApplicationFormProps) {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-6 py-6">
-      <h2 className="font-display text-primary dark:text-white text-3xl font-bold mb-8">Application Form</h2>
+    <div className="w-full py-2 sm:py-6">
+      <div className="mb-8">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-orange">Membership</p>
+        <h2 className="mt-2 font-display text-primary dark:text-white text-3xl font-bold sm:text-4xl">Application Form</h2>
+      </div>
 
       {error && (
         <div className="mb-6 p-4 bg-red-50 dark:bg-red-950/40 text-red-600 dark:text-red-400 text-sm border border-red-100 dark:border-red-900/50 rounded-lg">
