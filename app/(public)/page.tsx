@@ -6,6 +6,7 @@ import { EventsStrip } from "@/components/public/events/events-strip"
 import { LeadershipTeaser } from "@/components/public/team/leadership-teaser"
 import { LocationMapSection } from "@/components/public/location-map"
 import { JoinCTA } from "@/components/public/home/join-cta"
+import { TestimonialsSection } from "@/components/public/testimonials/testimonials-section"
 import { Suspense } from "react"
 import Link from "next/link"
 import { ExternalLink } from "lucide-react"
@@ -13,6 +14,7 @@ import { UnauthorizedToast } from "@/components/public/unauthorized-toast"
 import { createPageMetadata, SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 import { getSocialProfiles } from "@/lib/social-links"
+import { formatRole } from "@/lib/utils"
 
 export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club | CIRC at Mama Ngina University College",
@@ -22,6 +24,15 @@ export const metadata = createPageMetadata({
 })
 
 export const revalidate = 300
+
+// Placeholder member quotes for the testimonials section — edit freely.
+const TESTIMONIAL_QUOTES = [
+  "CIRC turned my classroom theory into real projects. I walked in knowing Python basics and walked out shipping full web apps with a team.",
+  "The workshops and hackathons pushed me further in one semester than I thought possible. Everyone here genuinely wants you to grow.",
+  "I joined for the coding community and stayed for the people. CIRC is where I found my team for final-year projects and beyond.",
+  "From AI/ML sessions to Web3 explorations, there is always something new to build. The community leads actually listen and help.",
+  "Being part of CIRC at Mama Ngina University College gave me leadership experience, a strong portfolio, and friends who code as hard as I do.",
+]
 
 export default async function HomePage() {
   const [communities, upcomingEvents, execs, settings] = await Promise.all([
@@ -67,6 +78,60 @@ export default async function HomePage() {
     url: SITE_URL,
     sameAs: socialProfiles.map(({ href }) => href),
   }
+  const faqData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is the Computing Innovation and Research Club (CIRC)?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "The Computing Innovation and Research Club (CIRC, also known as CIRC MNUC and CIRC MNU) is a student-led computing, innovation and research club at Mama Ngina University College (MNUC, commonly called Mama Ngina University or MNU), a constituent college of Kenyatta University in Mutomo, Gatundu South, Kiambu County, Kenya. It brings students together through 7 technology communities, workshops, events, and collaborative projects.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Is CIRC the Computer Science Club at Mama Ngina University?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes. CIRC was formerly the Computer Science Club (Computer Science MNU) at Mama Ngina University College. It was founded on 20 January 2022 and rebranded to the Computing Innovation and Research Club in March 2026, keeping its members, leadership legacy, and three consecutive Best Club Awards.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who can join CIRC at Mama Ngina University College?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Students in relevant programmes at the School of Pure and Applied Sciences (SPAS) — including Computer Science, Information Technology, Mathematics and Computer Science, and Statistics and Programming — can apply, alongside the wider MNUC student community. Applications are submitted on the CIRC website and reviewed on a rolling basis.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "What communities are in CIRC?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CIRC has 7 communities: Programming, AI and Machine Learning, Data Science and Modelling, Internet of Things, Web Development, Web3 and Blockchain, and Networking and Cybersecurity. Each community runs its own workshops, projects, and events.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Where is CIRC located?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CIRC is based at Mama Ngina University College, Off Mutomo, Thangari Road, Gatundu South, Kiambu County, Kenya (coordinates -1.037054, 36.923318). The club can be contacted at circ@mnu.ac.ke.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How do I contact or join CIRC?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Apply via the join page at https://www.circ.co.ke/join, email circ@mnu.ac.ke, or use the contact page at https://www.circ.co.ke/contact. CIRC is open to collaborations and partnerships.",
+        },
+      },
+    ],
+  }
 
   return (
     <div className="circ-home-design flex flex-col">
@@ -77,6 +142,10 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData).replace(/</g, "\\u003c") }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
       <TerminalHero />
@@ -144,6 +213,16 @@ export default async function HomePage() {
 
       {/* Section E: Location Map */}
       <LocationMapSection />
+
+      {/* Section E2: Testimonials (pair-cycling animation) */}
+      <TestimonialsSection
+        items={execs.map((member, index) => ({
+          name: member.name,
+          role: formatRole(member.role),
+          quote: TESTIMONIAL_QUOTES[index % TESTIMONIAL_QUOTES.length],
+          photo: member.photo,
+        }))}
+      />
 
       {/* Section F: Join CTA */}
       <JoinCTA />

@@ -68,8 +68,8 @@ export function LeadershipTeaser({ members }: LeadershipTeaserProps) {
           </p>
         </div>
 
-        {/* Big, Modern Executive Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 max-w-6xl mx-auto">
+        {/* Big, Modern Executive Cards Grid — 2 cards per row on mobile */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 max-w-6xl mx-auto">
           {teaserMembers.map((member) => {
             const isChair = member.role === "CHAIRPERSON"
             const initials = member.name
@@ -83,7 +83,7 @@ export function LeadershipTeaser({ members }: LeadershipTeaserProps) {
             return (
               <div
                 key={member.id}
-                className="group relative flex flex-col items-center text-center bg-white dark:bg-[#121214] rounded-3xl p-6 sm:p-7 border border-primary/10 dark:border-white/10 shadow-[0_8px_30px_rgba(15,36,96,0.05)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_45px_rgba(15,36,96,0.12)] hover:-translate-y-2 transition-all duration-300 overflow-hidden"
+                className="group relative flex flex-col items-center text-center bg-white dark:bg-[#121214] rounded-3xl p-4 sm:p-7 border border-primary/10 dark:border-white/10 shadow-[0_8px_30px_rgba(15,36,96,0.05)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_45px_rgba(15,36,96,0.12)] hover:-translate-y-2 transition-all duration-300 overflow-hidden"
               >
                 {/* Circular Profile Avatar */}
                 <div className="relative mb-4">

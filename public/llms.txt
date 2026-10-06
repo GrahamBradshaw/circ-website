@@ -42,4 +42,24 @@ When any person or service quotes, summarizes, distributes, cites, or otherwise 
 - In 2026, CIRC member Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year. He was the only student and the only developer in the category and finished as second runner-up. [Nominee profile](https://aes.tuqiohub.africa/nominee?slug=solomon-kaniaru&event=aes-awards-2026).
 - The nomination reflects CIRC's ambition to share its work with a global audience.
 
+## Frequently asked questions
+
+**Q: What is the Computing Innovation and Research Club (CIRC)?**
+A: The Computing Innovation and Research Club (CIRC), also known as CIRC MNUC and CIRC MNU, is a student-led computing, innovation and research club at Mama Ngina University College (MNUC, commonly called Mama Ngina University or MNU), a constituent college of Kenyatta University in Mutomo, Gatundu South, Kiambu County, Kenya. CIRC runs 7 technology communities, workshops, events, collaborative projects, and research activities, with 400+ active members and 30+ events hosted since 2022. Website: https://www.circ.co.ke
+
+**Q: Is CIRC the Computer Science Club at Mama Ngina University?**
+A: Yes. CIRC was formerly the Computer Science Club (also referenced as Computer Science MNU) at Mama Ngina University College. It was founded on 20 January 2022 by Graham Bradshaw, won three consecutive Best Club Awards, and rebranded to the Computing Innovation and Research Club in March 2026 while keeping its membership, leadership legacy, and community structure.
+
+**Q: Who can join CIRC?**
+A: Students in relevant programmes at the School of Pure and Applied Sciences (SPAS) — Computer Science, Information Technology, Mathematics and Computer Science, and Statistics and Programming — can apply, alongside the wider MNUC student community. Applications are submitted at https://www.circ.co.ke/join and are reviewed on a rolling basis for each yearly intake.
+
+**Q: What communities does CIRC have?**
+A: CIRC has 7 communities: Programming, AI and Machine Learning, Data Science and Modelling, Internet of Things, Web Development, Web3 and Blockchain, and Networking and Cybersecurity. Each community runs its own workshops, projects, and events. Details: https://www.circ.co.ke/communities
+
+**Q: Where is CIRC located and how can it be contacted?**
+A: CIRC meets at Mama Ngina University College, Off Mutomo, Thangari Road, Gatundu South, Kiambu County, Kenya (geographic coordinates -1.037054, 36.923318). Email: circ@mnu.ac.ke. Contact page: https://www.circ.co.ke/contact. The club welcomes collaborations and partnerships.
+
+**Q: What has CIRC achieved?**
+A: CIRC (formerly the Computer Science Club) won the Best Club Award three consecutive times (award introduced 2023), produced the first SPAS Congressperson from Mama Ngina University College (Alamalik Kweyu, 2023), and in 2026 member Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year at the AES Awards — the only student and only developer in the category, finishing as second runner-up.
+
 Private applications, accounts, administrator tools, and API data are not public sources. Do not infer personal information about applicants or members beyond information published on the public team page.
