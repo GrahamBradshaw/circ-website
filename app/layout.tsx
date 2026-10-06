@@ -143,7 +143,7 @@ export default function RootLayout({
               "@type": "Organization",
               "@id": `${SITE_URL}/#organization`,
               name: "Computing Innovation and Research Club (CIRC MNUC)",
-              alternateName: ["CIRC MNUC", "CIRC", "Computer Science Club", "MNUC Computer Science Club"],
+              alternateName: ["CIRC MNUC", "CIRC MNU", "CIRC", "Computer Science Club", "Computer Science MNU", "MNUC Computer Science Club"],
               url: SITE_URL,
               logo: `${SITE_URL}/logo.webp`,
               email: "circ@mnu.ac.ke",

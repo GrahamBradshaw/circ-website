@@ -18,7 +18,7 @@ export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club | CIRC at Mama Ngina University College",
   description: "The Computing Innovation and Research Club (CIRC) is the official computing and Computer Science Club at Mama Ngina University College (MNU, MNUC) in Mutomo, Kenya. Explore 7 student technology communities, events, and projects.",
   path: "/",
-  keywords: ["computing innovation and research club", "Mama Ngina University", "MNU", "MNUC", "computer science club mama ngina", "computer science club mnu", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
+  keywords: ["computing innovation and research club", "CIRC", "CIRC MNUC", "CIRC MNU", "Mama Ngina University", "MNU", "MNUC", "Computer Science", "computer science club mama ngina", "computer science club mnu", "Computer Science MNU", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
 })
 
 export const revalidate = 300
@@ -52,7 +52,7 @@ export default async function HomePage() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     name: "CIRC MNUC",
-    alternateName: ["Computing Innovation and Research Club", "CIRC"],
+    alternateName: ["Computing Innovation and Research Club", "CIRC", "CIRC MNU", "Computer Science MNU"],
     url: `${SITE_URL}/`,
     publisher: { "@id": `${SITE_URL}/#organization` },
     about: { "@id": `${SITE_URL}/#organization` },
@@ -63,7 +63,7 @@ export default async function HomePage() {
     "@type": "Organization",
     "@id": `${SITE_URL}/#organization`,
     name: "Computing Innovation and Research Club (CIRC MNUC)",
-    alternateName: ["CIRC MNUC", "CIRC", "Computer Science Club", "Computer Science Club Mama Ngina", "MNUC Computer Science Club"],
+    alternateName: ["CIRC MNUC", "CIRC MNU", "CIRC", "Computer Science Club", "Computer Science MNU", "Computer Science Club Mama Ngina", "MNUC Computer Science Club"],
     url: SITE_URL,
     sameAs: socialProfiles.map(({ href }) => href),
   }

@@ -5,7 +5,7 @@ export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club History | CIRC MNUC at Mama Ngina University",
   description: "The Computing Innovation and Research Club (CIRC) at Mama Ngina University College grew from the Computer Science Club founded in 2022. Read the full CIRC MNUC story: founders, awards, and the 2026 rebrand.",
   path: "/history",
-  keywords: ["computing innovation and research club history", "CIRC MNUC history", "Computer Science Club MNUC", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "computer science club mama ngina", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
+  keywords: ["computing innovation and research club history", "CIRC MNUC history", "CIRC MNU", "Computer Science Club MNUC", "Computer Science MNU", "CIRC founding", "CIRC student leadership", "Mama Ngina University College club history", "Mama Ngina University history", "MNU club history", "computer science club mama ngina", "first SPAS Congressperson MNU", "Alamalik Kweyu"],
 })
 
 const milestones = [

@@ -55,7 +55,7 @@ export function TerminalHero() {
               </span>
               {/* Crawlable exact-match phrase for search engines; visually hidden so the design stays untouched. */}
               <span className="sr-only">
-                Computing Innovation and Research Club — CIRC MNUC, the Computer Science Club at Mama Ngina University College, Mama Ngina University, MNU, MNUC, Mutomo, Gatundu South, Kiambu County, Kenya.
+                Computing Innovation and Research Club (CIRC) — CIRC MNUC, CIRC MNU, the Computer Science Club and Computer Science MNU at Mama Ngina University College, studying Computer Science and technology, Mama Ngina University, MNU, MNUC, Mutomo, Gatundu South, Kiambu County, Kenya.
               </span>
             </h1>
 
