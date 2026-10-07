@@ -51,6 +51,7 @@ export const metadata: Metadata = {
     google: "HswHGpatHGOjDuhlScdSyICzJfWexOEs4CG-AlaR-G4",
     yandex: "d4a2b549f1955318",
     other: {
+      "yandex-verification": "d4a2b549f1955318",
       "msvalidate.01": "EDDB31F2840D76A7E103286A266CB6E3",
     },
   },
