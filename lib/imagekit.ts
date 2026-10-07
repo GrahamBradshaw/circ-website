@@ -6,13 +6,20 @@ import ImageKit from "imagekit"
 let imagekitInstance: InstanceType<typeof ImageKit> | null = null
 
 function getImageKit() {
-  if (!imagekitInstance) {
-    imagekitInstance = new ImageKit({
-      publicKey: process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY!,
-      privateKey: process.env.IMAGEKIT_PRIVATE_KEY!,
-      urlEndpoint: process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT!,
-    })
+  const publicKey = process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY?.trim()
+  const privateKey = process.env.IMAGEKIT_PRIVATE_KEY?.trim()
+  const urlEndpoint = process.env.NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT?.trim()
+
+  if (!publicKey || !privateKey || !urlEndpoint) {
+    throw new Error(
+      "ImageKit is not configured. Set NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY, IMAGEKIT_PRIVATE_KEY, and NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT."
+    )
   }
+
+  if (!imagekitInstance) {
+    imagekitInstance = new ImageKit({ publicKey, privateKey, urlEndpoint })
+  }
+
   return imagekitInstance
 }
 
