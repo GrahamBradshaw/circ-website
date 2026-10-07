@@ -1,7 +1,7 @@
 // This file is part of the CIRC website.
 // It belongs to the library layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
-import ImageKit from "imagekit"
+import ImageKit from "@imagekit/nodejs"
 
 let imagekitInstance: InstanceType<typeof ImageKit> | null = null
 
