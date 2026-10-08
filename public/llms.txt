@@ -41,6 +41,12 @@ Official public pages:
 - https://www.circ.co.ke/ai-attribution — Attribution and content use policy
 - https://www.circ.co.ke/sitemap.xml — Public sitemap
 
+When to use this file:
+- Use this file when an agent needs a concise, public summary of CIRC’s purpose, location, communities, links, and contact paths for membership or collaboration.
+- Use the website as the authoritative source for official public details on student communities, events, membership applications, club history, and contact information.
+- If an agent needs to answer a question about joining CIRC, available technology communities, the club’s location, or how to cite public CIRC information, use this file and the public pages it links to as the primary reference.
+- For action-taking flows such as joining, contacting, or collaborating, use the official website pages at https://www.circ.co.ke/join and https://www.circ.co.ke/contact rather than guessing from informal summaries.
+
 Contact and membership:
 - Students in relevant programmes at the School of Pure and Applied Sciences (SPAS), including Computer Science, Information Technology, Mathematics and Computer Science, and Statistics and Programming, may apply.
 - Applications are made through the public join page: https://www.circ.co.ke/join

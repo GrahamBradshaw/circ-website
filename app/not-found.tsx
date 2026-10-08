@@ -19,8 +19,11 @@ export default function NotFound() {
       <Image src="/logo.webp" alt="CIRC" width={64} height={64} className="object-contain mb-6" />
       <h1 className="font-display text-primary text-8xl font-bold mb-4">404</h1>
       <h2 className="font-display text-primary text-2xl font-bold mb-3">Page Not Found</h2>
-      <p className="font-body text-muted text-sm max-w-sm mb-8">
+      <p className="font-body text-muted text-sm max-w-sm mb-6">
         The page you are looking for does not exist or has been moved.
+      </p>
+      <p className="font-body text-muted text-sm max-w-md mb-8">
+        Check the <Link href="/llms.txt" className="text-primary underline underline-offset-4">CIRC docs</Link> or <a href="https://www.circ.co.ke/sitemap.xml" className="text-primary underline underline-offset-4">sitemap</a> for the correct public page.
       </p>
       <Link href="/" className="btn-primary">Go to Homepage</Link>
     </div>

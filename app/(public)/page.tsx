@@ -83,6 +83,24 @@ export default async function HomePage() {
     alternateName: ["CIRC MNUC", "CIRC MNU", "CIRC", "Computer Science Club", "Computer Science MNU", "Computer Science Club Mama Ngina", "MNUC Computer Science Club"],
     url: SITE_URL,
     sameAs: socialProfiles.map(({ href }) => href),
+    email: "circ@mnu.ac.ke",
+    telephone: "+254 700 000 000",
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "membership and general enquiries",
+      email: "circ@mnu.ac.ke",
+      telephone: "+254 700 000 000",
+      areaServed: "KE",
+      availableLanguage: ["English"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "Along Thangari Road, Mutomo",
+      addressLocality: "Gatundu South",
+      addressRegion: "Kiambu County",
+      postalCode: "01030",
+      addressCountry: "KE",
+    },
   }
   const faqData = {
     "@context": "https://schema.org",
@@ -154,6 +172,15 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
+      <section aria-label="CIRC overview" className="mx-auto max-w-7xl px-6 pb-6 pt-10 md:pt-14">
+        <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-orange">Mama Ngina University College</p>
+        <h1 className="max-w-4xl font-display text-3xl font-bold tracking-[-0.06em] text-primary dark:text-white md:text-5xl">
+          Learn, build, and research with CIRC.
+        </h1>
+        <p className="mt-4 max-w-3xl text-base leading-8 text-main dark:text-gray-200 md:text-lg">
+          CIRC MNUC brings together students across computing, software engineering, AI, data science, cybersecurity, and emerging technologies. Members learn together through practical workshops, collaborative projects, technical communities, and events that turn classroom theory into real-world skills and research experience.
+        </p>
+      </section>
       <TerminalHero />
 
       <section
