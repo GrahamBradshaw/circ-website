@@ -21,10 +21,10 @@ import { formatRole } from "@/lib/utils"
 
 // This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
-  title: "Computing Innovation and Research Club | CIRC at Mama Ngina University College",
-  description: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya — student technology, research, software, AI, data science, and innovation community near Thika Road and connected to Kenyatta University.",
+  title: "CIRC MNUC | Computing Innovation and Research Club",
+  description: "Computing Innovation and Research Club (CIRC MNUC) is the student technology, research, software, AI, data science, and innovation community at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya.",
   path: "/",
-  keywords: ["computing innovation and research club", "CIRC", "CIRC MNUC", "CIRC MNU", "Mama Ngina University", "MNU", "MNUC", "Computer Science", "computer science club mama ngina", "computer science club mnu", "Computer Science MNU", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
+  keywords: ["CIRC MNUC", "Computing Innovation and Research Club", "CIRC", "CIRC MNU", "computing innovation and research club", "Mama Ngina University", "MNU", "MNUC", "Computer Science", "computer science club mama ngina", "computer science club mnu", "Computer Science MNU", "SPAS", "School of Pure and Applied Sciences", "software development", "AI and machine learning", "data science", "cybersecurity", "Web3", "Internet of Things", "student technology club Kenya"],
 })
 
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
@@ -68,12 +68,16 @@ export default async function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
-    name: "CIRC MNUC",
-    alternateName: ["Computing Innovation and Research Club", "CIRC", "CIRC MNU", "Computer Science MNU"],
+    name: "Computing Innovation and Research Club (CIRC MNUC)",
+    alternateName: ["CIRC MNUC", "CIRC MNU", "CIRC", "Computing Innovation and Research Club", "Computer Science MNU"],
     url: `${SITE_URL}/`,
     publisher: { "@id": `${SITE_URL}/#organization` },
     about: { "@id": `${SITE_URL}/#organization` },
     inLanguage: "en-KE",
+    brand: {
+      "@type": "Brand",
+      name: "Computing Innovation and Research Club (CIRC MNUC)",
+    },
   }
   const organizationData = {
     "@context": "https://schema.org",
@@ -175,10 +179,10 @@ export default async function HomePage() {
       <section aria-label="CIRC overview" className="mx-auto max-w-7xl px-6 pb-6 pt-10 md:pt-14">
         <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-orange">Mama Ngina University College</p>
         <h1 className="max-w-4xl font-display text-3xl font-bold tracking-[-0.06em] text-primary dark:text-white md:text-5xl">
-          Learn, build, and research with CIRC.
+          Computing Innovation and Research Club (CIRC MNUC)
         </h1>
         <p className="mt-4 max-w-3xl text-base leading-8 text-main dark:text-gray-200 md:text-lg">
-          CIRC MNUC brings together students across computing, software engineering, AI, data science, cybersecurity, and emerging technologies. Members learn together through practical workshops, collaborative projects, technical communities, and events that turn classroom theory into real-world skills and research experience.
+          CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College. We bring students together across computing, software engineering, AI, data science, cybersecurity, and emerging technologies through practical workshops, collaborative projects, technical communities, and research-focused events.
         </p>
       </section>
       <TerminalHero />

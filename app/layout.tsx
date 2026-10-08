@@ -23,26 +23,28 @@ const inter = Inter({
 // This is the global metadata for the whole application.
 // Next.js reads this object to set the default title, description, social cards, and SEO tags.
 // This constant metadata stores shared values used by this file so the logic stays easier to follow.
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "CIRC MNUC | Computing Innovation and Research Club",
+    default: "Computing Innovation and Research Club (CIRC MNUC)",
     template: "%s",
   },
-  description: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya — technology, innovation, research, AI, coding, and computing club for students near Thika Road, Kenyatta University, JKUAT, and Kiambu County.",
+  description: "Computing Innovation and Research Club (CIRC MNUC) is the student innovation, coding, AI, research, and technology community at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya.",
   openGraph: {
     type: "website",
     locale: "en_KE",
-    siteName: "CIRC MNUC",
-    title: "CIRC MNUC | Computing Innovation and Research Club",
-    description: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya — student innovation, coding, AI, and research community near Thika Road, Kenyatta University, JKUAT, and Kiambu County.",
+    siteName: "Computing Innovation and Research Club (CIRC MNUC)",
+    title: "Computing Innovation and Research Club (CIRC MNUC)",
+    description: "Computing Innovation and Research Club (CIRC MNUC) is the student innovation, coding, AI, research, and technology community at Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya.",
     url: SITE_URL,
-    images: [{ url: `${SITE_URL}/android-chrome-512x512.png`, alt: "CIRC at Mama Ngina University College" }],
+    images: [{ url: `${SITE_URL}/android-chrome-512x512.png`, alt: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Computing Innovation and Research Club (CIRC MNUC) at Mama Ngina University College",
-    description: "CIRC MNUC is a student technology, innovation, and research club at Mama Ngina University College in Kiambu County, Kenya — near Thika Road and connected to Kenyatta University.",
+    title: "Computing Innovation and Research Club (CIRC MNUC)",
+    description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College in Kiambu County, Kenya.",
     images: [`${SITE_URL}/android-chrome-512x512.png`],
   },
   alternates: { canonical: SITE_URL },

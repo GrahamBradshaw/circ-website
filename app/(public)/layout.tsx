@@ -4,6 +4,8 @@
 import { Navbar } from "@/components/public/navbar"
 import { Footer } from "@/components/public/footer"
 
+export const dynamic = "force-dynamic"
+
 // This function PublicLayout handles the main work in this file and explains what this logic is doing in simple English.
 export default function PublicLayout({
   children,
