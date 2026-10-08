@@ -2,13 +2,14 @@
 // It belongs to the library layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
 import { z } from "zod"
+import { sanitizeRichText } from "@/lib/sanitize"
 
 // These schemas are used to validate form input before it is saved to the database.
 // They help catch bad values like empty fields, invalid URLs, or missing required data.
 // This constant eventSchema stores shared values used by this file so the logic stays easier to follow.
 export const eventSchema = z.object({
   title: z.string().min(1, "Title is required"),
-  description: z.string().min(1, "Description is required"),
+  description: z.string().transform((value) => sanitizeRichText(value)).refine((value) => value.length > 0, "Description is required"),
   date: z.coerce.date(),
   venue: z.string().min(1, "Venue is required"),
   type: z.enum(["HACKATHON", "WORKSHOP", "TALK", "MENTORSHIP", "RESEARCH", "OTHER"]),

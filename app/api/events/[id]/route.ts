@@ -7,6 +7,7 @@ import { invalidatePublicContentCache } from "@/lib/redis-cache"
 import { requireAdmin } from "@/lib/auth"
 import { revalidatePath } from "next/cache"
 import { notifyIndexNow } from "@/lib/indexnow"
+import { sanitizeRichText } from "@/lib/sanitize"
 
 // This function GET handles the main work in this file and explains what this logic is doing in simple English.
 export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
@@ -28,6 +29,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
     if (error) return error
 
     const body = await req.json()
+
+    if (body.description && typeof body.description === "string") {
+      body.description = sanitizeRichText(body.description)
+    }
 
     // Convert date string to Date object if present
     if (body.date && typeof body.date === "string") {

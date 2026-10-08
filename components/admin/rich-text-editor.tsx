@@ -77,10 +77,26 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
     },
     editorProps: {
       attributes: {
-        class: "prose prose-slate max-w-none min-h-[250px] p-6 focus:outline-none font-body text-sm leading-relaxed"
+        class: "prose prose-slate max-w-none min-h-[250px] p-6 focus:outline-none font-body text-sm leading-relaxed text-main"
       }
     }
   })
+
+  const sanitizeUrl = (rawUrl: string) => {
+    const value = rawUrl.trim()
+    if (!value) return ""
+
+    try {
+      const url = new URL(value)
+      if (["http:", "https:", "mailto:", "tel:"].includes(url.protocol)) {
+        return url.toString()
+      }
+      return ""
+    } catch {
+      if (/^(mailto:|tel:)/i.test(value)) return value
+      return ""
+    }
+  }
 
   const setLink = useCallback(() => {
     if (!editor) return null
@@ -93,15 +109,27 @@ export function RichTextEditor({ value, onChange }: RichTextEditorProps) {
       return
     }
 
-    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run()
+    const safeUrl = sanitizeUrl(url)
+    if (!safeUrl) {
+      window.alert("Only http, https, mailto, and tel links are allowed.")
+      return
+    }
+
+    editor.chain().focus().extendMarkRange("link").setLink({ href: safeUrl }).run()
   }, [editor])
 
   const addImage = useCallback(() => {
     if (!editor) return null
-    const url = window.prompt("Image URL")
-    if (url) {
-      editor.chain().focus().setImage({ src: url }).run()
+    const rawUrl = window.prompt("Image URL")
+    if (!rawUrl) return
+
+    const safeUrl = sanitizeUrl(rawUrl)
+    if (!safeUrl) {
+      window.alert("Only http and https image URLs are allowed.")
+      return
     }
+
+    editor.chain().focus().setImage({ src: safeUrl }).run()
   }, [editor])
 
   if (!editor) return null

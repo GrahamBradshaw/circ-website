@@ -20,7 +20,7 @@ interface EventFormProps {
   event?: any
 }
 
-const inputClass = "w-full font-body text-sm border border-border rounded-lg px-4 py-2.5 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-surface"
+const inputClass = "w-full font-body text-sm text-main placeholder:text-muted border border-border rounded-lg px-4 py-2.5 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-surface"
 const labelClass = "text-[10px] font-bold text-muted uppercase tracking-widest pl-1 mb-1.5 block"
 const sectionClass = "bg-surface rounded-xl border border-border p-6"
 

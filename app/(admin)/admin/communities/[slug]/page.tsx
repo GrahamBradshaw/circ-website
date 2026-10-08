@@ -1,7 +1,7 @@
 // This file is part of the CIRC website.
 // It belongs to the app layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
-import { prisma } from "@/lib/prisma"
+import { prisma, safeDbQuery } from "@/lib/prisma"
 import { notFound } from "next/navigation"
 import { CommunityForm } from "@/components/admin/communities/community-form"
 import Link from "next/link"
@@ -14,17 +14,17 @@ export default async function AdminEditCommunityPage({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  const community = await prisma.community.findUnique({
+  const community = await safeDbQuery(() => prisma.community.findUnique({
     where: { slug },
-  })
+  }), null)
 
   if (!community) {
     notFound()
   }
 
-  const teamMembers = await prisma.teamMember.findMany({
+  const teamMembers = await safeDbQuery(() => prisma.teamMember.findMany({
     orderBy: { name: "asc" },
-  })
+  }), [])
 
   return (
     <div className="space-y-10">

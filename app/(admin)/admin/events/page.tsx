@@ -1,18 +1,18 @@
 // This file is part of the CIRC website.
 // It belongs to the app layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
-import { prisma } from "@/lib/prisma"
+import { prisma, safeDbQuery } from "@/lib/prisma"
 import { EventsTable } from "@/components/admin/events-table"
 import Link from "next/link"
 import { Plus } from "lucide-react"
 
 // This function EventsPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function EventsPage() {
-  const events = await prisma.event.findMany({
+  const events = await safeDbQuery(() => prisma.event.findMany({
     orderBy: { date: "desc" },
-  })
+  }), [])
 
-  const serialized = events.map(e => ({
+  const serialized = events.map((e) => ({
     ...e,
     date: e.date.toISOString(),
     createdAt: e.createdAt.toISOString(),

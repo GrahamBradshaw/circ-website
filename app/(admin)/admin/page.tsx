@@ -1,7 +1,7 @@
 // This file is part of the CIRC website.
 // It belongs to the app layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
-import { prisma } from "@/lib/prisma"
+import { prisma, safeDbQuery } from "@/lib/prisma"
 import Link from "next/link"
 import { 
   ClipboardList, 
@@ -14,6 +14,9 @@ import {
 import { format } from "date-fns"
 import { cn } from "@/lib/utils"
 
+const emptyAppData = [] as const
+const emptyEventData = [] as const
+
 // This function AdminDashboard handles the main work in this file and explains what this logic is doing in simple English.
 export default async function AdminDashboard() {
   const [
@@ -24,19 +27,19 @@ export default async function AdminDashboard() {
     recentApps,
     nextEvents
   ] = await Promise.all([
-    prisma.application.count(),
-    prisma.event.count({ where: { date: { gte: new Date() } } }),
-    prisma.teamMember.count(),
-    prisma.galleryImage.count(),
-    prisma.application.findMany({
+    safeDbQuery(() => prisma.application.count(), 0),
+    safeDbQuery(() => prisma.event.count({ where: { date: { gte: new Date() } } }), 0),
+    safeDbQuery(() => prisma.teamMember.count(), 0),
+    safeDbQuery(() => prisma.galleryImage.count(), 0),
+    safeDbQuery(() => prisma.application.findMany({
       take: 5,
       orderBy: { submittedAt: "desc" },
-    }),
-    prisma.event.findMany({
+    }), []),
+    safeDbQuery(() => prisma.event.findMany({
       where: { date: { gte: new Date() } },
       take: 3,
       orderBy: { date: "asc" },
-    })
+    }), [])
   ])
 
   const stats = [

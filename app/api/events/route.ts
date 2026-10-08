@@ -9,6 +9,7 @@ import { publicSuccessResponse, successResponse, errorResponse } from "@/lib/api
 import { requireAdmin } from "@/lib/auth"
 import { eventSchema } from "@/lib/validators"
 import { notifyIndexNow } from "@/lib/indexnow"
+import { sanitizeRichText } from "@/lib/sanitize"
 
 // This function GET handles the main work in this file and explains what this logic is doing in simple English.
 export async function GET(req: NextRequest) {
@@ -44,7 +45,10 @@ export async function POST(req: NextRequest) {
     const { error } = await requireAdmin()
     if (error) return error
     const body = await req.json()
-    const validatedData = eventSchema.parse(body)
+    const validatedData = eventSchema.parse({
+      ...body,
+      description: sanitizeRichText(body.description ?? ""),
+    })
 
     const event = await prisma.event.create({
       data: validatedData,

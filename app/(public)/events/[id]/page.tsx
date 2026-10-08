@@ -3,6 +3,7 @@
 // Read it from top to bottom to understand how the page, component, or data flow works.
 import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
+import { sanitizeRichText } from "@/lib/sanitize"
 import { notFound } from "next/navigation"
 import Image from "next/image"
 import Link from "next/link"
@@ -64,6 +65,7 @@ export default async function EventDetailPage({
     orderBy: { date: "asc" },
   }), [])
 
+  const safeDescription = sanitizeRichText(event.description)
   const eventUrl = `${SITE_URL}/events/${encodeURIComponent(id)}`
   const structuredData = {
     "@context": "https://schema.org",
@@ -141,7 +143,7 @@ export default async function EventDetailPage({
 
               <div
                 className="prose prose-sm dark:prose-invert max-w-none font-body text-main dark:text-gray-200 leading-relaxed [&>p]:mb-4 [&>h2]:font-display [&>h2]:text-primary [&>h2]:dark:text-white [&>ul]:list-disc [&>ul]:pl-5 [&>ol]:list-decimal [&>ol]:pl-5"
-                dangerouslySetInnerHTML={{ __html: event.description }}
+                dangerouslySetInnerHTML={{ __html: safeDescription }}
               />
 
               {event.gallery.length > 0 && (

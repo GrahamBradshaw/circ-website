@@ -2,15 +2,15 @@
 // It belongs to the app layer and contains the logic for this feature.
 // Read it from top to bottom to understand how the page, component, or data flow works.
 import { notFound } from "next/navigation"
-import { prisma } from "@/lib/prisma"
+import { prisma, safeDbQuery } from "@/lib/prisma"
 import { TeamForm } from "@/components/admin/forms/team-form"
 
 // This function EditTeamMemberPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function EditTeamMemberPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
-  const member = await prisma.teamMember.findUnique({
+  const member = await safeDbQuery(() => prisma.teamMember.findUnique({
     where: { id },
-  })
+  }), null)
 
   if (!member) notFound()
 
