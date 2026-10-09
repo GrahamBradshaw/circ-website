@@ -47,7 +47,6 @@ export const metadata: Metadata = {
     description: "CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College in Kiambu County, Kenya.",
     images: [`${SITE_URL}/android-chrome-512x512.png`],
   },
-  alternates: { canonical: SITE_URL },
   applicationName: "CIRC",
   verification: {
     google: "HswHGpatHGOjDuhlScdSyICzJfWexOEs4CG-AlaR-G4",
