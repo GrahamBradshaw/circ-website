@@ -36,6 +36,7 @@ const knownPublicPaths = new Set([
   "/terms",
   "/cookies",
   "/llms.txt",
+  "/ads.txt",
 ])
 
 function markdownResponse(body: string, status: number) {

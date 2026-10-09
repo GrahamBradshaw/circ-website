@@ -26,6 +26,7 @@ export default function robots(): MetadataRoute.Robots {
     "/terms",
     "/cookies",
     "/llms.txt",
+    "/ads.txt",
   ]
 
   const disallow = [
