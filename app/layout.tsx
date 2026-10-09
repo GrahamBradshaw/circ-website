@@ -3,7 +3,6 @@
 // Read it from top to bottom to understand how the page, component, or data flow works.
 import type { Metadata } from "next"
 import Script from "next/script"
-import { GoogleTagManager } from "@next/third-parties/google"
 import { Suspense } from "react"
 import { Analytics } from "@/components/analytics"
 import { SITE_URL } from "@/lib/seo"
@@ -170,6 +169,11 @@ export default function RootLayout({
       <head>
           <meta name="google-adsense-account" content="ca-pub-6830260548020150" />
           <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6830260548020150" crossOrigin="anonymous"></script>
+          {/* Preconnect to common third-party origins to reduce connection latency */}
+          <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://mc.yandex.ru" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://www.clarity.ms" crossOrigin="anonymous" />
+          <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
         </head>
       <body className="font-body antialiased">
         <noscript>
@@ -181,7 +185,10 @@ export default function RootLayout({
             title="Google Tag Manager"
           />
         </noscript>
-        <GoogleTagManager gtmId="GTM-WPQDDGS8" />
+        {/* Lazy-load Google Tag Manager to keep the critical path fast. This runs during idle time. */}
+        <Script id="gtm-loader" strategy="lazyOnload" dangerouslySetInnerHTML={{
+          __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s);j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WPQDDGS8');`
+        }} />
         <Script
           id="circ-theme-init"
           strategy="afterInteractive"
