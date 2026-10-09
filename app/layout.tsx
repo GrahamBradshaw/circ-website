@@ -167,15 +167,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning className={inter.variable}>
-      <body className="font-body antialiased">
-        <head>
+      <head>
           <meta name="google-adsense-account" content="ca-pub-6830260548020150" />
-          <Script
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6830260548020150"
-            strategy="afterInteractive"
-            crossOrigin="anonymous"
-          />
+          <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6830260548020150" crossOrigin="anonymous"></script>
         </head>
+      <body className="font-body antialiased">
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-WPQDDGS8"
