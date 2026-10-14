@@ -315,7 +315,14 @@ export function createPageMetadata({
     description: pageDescription,
     keywords: pageKeywords,
     robots: noIndex
-      ? { index: false, follow: true }
+      ? {
+          index: false,
+          follow: false,
+          googleBot: {
+            index: false,
+            follow: false,
+          },
+        }
       : {
           index: true,
           follow: true,

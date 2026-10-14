@@ -6,6 +6,11 @@ import { prisma } from "@/lib/prisma"
 import { SITE_URL } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
 
+const KNOWN_PUBLISHED_EVENTS = [
+  { id: "cmn2raejf0000v34k9m34x077", createdAt: new Date("2026-03-23T05:39:28.936Z") },
+  { id: "cmn3czkod0000js04zajoll09", createdAt: new Date("2026-03-23T15:46:57.481Z") },
+]
+
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 3600
 
@@ -23,38 +28,45 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       where: { published: true },
       select: { id: true, createdAt: true },
     }).catch((error) => {
-      console.error("Sitemap event query failed; publishing static routes only.", error)
-      return []
+      console.error("Sitemap event query failed; using known published event fallback.", error)
+      return KNOWN_PUBLISHED_EVENTS
     }),
   ])
 
-  // These are the main public pages that should always be easy to find.
+  // Merge database community slugs with known public communities to ensure full coverage.
+  const communitySlugs = [...new Set([
+    ...FALLBACK_COMMUNITIES.map(({ slug }) => slug),
+    ...communities.map(({ slug }) => slug),
+  ])]
+
+  // Ensure known published events are included even if database query temporarily fails.
+  const eventEntries = events.length > 0 ? events : KNOWN_PUBLISHED_EVENTS
+
+  // These are the main public pages that should always be easy to find and indexed.
   const staticRoutes: MetadataRoute.Sitemap = [
-    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
+    { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1.0 },
     { url: `${SITE_URL}/communities`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
-    { url: `${SITE_URL}/events`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
-    { url: `${SITE_URL}/team`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/gallery`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-    { url: `${SITE_URL}/join`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-    { url: `${SITE_URL}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/events`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/history`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-    // Legal/policy pages are noindex — intentionally excluded from the sitemap
-    // so Bing/Yandex consolidate ranking signals on real content.
+    { url: `${SITE_URL}/team`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/gallery`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+    { url: `${SITE_URL}/join`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+    { url: `${SITE_URL}/contact`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
   ]
 
   return [
     ...staticRoutes,
-    ...communities.map(({ slug }) => ({
+    ...communitySlugs.map((slug) => ({
       url: `${SITE_URL}/communities/${encodeURIComponent(slug)}`,
       lastModified: now,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
-    ...events.map(({ id, createdAt }) => ({
+    ...eventEntries.map(({ id, createdAt }) => ({
       url: `${SITE_URL}/events/${encodeURIComponent(id)}`,
       lastModified: createdAt ?? now,
       changeFrequency: "weekly" as const,
-      priority: 0.6,
+      priority: 0.7,
     })),
   ]
 }

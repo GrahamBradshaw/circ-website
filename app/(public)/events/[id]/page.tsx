@@ -15,6 +15,26 @@ import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
 
+const FALLBACK_EVENT_IDS = [
+  "cmn2raejf0000v34k9m34x077",
+  "cmn3czkod0000js04zajoll09",
+]
+
+// Pre-render event detail routes so crawlers receive public HTML on first visit.
+export async function generateStaticParams() {
+  try {
+    const events = await prisma.event.findMany({
+      where: { published: true },
+      select: { id: true },
+    })
+    const ids = new Set([...FALLBACK_EVENT_IDS, ...events.map(({ id }) => id)])
+    return [...ids].map((id) => ({ id }))
+  } catch (error) {
+    console.error("Event route generation failed; using known public events.", error)
+    return FALLBACK_EVENT_IDS.map((id) => ({ id }))
+  }
+}
+
 // This function generateMetadata handles the main work in this file and explains what this logic is doing in simple English.
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
