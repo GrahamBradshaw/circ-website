@@ -211,12 +211,13 @@ export function EventForm({ event }: EventFormProps) {
               </div>
 
               <div>
-                <label className={labelClass}>Registration Link</label>
+                <label className={labelClass}>Registration Link (Optional)</label>
                 <input 
                   {...register("regLink")}
-                  className={inputClass}
-                  placeholder="https://forms.gle/..."
+                  className={cn(inputClass, errors.regLink && "border-red-400 focus:border-red-500 focus:ring-red-200")}
+                  placeholder="https://forms.gle/... (optional)"
                 />
+                {errors.regLink && <p className="text-[11px] text-red-500 font-bold pl-1 mt-1">{errors.regLink.message as string}</p>}
               </div>
             </div>
           </div>

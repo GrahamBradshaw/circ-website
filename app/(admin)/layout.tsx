@@ -3,7 +3,7 @@
 // Read it from top to bottom to understand how the page, component, or data flow works.
 import type { Metadata } from "next"
 import { redirect } from "next/navigation"
-import { auth } from "@clerk/nextjs/server"
+import { auth, currentUser } from "@clerk/nextjs/server"
 import { ClerkProvider } from "@clerk/nextjs"
 import { Sidebar } from "@/components/admin/sidebar"
 import { Topbar } from "@/components/admin/topbar"
@@ -30,7 +30,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   const adminOrgSlug = process.env.ADMIN_ORG_SLUG ?? "circ-admin-1774191169338462679"
-  if (orgSlug !== adminOrgSlug) {
+  const isMember = orgSlug === adminOrgSlug
+  const user = await currentUser()
+  const hasAdminRole = user?.publicMetadata?.role === "admin"
+
+  if (!isMember && !hasAdminRole) {
     redirect("/?error=unauthorized")
   }
 

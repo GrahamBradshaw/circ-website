@@ -51,7 +51,10 @@ export async function POST(req: NextRequest) {
     })
 
     const event = await prisma.event.create({
-      data: validatedData,
+      data: {
+        ...validatedData,
+        regLink: validatedData.regLink || null,
+      },
     })
     await invalidatePublicContentCache()
 

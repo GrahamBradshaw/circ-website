@@ -39,6 +39,10 @@ export async function PATCH(req: NextRequest, { params }: { params: Promise<{ id
       body.date = new Date(body.date)
     }
 
+    if (body.regLink !== undefined) {
+      body.regLink = body.regLink || null
+    }
+
     const event = await prisma.event.update({
       where: { id },
       data: body,

@@ -5,39 +5,46 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { useOrganizationList, useAuth } from "@clerk/nextjs"
+import { useOrganizationList, useAuth, useUser } from "@clerk/nextjs"
 
 // This function AdminEntryPage handles the main work in this file and explains what this logic is doing in simple English.
 export default function AdminEntryPage() {
   const { isSignedIn, isLoaded } = useAuth()
+  const { user, isLoaded: isUserLoaded } = useUser()
   const { userMemberships, setActive } = useOrganizationList({ userMemberships: true })
   const router = useRouter()
-  const adminOrgSlug = "circ-admin-1774191169338462679"
+  const adminOrgSlug = process.env.NEXT_PUBLIC_ADMIN_ORG_SLUG ?? "circ-admin-1774191169338462679"
 
   useEffect(() => {
-    if (!isLoaded) return
+    if (!isLoaded || !isUserLoaded) return
+    if (userMemberships.isLoading) return
 
     if (!isSignedIn) {
       router.push("/sign-in")
       return
     }
 
+    // Path 1: user has the admin role in their metadata — go straight in.
+    if (user?.publicMetadata?.role === "admin") {
+      router.push("/admin")
+      return
+    }
+
+    // Path 2: user is an org member — activate the org first so orgSlug is set.
     const adminMembership = userMemberships.data?.find(
       (m) => m.organization.slug === adminOrgSlug
     )
 
-    if (!adminMembership) {
-      router.push("/?error=unauthorized")
+    if (adminMembership && setActive) {
+      setActive({ organization: adminMembership.organization.id }).then(() => {
+        router.push("/admin")
+      })
       return
     }
 
-    // Set the active organization so orgSlug is available to later requests.
-    if (setActive) {
-        setActive({ organization: adminMembership.organization.id }).then(() => {
-          router.push("/admin")
-        })
-    }
-  }, [isLoaded, isSignedIn, userMemberships.data, setActive, router])
+    // Neither condition met — deny access.
+    router.push("/?error=unauthorized")
+  }, [isLoaded, isUserLoaded, isSignedIn, user, userMemberships.isLoading, userMemberships.data, setActive, router, adminOrgSlug])
 
   return (
     <div className="min-h-screen bg-surface-2 flex items-center justify-center">

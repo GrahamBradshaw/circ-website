@@ -176,15 +176,6 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData).replace(/</g, "\\u003c") }}
       />
       <Suspense><UnauthorizedToast /></Suspense>
-      <section aria-label="CIRC overview" className="mx-auto max-w-7xl px-6 pb-6 pt-10 md:pt-14">
-        <p className="mb-3 font-mono text-[10px] font-semibold uppercase tracking-[0.2em] text-accent-orange">Mama Ngina University College</p>
-        <h1 className="max-w-4xl font-display text-3xl font-bold tracking-[-0.06em] text-primary dark:text-white md:text-5xl">
-          Computing Innovation and Research Club (CIRC MNUC)
-        </h1>
-        <p className="mt-4 max-w-3xl text-base leading-8 text-main dark:text-gray-200 md:text-lg">
-          CIRC MNUC is the Computing Innovation and Research Club at Mama Ngina University College. We bring students together across computing, software engineering, AI, data science, cybersecurity, and emerging technologies through practical workshops, collaborative projects, technical communities, and research-focused events.
-        </p>
-      </section>
       <TerminalHero />
 
       <section

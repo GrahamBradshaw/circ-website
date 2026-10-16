@@ -10,6 +10,7 @@ import Link from "next/link"
 import { format } from "date-fns"
 import { Calendar, MapPin, Tag, ExternalLink } from "lucide-react"
 import { PageHero } from "@/components/public/page-hero"
+import { EventCard } from "@/components/public/events/event-card"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
@@ -122,6 +123,8 @@ export default async function EventDetailPage({
           }) + " · " + event.venue
         }
         size="md"
+        image={event.coverImage}
+        imageAlt={event.title}
       />
 
       {/* Main Content Area */}
@@ -130,7 +133,21 @@ export default async function EventDetailPage({
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
             
             {/* Left: Event Details */}
-            <div className="lg:col-span-8 space-y-10 bg-white dark:bg-[#121214] rounded-3xl p-8 sm:p-12 border border-primary/10 dark:border-white/10 shadow-[0_8px_30px_rgba(15,36,96,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+            <div className="lg:col-span-8 space-y-10 bg-white dark:bg-[#121214] rounded-3xl p-6 sm:p-10 lg:p-12 border border-primary/10 dark:border-white/10 shadow-[0_8px_30px_rgba(15,36,96,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
+              {/* Featured Uploaded Cover Image Banner */}
+              {event.coverImage && (
+                <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-primary/10 dark:border-white/10 shadow-lg">
+                  <Image
+                    src={event.coverImage}
+                    alt={event.title}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 850px"
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               <div className="flex flex-wrap items-center gap-6 lg:gap-10 pb-8 border-b border-primary/10 dark:border-white/10">
                 <div className="flex items-center gap-3.5 group">
                   <div className="w-12 h-12 rounded-2xl bg-surface-2 dark:bg-[#1A1A1E] border border-primary/10 dark:border-white/10 flex items-center justify-center text-accent-orange flex-shrink-0">
@@ -226,23 +243,9 @@ export default async function EventDetailPage({
               Explore More
             </p>
             <h2 className="font-display text-primary dark:text-white text-3xl font-bold mb-10">Related Events</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedEvents.map((related) => (
-                <Link 
-                  key={related.id} 
-                  href={`/events/${related.id}`}
-                  className="group bg-white dark:bg-[#121214] rounded-3xl border border-primary/10 dark:border-white/10 overflow-hidden shadow-[0_8px_30px_rgba(15,36,96,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] hover:shadow-[0_20px_45px_rgba(15,36,96,0.1)] dark:hover:shadow-[0_20px_45px_rgba(0,0,0,0.8)] hover:-translate-y-1 transition-all duration-300 p-6 flex flex-col"
-                >
-                  <div className="relative h-44 -mx-6 -mt-6 mb-5 overflow-hidden">
-                    <Image src={related.coverImage} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 400px" className="object-cover group-hover:scale-105 transition-transform duration-500" alt={related.title} />
-                  </div>
-                  <p className="font-mono text-accent-orange text-[10px] font-bold uppercase tracking-wider mb-2">
-                    {format(new Date(related.date), "MMM d, yyyy")}
-                  </p>
-                  <h4 className="font-display font-bold text-primary dark:text-white group-hover:text-accent-orange transition-colors line-clamp-2 text-lg">
-                    {related.title}
-                  </h4>
-                </Link>
+                <EventCard key={related.id} {...related} />
               ))}
             </div>
           </div>

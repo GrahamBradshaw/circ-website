@@ -14,7 +14,7 @@ export const eventSchema = z.object({
   venue: z.string().min(1, "Venue is required"),
   type: z.enum(["HACKATHON", "WORKSHOP", "TALK", "MENTORSHIP", "RESEARCH", "OTHER"]),
   coverImage: z.string().url("Valid cover image URL is required"),
-  regLink: z.string().url("Valid registration link is required").optional().nullable(),
+  regLink: z.string().url("Valid registration link is required").nullish().or(z.literal("")),
   published: z.boolean().default(false),
 })
 
