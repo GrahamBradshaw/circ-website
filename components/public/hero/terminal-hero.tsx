@@ -20,7 +20,7 @@ const HERO_SLIDES = [
 const STATS = [
   { value: 400, label: "Active Members", suffix: "+" },
   { value: 30, label: "Events Hosted", suffix: "+" },
-  { value: 7, label: "Communities", suffix: "" },
+  { value: 8, label: "Communities", suffix: "" },
   { value: 30, label: "Projects Built", suffix: "+" },
   { value: 2022, label: "Founded", suffix: "" },
   { value: 3, label: "Club awards", suffix: "" },

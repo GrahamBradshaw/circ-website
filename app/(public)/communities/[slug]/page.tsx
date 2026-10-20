@@ -42,7 +42,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return createPageMetadata({
     title: `${community.name} Community | CIRC at Mama Ngina University`,
-    description: plainTextDescription(`${community.description} Join the ${community.name} community — one of 7 student groups in the Computing Innovation and Research Club at Mama Ngina University College.`),
+    description: plainTextDescription(`${community.description} Join the ${community.name} community — one of 8 student groups in the Computing Innovation and Research Club at Mama Ngina University College.`),
     path: `/communities/${encodeURIComponent(slug)}`,
     keywords: [...community.focusTags, `${community.name} community`, `${community.name} Mama Ngina`, "CIRC communities", "MNUC technology community", "SPAS computing"],
     image: communityHeroImage(slug),
@@ -60,6 +60,7 @@ const COMMUNITY_HERO_IMAGES: Record<string, string> = {
   "web3-blockchain": "/hero/hero-bg-5.1af39077.webp",
   programming: "/hero/hero-bg-1.0239ec49.webp",
   "networking-cybersecurity": "/hero/hero-bg-3.73468c4c.webp",
+  gdg: "/hero/hero-bg-2.90cbe47a.webp",
 }
 
 function communityHeroImage(slug: string): string {
@@ -169,7 +170,7 @@ export default async function CommunityDetailPage({
               <div className="space-y-4 pt-6 border-t border-primary/10 dark:border-white/10">
                 <h3 className="font-display text-primary dark:text-white text-2xl font-bold">Part of CIRC</h3>
                 <p className="font-body text-main dark:text-gray-200 text-base leading-relaxed">
-                  The {community.name} community is one of 7 student groups in the{" "}
+                  The {community.name} community is one of 8 student groups in the{" "}
                   <Link href="/" className="font-semibold text-accent-orange underline decoration-accent-orange/40 underline-offset-4 hover:decoration-accent-orange">
                     Computing Innovation and Research Club
                   </Link>{" "}

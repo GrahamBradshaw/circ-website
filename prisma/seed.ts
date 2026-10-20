@@ -58,6 +58,13 @@ async function main() {
       description: "Defend, protect, and understand digital infrastructure. This community explores network architecture, ethical hacking, penetration testing, cryptography, and the principles of securing systems in an increasingly connected world.",
       focusTags: ["Network Security", "Ethical Hacking", "Cryptography", "Wireshark", "Kali Linux", "Firewalls"],
       activities: [],
+    },
+    {
+      name: "Google Developer Groups",
+      slug: "gdg",
+      description: "Learn, build, and connect with fellow developers through practical sessions, collaborative projects, and the Google developer ecosystem.",
+      focusTags: ["Google Cloud", "Firebase", "Android", "Flutter", "Web Development", "Community"],
+      activities: [],
     }
   ];
 

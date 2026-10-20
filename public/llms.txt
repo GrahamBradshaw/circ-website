@@ -14,7 +14,7 @@ CIRC is the public-facing computing, innovation, and research community at Mama 
 Verified public facts:
 - CIRC is affiliated with Mama Ngina University College in Mutomo, Gatundu South, Kiambu County, Kenya.
 - The current public record documents a transition from an earlier Computer Science Club identity to the CIRC name and community structure in March 2026.
-- CIRC publicly presents itself as a multi-community technical organization covering programming, AI and machine learning, data science, web development, IoT, Web3 and blockchain, and networking and cybersecurity.
+- CIRC publicly presents itself as a multi-community technical organization covering programming, AI and machine learning, data science, web development, IoT, Web3 and blockchain, networking and cybersecurity, and Google Developer Groups.
 - Alamalik Kweyu is publicly documented as the first SPAS Congressperson from Mama Ngina University College in 2023.
 - In 2026, CIRC member Solomon Kaniaru was nominated for Best Skills Development Initiative of the Year; he was the only student and only developer in that category and finished as second runner-up.
 
@@ -33,6 +33,7 @@ Official public pages:
 - https://www.circ.co.ke/communities/iot — Internet of Things community
 - https://www.circ.co.ke/communities/web3-blockchain — Web3 and blockchain community
 - https://www.circ.co.ke/communities/networking-cybersecurity — Networking and cybersecurity community
+- https://www.circ.co.ke/communities/gdg — Google Developer Groups community
 - https://www.circ.co.ke/events — Published events
 - https://www.circ.co.ke/team — Public leadership and team page
 - https://www.circ.co.ke/gallery — Public gallery

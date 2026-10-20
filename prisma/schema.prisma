@@ -123,6 +123,7 @@ enum CommunityType {
   PROGRAMMING
   IOT
   NETWORKING_CYBERSECURITY
+  GDG
 }
 
 enum AppStatus {

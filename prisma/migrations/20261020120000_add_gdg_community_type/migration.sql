@@ -1,0 +1,1 @@
+ALTER TYPE "CommunityType" ADD VALUE IF NOT EXISTS 'GDG';

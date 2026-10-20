@@ -41,7 +41,7 @@ interface TeamFormProps {
 }
 
 const roles = ["CHAIRPERSON", "VICE_CHAIRPERSON", "SECRETARY", "TREASURER", "EVENT_ORGANIZER", "COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"]
-const communities = ["WEB_DEV", "DATA_SCIENCE", "AI_ML", "WEB3_BLOCKCHAIN", "PROGRAMMING", "IOT", "NETWORKING_CYBERSECURITY"]
+const communities = ["WEB_DEV", "DATA_SCIENCE", "AI_ML", "WEB3_BLOCKCHAIN", "PROGRAMMING", "IOT", "NETWORKING_CYBERSECURITY", "GDG"]
 
 const inputClass = "w-full font-body text-sm text-main placeholder:text-muted border border-border rounded-lg px-4 py-2.5 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all bg-surface"
 const labelClass = "text-[10px] font-bold text-muted uppercase tracking-widest pl-1 mb-1.5 block"
@@ -162,7 +162,7 @@ export function TeamForm({ member }: TeamFormProps) {
                       className={cn(inputClass, "appearance-none")}
                     >
                       <option value="NONE">Select a community...</option>
-                      {communities.map(c => <option key={c} value={c}>{c === "NETWORKING_CYBERSECURITY" ? "Networking and Cybersecurity" : c.replace(/_/g, " ")}</option>)}
+                      {communities.map(c => <option key={c} value={c}>{c === "NETWORKING_CYBERSECURITY" ? "Networking and Cybersecurity" : c === "GDG" ? "Google Developer Groups" : c.replace(/_/g, " ")}</option>)}
                     </select>
                   </div>
                 )}

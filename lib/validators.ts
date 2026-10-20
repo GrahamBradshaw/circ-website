@@ -24,7 +24,7 @@ export const teamMemberSchema = z.object({
   role: z.enum(["CHAIRPERSON", "VICE_CHAIRPERSON", "SECRETARY", "TREASURER", "EVENT_ORGANIZER", "COMMUNITY_LEAD", "COMMUNITY_CO_LEADER"]),
   community: z.preprocess(
     (val) => (val === "NONE" || val === "" || val === undefined ? null : val),
-    z.enum(["WEB_DEV", "DATA_SCIENCE", "AI_ML", "WEB3_BLOCKCHAIN", "PROGRAMMING", "IOT", "NETWORKING_CYBERSECURITY"]).nullable()
+    z.enum(["WEB_DEV", "DATA_SCIENCE", "AI_ML", "WEB3_BLOCKCHAIN", "PROGRAMMING", "IOT", "NETWORKING_CYBERSECURITY", "GDG"]).nullable()
   ),
   bio: z.string().min(1, "Bio is required"),
   photo: z.string().url("Valid photo URL is required"),

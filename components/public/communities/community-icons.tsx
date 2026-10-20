@@ -87,6 +87,13 @@ export const COMMUNITY_ICONS: Record<string, React.FC<{ className?: string; styl
       <path d="M12 17.5v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   ),
+  gdg: ({ className }) => (
+    <svg className={className} viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 12h4v4h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M16 8h-4v4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
 }
 
 // This constant COMMUNITY_COLORS stores shared values used by this file so the logic stays easier to follow.
@@ -98,4 +105,5 @@ export const COMMUNITY_COLORS: Record<string, { bg: string; text: string; icon: 
   "iot":              { bg: "#F0FDFA", text: "#0F766E", icon: "#14B8A6" },
   "programming":      { bg: "#FFF1F2", text: "#BE123C", icon: "#F43F5E" },
   "networking-cybersecurity": { bg: "#FFF1F2", text: "#BE123C", icon: "#E11D48" },
+  "gdg":              { bg: "#EFF6FF", text: "#1D4ED8", icon: "#2563EB" },
 }

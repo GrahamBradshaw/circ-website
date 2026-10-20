@@ -134,16 +134,16 @@ export default async function EventDetailPage({
             
             {/* Left: Event Details */}
             <div className="lg:col-span-8 space-y-10 bg-white dark:bg-[#121214] rounded-3xl p-6 sm:p-10 lg:p-12 border border-primary/10 dark:border-white/10 shadow-[0_8px_30px_rgba(15,36,96,0.04)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)]">
-              {/* Featured Uploaded Cover Image Banner */}
+              {/* Show the full uploaded poster in the event details section. Poster uploads are often portrait-oriented, so avoid cropping them into a wide banner. */}
               {event.coverImage && (
-                <div className="relative w-full aspect-[16/9] sm:aspect-[21/9] rounded-2xl overflow-hidden border border-primary/10 dark:border-white/10 shadow-lg">
+                <div className="relative w-full min-h-[360px] sm:min-h-[520px] max-h-[720px] rounded-2xl overflow-hidden border border-primary/10 dark:border-white/10 bg-surface-2 dark:bg-[#1A1A1E] shadow-lg">
                   <Image
                     src={event.coverImage}
                     alt={event.title}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 850px"
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
               )}

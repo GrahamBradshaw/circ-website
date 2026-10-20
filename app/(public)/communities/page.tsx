@@ -5,7 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { getPublicCached } from "@/lib/redis-cache"
 import Image from "next/image"
 import Link from "next/link"
-import { Globe2, BarChart2, Brain, Link2, Code2, Wifi, Shield } from "lucide-react"
+import { Globe2, BarChart2, Brain, Link2, Code2, Wifi, Shield, Users } from "lucide-react"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
 import { FALLBACK_COMMUNITIES } from "@/lib/public-fallbacks"
@@ -18,6 +18,7 @@ const iconMap: Record<string, any> = {
   PROGRAMMING: Code2,
   IOT: Wifi,
   NETWORKING_CYBERSECURITY: Shield,
+  GDG: Users,
 }
 
 const TECH_TAGS = [
@@ -115,7 +116,7 @@ const TECH_TAGS = [
 // This constant metadata stores shared values used by this file so the logic stays easier to follow.
 export const metadata = createPageMetadata({
   title: "Computing Innovation and Research Club Communities | CIRC at Mama Ngina University",
-  description: "Explore the 7 CIRC student communities at Mama Ngina University College: web development, programming, AI and machine learning, data science, Web3, IoT, networking, and cybersecurity.",
+  description: "Explore the 8 CIRC student communities at Mama Ngina University College: web development, programming, AI and machine learning, data science, Web3, IoT, networking, cybersecurity, and GDG.",
   path: "/communities",
   keywords: ["computing innovation and research club communities", "CIRC communities", "web development community", "programming club", "AI and machine learning", "data science", "Web3 and blockchain", "Internet of Things", "networking and cybersecurity", "SPAS", "Kenyatta University technology"],
 })
@@ -137,9 +138,9 @@ export default async function CommunitiesPage() {
   return (
     <div className="flex flex-col">
       <PageHero
-        badge="7 ACTIVE COMMUNITIES"
+        badge="8 ACTIVE COMMUNITIES"
         title="Our Communities"
-        subtitle="Seven disciplines. One shared mission. Find your people and build something meaningful."
+        subtitle="Eight disciplines. One shared mission. Find your people and build something meaningful."
         size="lg"
         image="/hero/hero-bg-2.90cbe47a.webp"
         imageAlt="CIRC community members collaborating"
@@ -158,6 +159,7 @@ export default async function CommunitiesPage() {
                 "programming-community": "PROGRAMMING",
                 "internet-of-things": "IOT",
                 "networking-cybersecurity": "NETWORKING_CYBERSECURITY",
+                gdg: "GDG",
               }
               const type = typeMap[community.slug] || "PROGRAMMING"
               const Icon = iconMap[type] || Code2

@@ -30,6 +30,7 @@ const enumToSlug: Record<string, string> = {
   PROGRAMMING: "programming",
   IOT: "iot",
   NETWORKING_CYBERSECURITY: "networking-cybersecurity",
+  GDG: "gdg",
 }
 
 // This function TeamPage handles the main work in this file and explains what this logic is doing in simple English.
@@ -254,7 +255,7 @@ export default async function TeamPage() {
                           color: COMMUNITY_COLORS[communitySlug]?.text ?? "#1E3A8A",
                         }}
                       >
-                        {member.community === "NETWORKING_CYBERSECURITY" ? "Networking and Cybersecurity" : member.community.replace(/_/g, " ")}
+                        {member.community === "NETWORKING_CYBERSECURITY" ? "Networking and Cybersecurity" : member.community === "GDG" ? "Google Developer Groups" : member.community.replace(/_/g, " ")}
                       </span>
                     )}
 

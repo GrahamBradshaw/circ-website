@@ -96,5 +96,18 @@ export const FALLBACK_COMMUNITIES = [
     lead: null,
     events: [],
   },
+  {
+    id: "public-gdg",
+    name: "Google Developer Groups",
+    slug: "gdg",
+    description: "Learn, build, and connect with fellow developers through practical sessions, collaborative projects, and the Google developer ecosystem.",
+    focusTags: ["Google Cloud", "Firebase", "Android", "Flutter", "Web Development", "Community"],
+    heroImage: null,
+    leadId: null,
+    activities: [],
+    createdAt,
+    lead: null,
+    events: [],
+  },
 ]
 

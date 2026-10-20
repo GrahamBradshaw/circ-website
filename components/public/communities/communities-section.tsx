@@ -29,7 +29,7 @@ const COMMUNITY_PHOTOS = [
 
 // This function CommunitiesSection handles the main work in this file and explains what this logic is doing in simple English.
 export function CommunitiesSection({ communities }: CommunitiesSectionProps) {
-  const visibleCommunities = communities.slice(0, 6)
+  const visibleCommunities = communities
   const totalCount = communities.length
 
   return (

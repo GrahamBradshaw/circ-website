@@ -139,7 +139,7 @@ export default async function HomePage() {
         name: "What communities are in CIRC?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "CIRC has 7 communities: Programming, AI and Machine Learning, Data Science and Modelling, Internet of Things, Web Development, Web3 and Blockchain, and Networking and Cybersecurity. Each community runs its own workshops, projects, and events.",
+          text: "CIRC has 8 communities: Programming, AI and Machine Learning, Data Science and Modelling, Internet of Things, Web Development, Web3 and Blockchain, Networking and Cybersecurity, and Google Developer Groups. Each community runs its own workshops, projects, and events.",
         },
       },
       {
