@@ -13,6 +13,7 @@ import { PageHero } from "@/components/public/page-hero"
 import { EventCard } from "@/components/public/events/event-card"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
 import { ShareEventButton } from "@/components/public/events/share-event-button"
+import { EventCountdown } from "@/components/public/events/event-countdown"
 
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
@@ -177,6 +178,13 @@ export default async function EventDetailPage({
                     <p className="font-display font-bold text-primary dark:text-white">{event.type}</p>
                   </div>
                 </div>
+              </div>
+
+              <div className="rounded-2xl border border-primary/10 bg-surface-2 px-5 py-4 dark:border-white/10 dark:bg-[#1A1A1E]">
+                <p className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted dark:text-gray-400">
+                  Event status
+                </p>
+                <EventCountdown date={event.date} />
               </div>
 
               <div

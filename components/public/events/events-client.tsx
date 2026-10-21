@@ -92,7 +92,7 @@ export function EventsClient({ events, featuredEvent }: EventsClientProps) {
       {/* Events grid */}
       <section className="max-w-7xl mx-auto px-6 py-12">
         {filteredEvents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="event-card-grid grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {filteredEvents.map((event) => (
               <EventCard key={event.id} {...event} />
             ))}

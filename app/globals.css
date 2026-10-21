@@ -1,4 +1,13 @@
 @import "tailwindcss";
+
+/* Focused-card interaction: keep the hovered image sharp while the rest of
+   the collection recedes, matching the visual card treatment used by the
+   reference design. */
+.event-card-grid:has(> .event-card:hover) > .event-card:not(:hover) img,
+.community-card-grid:has(> .community-card:hover) > .community-card:not(:hover) img,
+.featured-event-grid:has(> .featured-event-item:hover) > .featured-event-item:not(:has(:hover)) img {
+  filter: brightness(0.5) saturate(0.5) contrast(1.2) blur(20px);
+}
 @config "../tailwind.config.ts";
 
 @layer base {

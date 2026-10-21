@@ -47,8 +47,8 @@ export function EventCountdown({ date }: { date: Date | string }) {
 
   if (isOngoing) {
     return (
-      <span className="mt-4 inline-flex w-fit items-center rounded-full border border-emerald-300/40 bg-emerald-400/20 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-emerald-100">
-        <span className="mr-2 h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-300" aria-hidden="true" />
+      <span className="mt-4 inline-flex w-fit items-center rounded-full border border-emerald-200/70 bg-emerald-500/50 px-3 py-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.16em] text-white shadow-[0_0_18px_rgba(52,211,153,0.35)]">
+        <span className="mr-2 h-1.5 w-1.5 animate-pulse rounded-full bg-white" aria-hidden="true" />
         Ongoing
       </span>
     )
@@ -57,19 +57,19 @@ export function EventCountdown({ date }: { date: Date | string }) {
   if (!countdown) return null
 
   const units = [
-    { label: "D", value: countdown.days },
-    { label: "H", value: countdown.hours },
-    { label: "M", value: countdown.minutes },
-    { label: "S", value: countdown.seconds },
-  ]
+    { key: "days", label: countdown.days === 1 ? "Day" : "Days", value: countdown.days },
+    { key: "hours", label: countdown.hours === 1 ? "Hour" : "Hours", value: countdown.hours },
+    { key: "minutes", label: countdown.minutes === 1 ? "Min" : "Mins", value: countdown.minutes },
+    { key: "seconds", label: countdown.seconds === 1 ? "Sec" : "Secs", value: countdown.seconds },
+  ].filter((unit) => unit.value > 0 || unit.key === "seconds")
 
   return (
-    <div className="mt-4 flex items-center gap-1.5" aria-label="Time until event starts">
-      <span className="mr-1 font-mono text-[9px] font-bold uppercase tracking-wider text-white/60">Starts in</span>
+    <div className="mt-4 flex w-fit items-center gap-1.5 rounded-xl border border-orange-300/50 bg-black/75 px-2.5 py-2 shadow-[0_0_20px_rgba(249,115,22,0.2)] backdrop-blur-sm" aria-label="Time until event starts">
+      <span className="mr-0.5 font-mono text-[9px] font-extrabold uppercase tracking-wider text-orange-300">Starts in</span>
       {units.map((unit) => (
-        <span key={unit.label} className="inline-flex items-baseline gap-0.5 rounded-md bg-black/40 px-2 py-1.5 font-mono text-white backdrop-blur-sm">
-          <span className="text-sm font-bold tabular-nums">{String(unit.value).padStart(2, "0")}</span>
-          <span className="text-[8px] text-white/60">{unit.label}</span>
+        <span key={unit.label} className="inline-flex min-w-[50px] items-baseline justify-center gap-1 rounded-md bg-orange-500 px-2 py-1 font-mono text-white shadow-sm">
+          <span className="text-sm font-extrabold tabular-nums">{String(unit.value).padStart(2, "0")}</span>
+          <span className="text-[9px] font-bold text-white/95">{unit.label}</span>
         </span>
       ))}
     </div>

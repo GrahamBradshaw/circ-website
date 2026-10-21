@@ -40,9 +40,9 @@ export function EventsStrip({ events }: EventsStripProps) {
         </div>
 
         {events.length > 0 ? (
-          <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-6 scrollbar-hide md:gap-6">
+          <div className="featured-event-grid flex snap-x snap-mandatory gap-5 overflow-x-auto pb-6 scrollbar-hide md:gap-6">
             {events.map((event) => (
-              <div key={event.id} className="snap-start h-full">
+              <div key={event.id} className="featured-event-item snap-start h-full">
                 <FeaturedEventCard {...event} />
               </div>
             ))}

@@ -19,7 +19,13 @@ function countdownLabel(date: Date) {
   const hours = Math.floor((distance % 86400000) / 3600000)
   const minutes = Math.floor((distance % 3600000) / 60000)
   const seconds = Math.floor((distance % 60000) / 1000)
-  return `STARTS IN  ${String(days).padStart(2, "0")}D  ${String(hours).padStart(2, "0")}H  ${String(minutes).padStart(2, "0")}M  ${String(seconds).padStart(2, "0")}S`
+  const units = [
+    { key: "days", label: days === 1 ? "Day" : "Days", value: days },
+    { key: "hours", label: hours === 1 ? "Hour" : "Hours", value: hours },
+    { key: "minutes", label: minutes === 1 ? "Min" : "Mins", value: minutes },
+    { key: "seconds", label: seconds === 1 ? "Sec" : "Secs", value: seconds },
+  ].filter((unit) => unit.value > 0 || unit.key === "seconds")
+  return `STARTS IN  ${units.map((unit) => `${String(unit.value).padStart(2, "0")}${unit.label}`).join("  ")}`
 }
 
 export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) {

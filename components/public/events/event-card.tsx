@@ -122,7 +122,7 @@ export function EventCard({ id, title, description, date, venue, coverImage, typ
     <Link
       href={`/events/${id}`}
       aria-label={`View details for ${title}`}
-      className="group relative isolate flex h-[420px] w-full flex-col justify-end overflow-hidden rounded-[1.25rem] bg-[#121214] text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-orange/50"
+      className="event-card group relative isolate flex h-[420px] w-full flex-col justify-end overflow-hidden rounded-[1.25rem] bg-[#121214] text-white shadow-[0_8px_30px_rgba(0,0,0,0.18)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_22px_45px_rgba(0,0,0,0.35)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.6)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-accent-orange/50"
     >
       {/* Background full-bleed cover image */}
       <Image
@@ -130,15 +130,10 @@ export function EventCard({ id, title, description, date, venue, coverImage, typ
         alt=""
         fill
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
-        className="absolute inset-0 -z-20 h-full w-full object-cover transition-all duration-500 group-hover:scale-105 group-hover:brightness-90"
+        className="absolute inset-0 -z-20 h-full w-full object-cover brightness-[0.78] saturate-[1.12] contrast-[0.92] transition-all duration-500 group-hover:scale-105 group-hover:brightness-[0.86]"
       />
 
-      {/* Dynamic top-to-bottom gradient overlay ensuring 100% text contrast and readability */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 transition-opacity duration-300 pointer-events-none"
-        style={theme.gradientStyle}
-      />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-black/5 via-black/10 to-black/90" />
 
       {/* Top badges (Date, Location, Event Type) positioned over the top protective scrim */}
       <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between gap-2 pointer-events-none">

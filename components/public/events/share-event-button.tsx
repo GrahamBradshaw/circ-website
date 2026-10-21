@@ -5,7 +5,7 @@
 
 import { useEffect, useState } from "react"
 import { createPortal } from "react-dom"
-import { Instagram, Share2 } from "lucide-react"
+import { AtSign, Facebook, Instagram, Linkedin, MessageCircle, Share2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface ShareEventButtonProps {
@@ -30,7 +30,13 @@ function dateLabel(date: Date | string) {
   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
   const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60))
   const seconds = Math.floor((distance % (1000 * 60)) / 1000)
-  return `STARTS IN ${String(days).padStart(2, "0")}D ${String(hours).padStart(2, "0")}H ${String(minutes).padStart(2, "0")}M ${String(seconds).padStart(2, "0")}S`
+  const units = [
+    { key: "days", label: days === 1 ? "Day" : "Days", value: days },
+    { key: "hours", label: hours === 1 ? "Hour" : "Hours", value: hours },
+    { key: "minutes", label: minutes === 1 ? "Min" : "Mins", value: minutes },
+    { key: "seconds", label: seconds === 1 ? "Sec" : "Secs", value: seconds },
+  ].filter((unit) => unit.value > 0 || unit.key === "seconds")
+  return `STARTS IN ${units.map((unit) => `${String(unit.value).padStart(2, "0")}${unit.label}`).join(" ")}`
 }
 
 function drawText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
@@ -52,6 +58,55 @@ function drawText(context: CanvasRenderingContext2D, text: string, x: number, y:
   if (line) context.fillText(line, x, y + offset)
 }
 
+function getPosterPalette(poster: HTMLImageElement) {
+  const sample = document.createElement("canvas")
+  sample.width = 32
+  sample.height = 32
+  const sampleContext = sample.getContext("2d")
+  if (!sampleContext) return { color: "7,20,47", text: "#ffffff", accent: "#fed7aa" }
+
+  sampleContext.drawImage(poster, 0, 0, sample.width, sample.height)
+  const pixels = sampleContext.getImageData(0, 0, sample.width, sample.height).data
+  let red = 0
+  let green = 0
+  let blue = 0
+  let count = 0
+
+  for (let index = 0; index < pixels.length; index += 4) {
+    if (pixels[index + 3] < 180) continue
+    red += pixels[index]
+    green += pixels[index + 1]
+    blue += pixels[index + 2]
+    count += 1
+  }
+
+  const averageRed = Math.round(red / Math.max(count, 1))
+  const averageGreen = Math.round(green / Math.max(count, 1))
+  const averageBlue = Math.round(blue / Math.max(count, 1))
+  // Use a darkened complementary colour for the overlay. This keeps the
+  // poster visible while ensuring the gradient is deliberately different
+  // from the poster's dominant colour.
+  const complementaryRed = Math.round((255 - averageRed) * 0.58)
+  const complementaryGreen = Math.round((255 - averageGreen) * 0.58)
+  const complementaryBlue = Math.round((255 - averageBlue) * 0.58)
+
+  return {
+    color: `${complementaryRed},${complementaryGreen},${complementaryBlue}`,
+    text: "#ffffff",
+    accent: "#ffd166",
+  }
+}
+
+function loadImage(source: string, crossOrigin = false) {
+  return new Promise<HTMLImageElement>((resolve, reject) => {
+    const image = new Image()
+    if (crossOrigin) image.crossOrigin = "anonymous"
+    image.onload = () => resolve(image)
+    image.onerror = () => reject(new Error(`Unable to load ${source}`))
+    image.src = source
+  })
+}
+
 async function createShareCard(title: string, coverImage: string, type: string, venue: string, date: Date | string) {
   const canvas = document.createElement("canvas")
   canvas.width = 500
@@ -62,14 +117,10 @@ async function createShareCard(title: string, coverImage: string, type: string, 
   context.fillStyle = "#07142f"
   context.fillRect(0, 0, canvas.width, canvas.height)
 
+  let palette = { color: "7,20,47", text: "#ffffff", accent: "#ffd166" }
   try {
-    const poster = new Image()
-    poster.crossOrigin = "anonymous"
-    await new Promise<void>((resolve, reject) => {
-      poster.onload = () => resolve()
-      poster.onerror = () => reject(new Error("Poster could not be loaded"))
-      poster.src = coverImage
-    })
+    const poster = await loadImage(coverImage, true)
+    palette = getPosterPalette(poster)
 
     const scale = Math.max(canvas.width / poster.width, canvas.height / poster.height)
     const width = poster.width * scale
@@ -82,32 +133,46 @@ async function createShareCard(title: string, coverImage: string, type: string, 
   }
 
   const gradient = context.createLinearGradient(0, 0, canvas.width, 0)
-  gradient.addColorStop(0, "rgba(7,20,47,.98)")
-  gradient.addColorStop(1, "rgba(7,20,47,.58)")
+  gradient.addColorStop(0, `rgba(${palette.color},.96)`)
+  gradient.addColorStop(0.58, `rgba(${palette.color},.78)`)
+  gradient.addColorStop(1, "rgba(7,12,24,.68)")
   context.fillStyle = gradient
   context.fillRect(0, 0, canvas.width, canvas.height)
+
+  // A separate dark information surface prevents venue/date text from
+  // disappearing over bright or detailed poster areas.
+  context.fillStyle = "rgba(3,8,18,.72)"
+  context.fillRect(16, 330, 468, 145)
+  context.shadowColor = "rgba(0,0,0,.85)"
+  context.shadowBlur = 5
   context.fillStyle = "#f97316"
   context.fillRect(0, 0, canvas.width, 9)
 
-  context.fillStyle = "#ffffff"
+  context.fillStyle = palette.text
   context.font = "700 16px Arial"
-  context.fillText("●  CIRC", 24, 42)
-  context.fillStyle = "#fb923c"
-  context.font = "700 10px Arial"
+  try {
+    const logo = await loadImage("/circ-logo-white.png")
+    context.drawImage(logo, 24, 17, 58, 40)
+  } catch {
+    context.fillText("CIRC", 24, 42)
+  }
+  context.fillStyle = palette.accent
+  context.font = "700 11px Arial"
   context.fillText("MAMA NGINA UNIVERSITY COLLEGE", 100, 42)
 
-  context.fillStyle = "#fb923c"
-  context.font = "700 13px Arial"
+  context.fillStyle = palette.accent
+  context.font = "700 15px Arial"
   context.fillText(type, 24, 142)
-  context.fillStyle = "#ffffff"
-  context.font = "800 36px Arial"
+  context.fillStyle = palette.text
+  context.font = "800 37px Arial"
   drawText(context, title, 24, 190, 430, 44)
-  context.fillStyle = "#fbbf24"
-  context.font = "700 13px Arial"
-  context.fillText(dateLabel(date), 24, 360)
-  context.fillStyle = "#dbe5f5"
-  context.font = "400 12px Arial"
-  drawText(context, `${new Date(date).toLocaleDateString("en-KE", { dateStyle: "long" })}  •  ${venue}`, 24, 405, 440, 18)
+  context.fillStyle = palette.accent
+  context.font = "700 15px Arial"
+  context.fillText(dateLabel(date), 28, 365)
+  context.fillStyle = palette.text
+  context.font = "600 14px Arial"
+  drawText(context, `${new Date(date).toLocaleDateString("en-KE", { dateStyle: "long" })}  •  ${venue}`, 28, 410, 430, 22)
+  context.shadowBlur = 0
 
   const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.9))
   if (!blob) throw new Error("Card image could not be created")
@@ -194,10 +259,42 @@ export function ShareEventButton({ title, url, description, coverImage, date, ty
     }
   }
 
-  function handleShareClick() {
-    // The card is generated before these buttons become enabled. Calling the
-    // native API directly from this tap preserves Android's transient user
-    // activation requirement.
+  function eventMessage() {
+    const eventDate = new Date(date).toLocaleString("en-KE", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      hour: "numeric",
+      minute: "2-digit",
+    })
+    return `${title}\n\n${description}\n\n📅 ${eventDate}\n📍 ${venue}\n\n${url}`
+  }
+
+  function handlePlatformShare(platform: "whatsapp" | "instagram" | "linkedin" | "x" | "facebook") {
+    if (!cardFile) return
+    setShareError(null)
+
+    if (platform === "instagram") {
+      // Instagram has no browser share endpoint that accepts a generated file.
+      // Native sharing is the only web-supported way to attach the card.
+      setIsOpen(false)
+      void shareWithDevice(cardFile)
+      return
+    }
+
+    const message = eventMessage()
+    const shareUrls = {
+      whatsapp: `https://wa.me/?text=${encodeURIComponent(message)}`,
+      linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+      x: `https://twitter.com/intent/tweet?text=${encodeURIComponent(`${title}\n\n${description}`)}&url=${encodeURIComponent(url)}`,
+      facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    }
+
+    window.open(shareUrls[platform], "_blank", "noopener,noreferrer")
+  }
+
+  function handleMoreShare() {
     if (!cardFile) return
     setShareError(null)
     setIsOpen(false)
@@ -230,12 +327,24 @@ export function ShareEventButton({ title, url, description, coverImage, date, ty
           <div className="mb-5 overflow-hidden rounded-2xl border border-primary/10 bg-surface-2 dark:border-white/10 dark:bg-[#09090B]">
             {cardUrl ? <img src={cardUrl} alt={`Share preview for ${title}`} className="aspect-square w-full object-cover" /> : <div className="aspect-square w-full animate-pulse bg-[#07142f]" />}
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-            <button type="button" onClick={handleShareClick} disabled={!cardFile} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-pink-600 via-purple-600 to-orange-500 px-4 py-3.5 font-body text-sm font-semibold text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">
-              <Instagram size={17} /> Instagram / Stories
+          <div className="flex flex-wrap justify-center gap-3">
+            <button type="button" onClick={() => handlePlatformShare("whatsapp")} disabled={!cardFile} title="Share on WhatsApp" aria-label="Share on WhatsApp" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#25D366] text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">
+              <MessageCircle size={19} />
             </button>
-            <button type="button" onClick={handleShareClick} disabled={!cardFile} className="inline-flex items-center justify-center gap-2 rounded-2xl bg-primary px-4 py-3.5 font-body text-sm font-semibold text-white transition hover:bg-primary/90 disabled:cursor-wait disabled:opacity-60">
-              <Share2 size={17} /> More apps
+            <button type="button" onClick={() => handlePlatformShare("instagram")} disabled={!cardFile} title="Share on Instagram" aria-label="Share on Instagram" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-pink-600 via-purple-600 to-orange-500 text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">
+              <Instagram size={19} />
+            </button>
+            <button type="button" onClick={() => handlePlatformShare("linkedin")} disabled={!cardFile} title="Share on LinkedIn" aria-label="Share on LinkedIn" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#0A66C2] text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">
+              <Linkedin size={19} />
+            </button>
+            <button type="button" onClick={() => handlePlatformShare("x")} disabled={!cardFile} title="Share on X" aria-label="Share on X" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-black text-white transition hover:bg-gray-900 disabled:cursor-wait disabled:opacity-60">
+              <AtSign size={19} />
+            </button>
+            <button type="button" onClick={() => handlePlatformShare("facebook")} disabled={!cardFile} title="Share on Facebook" aria-label="Share on Facebook" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[#1877F2] text-white transition hover:brightness-110 disabled:cursor-wait disabled:opacity-60">
+              <Facebook size={19} />
+            </button>
+            <button type="button" onClick={handleMoreShare} disabled={!cardFile} title="Share to more apps" aria-label="Share to more apps" className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white transition hover:bg-primary/90 disabled:cursor-wait disabled:opacity-60">
+              <Share2 size={19} />
             </button>
           </div>
           {shareError && <p className="mt-3 text-center font-body text-xs leading-relaxed text-red-500">{shareError}</p>}
