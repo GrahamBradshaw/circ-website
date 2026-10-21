@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils"
 interface ShareEventButtonProps {
   title: string
   url: string
+  description: string
   coverImage: string
   date: Date | string
   type: string
@@ -114,7 +115,7 @@ async function createShareCard(title: string, coverImage: string, type: string, 
 }
 
 // This function ShareEventButton handles the main work in this file and explains what this logic is doing in simple English.
-export function ShareEventButton({ title, url, coverImage, date, type, venue }: ShareEventButtonProps) {
+export function ShareEventButton({ title, url, description, coverImage, date, type, venue }: ShareEventButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [shareError, setShareError] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
@@ -169,13 +170,22 @@ export function ShareEventButton({ title, url, coverImage, date, type, venue }: 
     }
 
     try {
-      // Share the very same File used by the preview. Keeping the payload to
-      // files only is important: some Android share targets reject a mixed
-      // title/text payload when an image is attached.
+      const eventDate = new Date(date).toLocaleString("en-KE", {
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+      })
+      const shareMessage = `${title}\n\n${description}\n\n📅 ${eventDate}\n📍 ${venue}\n\n${url}`
+
+      // Share the very same File used by the preview together with a useful
+      // message. Messaging apps can display the text and keep the URL tappable.
       await navigator.share({
         files: [imageFile],
         title: `${title} | CIRC MNUC`,
-        text: url,
+        text: shareMessage,
       })
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return

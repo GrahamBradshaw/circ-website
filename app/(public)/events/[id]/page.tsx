@@ -235,6 +235,7 @@ export default async function EventDetailPage({
                   <ShareEventButton
                     title={event.title}
                     url={eventUrl}
+                    description={plainTextDescription(event.description, 220)}
                     coverImage={event.coverImage}
                     date={event.date}
                     type={event.type}
