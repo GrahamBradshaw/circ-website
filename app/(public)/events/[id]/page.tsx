@@ -12,6 +12,7 @@ import { Calendar, MapPin, Tag, ExternalLink } from "lucide-react"
 import { PageHero } from "@/components/public/page-hero"
 import { EventCard } from "@/components/public/events/event-card"
 import { createPageMetadata, plainTextDescription, SITE_URL } from "@/lib/seo"
+import { ShareEventButton } from "@/components/public/events/share-event-button"
 
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
@@ -49,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: event.title,
     description: plainTextDescription(event.description),
     path: `/events/${encodeURIComponent(id)}`,
-    image: event.coverImage,
+    image: `/events/${encodeURIComponent(id)}/opengraph-image`,
     keywords: ["CIRC event", `${event.type} event`, "technology event Kenya", "Mama Ngina University College event"],
   })
 }
@@ -229,6 +230,14 @@ export default async function EventDetailPage({
                     <p className="font-body text-muted dark:text-gray-400 text-sm">Free entry for all MNUC students. Walk-ins welcome.</p>
                   </div>
                 )}
+
+                <div className="mt-4">
+                  <ShareEventButton
+                    title={event.title}
+                    url={`${SITE_URL}/events/${encodeURIComponent(event.id)}`}
+                    imageUrl={`${SITE_URL}/events/${encodeURIComponent(event.id)}/opengraph-image`}
+                  />
+                </div>
               </div>
             </div>
           </div>
