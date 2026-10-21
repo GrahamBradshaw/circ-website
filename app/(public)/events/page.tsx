@@ -6,6 +6,7 @@ import { getPublicCached } from "@/lib/redis-cache"
 import { EventsClient } from "@/components/public/events/events-client"
 import { PageHero } from "@/components/public/page-hero"
 import { createPageMetadata } from "@/lib/seo"
+import { startOfDay } from "date-fns"
 
 // This constant revalidate stores shared values used by this file so the logic stays easier to follow.
 export const revalidate = 300
@@ -21,14 +22,15 @@ export const metadata = createPageMetadata({
 // This function EventsPage handles the main work in this file and explains what this logic is doing in simple English.
 export default async function EventsPage() {
   const now = new Date()
+  const today = startOfDay(now)
 
   const upcomingEvents = await getPublicCached("events:upcoming", () => prisma.event.findMany({
-    where: { published: true, date: { gte: now } },
+    where: { published: true, date: { gte: today } },
     orderBy: { date: "asc" },
   }), [])
 
   const pastEvents = await getPublicCached("events:past", () => prisma.event.findMany({
-    where: { published: true, date: { lt: now } },
+    where: { published: true, date: { lt: today } },
     orderBy: { date: "desc" },
   }), [])
 

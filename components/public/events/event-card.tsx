@@ -6,6 +6,7 @@ import Link from "next/link"
 import { format } from "date-fns"
 import { ArrowUpRight, CalendarDays, MapPin } from "lucide-react"
 import { cn, stripHtml } from "@/lib/utils"
+import { EventCountdown } from "./event-countdown"
 
 interface EventCardProps {
   id: string
@@ -173,6 +174,8 @@ export function EventCard({ id, title, description, date, venue, coverImage, typ
           {summary}
           {summary.length >= 120 ? "…" : ""}
         </p>
+
+        <EventCountdown date={dateObj} />
 
         {/* Bottom action row with subtle divider */}
         <div className="mt-4 flex items-center justify-between border-t border-white/15 pt-3.5">
