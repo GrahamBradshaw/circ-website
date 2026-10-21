@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
     title: event.title,
     description: plainTextDescription(event.description),
     path: `/events/${encodeURIComponent(id)}`,
-    image: `/events/${encodeURIComponent(id)}/opengraph-image`,
+    image: `/api/events/${encodeURIComponent(id)}/share-card`,
     keywords: ["CIRC event", `${event.type} event`, "technology event Kenya", "Mama Ngina University College event"],
   })
 }
@@ -234,8 +234,10 @@ export default async function EventDetailPage({
                 <div className="mt-4">
                   <ShareEventButton
                     title={event.title}
-                    url={`${SITE_URL}/events/${encodeURIComponent(event.id)}`}
-                    imageUrl={`${SITE_URL}/events/${encodeURIComponent(event.id)}/opengraph-image`}
+                    coverImage={event.coverImage}
+                    date={event.date}
+                    type={event.type}
+                    venue={event.venue}
                   />
                 </div>
               </div>

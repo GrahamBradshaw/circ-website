@@ -14,12 +14,11 @@ export default async function Image({ params }: { params: Promise<{ id: string }
   const { id } = await params
   const event = await prisma.event.findFirst({
     where: { id, published: true },
-    select: { title: true, description: true, date: true, venue: true, type: true, coverImage: true },
+    select: { title: true, description: true, date: true, venue: true, type: true },
   })
 
   const title = event?.title ?? "CIRC Events"
   const description = event ? plainTextDescription(event.description, 150) : "Computing, innovation, research, and technology events at Mama Ngina University College."
-  const coverImage = event?.coverImage?.startsWith("http") ? event.coverImage : null
 
   return new ImageResponse(
     (
@@ -36,14 +35,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
           width: "100%",
         }}
       >
-        {coverImage && (
-          <img
-            src={coverImage}
-            alt=""
-            style={{ height: "100%", left: 0, objectFit: "cover", opacity: 0.28, position: "absolute", top: 0, width: "100%" }}
-          />
-        )}
-        <div style={{ background: "linear-gradient(90deg, rgba(7,20,47,.98) 0%, rgba(7,20,47,.78) 58%, rgba(7,20,47,.3) 100%)", display: "flex", inset: 0, position: "absolute" }} />
+        <div style={{ background: "#f97316", height: 14, left: 0, position: "absolute", top: 0, width: "100%" }} />
         <div style={{ alignItems: "center", display: "flex", fontSize: 28, fontWeight: 700, gap: 14, position: "relative" }}>
           <div style={{ background: "#f97316", borderRadius: 999, height: 18, width: 18 }} />
           CIRC <span style={{ color: "#f97316", fontSize: 20 }}>MAMA NGINA UNIVERSITY COLLEGE</span>

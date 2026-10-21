@@ -91,6 +91,7 @@ function needsClerk(request: NextRequest) {
     const isPublicRead = request.method === "GET" && [
       /^\/api\/communities(?:\/[^/]+)?$/,
       /^\/api\/events(?:\/[^/]+)?$/,
+      /^\/api\/events\/[^/]+\/share-card$/,
       /^\/api\/team(?:\/[^/]+)?$/,
       /^\/api\/gallery$/,
       /^\/api\/settings$/,
