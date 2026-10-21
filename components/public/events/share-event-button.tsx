@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 
 interface ShareEventButtonProps {
   title: string
+  url: string
   coverImage: string
   date: Date | string
   type: string
@@ -113,7 +114,7 @@ async function createShareCard(title: string, coverImage: string, type: string, 
 }
 
 // This function ShareEventButton handles the main work in this file and explains what this logic is doing in simple English.
-export function ShareEventButton({ title, coverImage, date, type, venue }: ShareEventButtonProps) {
+export function ShareEventButton({ title, url, coverImage, date, type, venue }: ShareEventButtonProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [shareError, setShareError] = useState<string | null>(null)
   const [mounted, setMounted] = useState(false)
@@ -171,7 +172,11 @@ export function ShareEventButton({ title, coverImage, date, type, venue }: Share
       // Share the very same File used by the preview. Keeping the payload to
       // files only is important: some Android share targets reject a mixed
       // title/text payload when an image is attached.
-      await navigator.share({ files: [imageFile] })
+      await navigator.share({
+        files: [imageFile],
+        title: `${title} | CIRC MNUC`,
+        text: url,
+      })
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return
       setShareError("Chrome could not pass this image to the native share sheet.")

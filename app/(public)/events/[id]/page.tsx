@@ -234,6 +234,7 @@ export default async function EventDetailPage({
                 <div className="mt-4">
                   <ShareEventButton
                     title={event.title}
+                    url={eventUrl}
                     coverImage={event.coverImage}
                     date={event.date}
                     type={event.type}
